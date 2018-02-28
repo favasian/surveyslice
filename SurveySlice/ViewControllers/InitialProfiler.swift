@@ -21,7 +21,9 @@ class InitialProfiler: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    class func hello() {
+        print("HIIIIIIIII")
+    }
     /*
     // MARK: - Navigation
 
