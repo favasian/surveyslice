@@ -10,14 +10,19 @@ import UIKit
 
 class InitialProfiler: UIViewController {
 
-    override func viewDidLoad() {
+    @IBOutlet weak var label: UILabel!
+    public override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-    public class func hello() {
-        print("hiiiiiii!!!!")
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        label.text = "WHOOOOAAAAAA"
+    }
+
+    public class func instantiate() -> InitialProfiler {
+        return InitialProfiler(nibName: "InitialProfiler", bundle: nil)
     }
 }
-
