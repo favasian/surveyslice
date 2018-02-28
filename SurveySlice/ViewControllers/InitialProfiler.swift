@@ -8,21 +8,21 @@
 
 import UIKit
 
-class InitialProfiler: UIViewController {
+public class InitialProfiler: UIViewController {
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
+    public override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    class func hello() {
-        print("HIIIIIIIII")
+    public class func hello() {
+        print("hiiiiiii!!!!")
     }
     /*
     // MARK: - Navigation
