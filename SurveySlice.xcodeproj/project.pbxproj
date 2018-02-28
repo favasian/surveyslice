@@ -8,12 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		9D89349320471B7600773F59 /* SurveySlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D89349120471B7600773F59 /* SurveySlice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9D89349D204733B600773F59 /* InitialProfiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D89349B204733B600773F59 /* InitialProfiler.swift */; };
+		9D89349E204733B600773F59 /* InitialProfiler.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D89349C204733B600773F59 /* InitialProfiler.xib */; };
+		AAD19ABF2AAEDF8E401A15CA /* Pods_SurveySlice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 378E6F0543FE71B7A2386800 /* Pods_SurveySlice.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11C094471AE2A25A47B44274 /* Pods-SurveySlice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurveySlice.release.xcconfig"; path = "Pods/Target Support Files/Pods-SurveySlice/Pods-SurveySlice.release.xcconfig"; sourceTree = "<group>"; };
+		378E6F0543FE71B7A2386800 /* Pods_SurveySlice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SurveySlice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D89348E20471B7600773F59 /* SurveySlice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SurveySlice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D89349120471B7600773F59 /* SurveySlice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SurveySlice.h; sourceTree = "<group>"; };
 		9D89349220471B7600773F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9D89349B204733B600773F59 /* InitialProfiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialProfiler.swift; sourceTree = "<group>"; };
+		9D89349C204733B600773F59 /* InitialProfiler.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InitialProfiler.xib; sourceTree = "<group>"; };
+		DD3713789A7DAF85B7BCB9DB /* Pods-SurveySlice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurveySlice.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SurveySlice/Pods-SurveySlice.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -21,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAD19ABF2AAEDF8E401A15CA /* Pods_SurveySlice.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,6 +41,8 @@
 			children = (
 				9D89349020471B7600773F59 /* SurveySlice */,
 				9D89348F20471B7600773F59 /* Products */,
+				EFC1D4196A0BC91EC89F095C /* Pods */,
+				DAACECEE355661F239E7DF93 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -46,10 +57,37 @@
 		9D89349020471B7600773F59 /* SurveySlice */ = {
 			isa = PBXGroup;
 			children = (
+				9D89349A2047323C00773F59 /* ViewControllers */,
 				9D89349120471B7600773F59 /* SurveySlice.h */,
 				9D89349220471B7600773F59 /* Info.plist */,
 			);
 			path = SurveySlice;
+			sourceTree = "<group>";
+		};
+		9D89349A2047323C00773F59 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9D89349B204733B600773F59 /* InitialProfiler.swift */,
+				9D89349C204733B600773F59 /* InitialProfiler.xib */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		DAACECEE355661F239E7DF93 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				378E6F0543FE71B7A2386800 /* Pods_SurveySlice.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EFC1D4196A0BC91EC89F095C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DD3713789A7DAF85B7BCB9DB /* Pods-SurveySlice.debug.xcconfig */,
+				11C094471AE2A25A47B44274 /* Pods-SurveySlice.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -70,10 +108,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9D89349620471B7600773F59 /* Build configuration list for PBXNativeTarget "SurveySlice" */;
 			buildPhases = (
+				B39D4BBD10B67ADF7489E9B4 /* [CP] Check Pods Manifest.lock */,
 				9D89348920471B7600773F59 /* Sources */,
 				9D89348A20471B7600773F59 /* Frameworks */,
 				9D89348B20471B7600773F59 /* Headers */,
 				9D89348C20471B7600773F59 /* Resources */,
+				33F1A15002CFB8BF1213C368 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -95,6 +135,7 @@
 				TargetAttributes = {
 					9D89348D20471B7600773F59 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -121,16 +162,54 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D89349E204733B600773F59 /* InitialProfiler.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		33F1A15002CFB8BF1213C368 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SurveySlice/Pods-SurveySlice-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B39D4BBD10B67ADF7489E9B4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SurveySlice-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9D89348920471B7600773F59 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D89349D204733B600773F59 /* InitialProfiler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,7 +331,9 @@
 		};
 		9D89349720471B7600773F59 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD3713789A7DAF85B7BCB9DB /* Pods-SurveySlice.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -266,6 +347,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.appsthatpay.SurveySlice;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -273,7 +355,9 @@
 		};
 		9D89349820471B7600773F59 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11C094471AE2A25A47B44274 /* Pods-SurveySlice.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
