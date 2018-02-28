@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InitialProfiler: UIViewController {
+public class InitialProfiler: UIViewController {
 
     @IBOutlet weak var label: UILabel!
     public override func viewDidLoad() {
