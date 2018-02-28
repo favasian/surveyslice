@@ -23,6 +23,7 @@ public class InitialProfiler: UIViewController {
     }
 
     public class func instantiate() -> InitialProfiler {
-        return InitialProfiler(nibName: "InitialProfiler", bundle: nil)
+        let bundle = Bundle(for: self.classForCoder())
+        return InitialProfiler(nibName: "InitialProfiler", bundle: bundle)
     }
 }
