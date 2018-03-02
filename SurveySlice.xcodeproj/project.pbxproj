@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		9D89349320471B7600773F59 /* SurveySlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D89349120471B7600773F59 /* SurveySlice.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9D89349D204733B600773F59 /* InitialProfiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D89349B204733B600773F59 /* InitialProfiler.swift */; };
-		9D89349E204733B600773F59 /* InitialProfiler.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D89349C204733B600773F59 /* InitialProfiler.xib */; };
+		9D8934C22048D00500773F59 /* InitialProfiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8934C02048D00500773F59 /* InitialProfiler.swift */; };
+		9D8934C32048D00500773F59 /* InitialProfiler.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8934C12048D00500773F59 /* InitialProfiler.xib */; };
+		9D8934CB2048D43400773F59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D8934CA2048D43400773F59 /* Assets.xcassets */; };
 		AAD19ABF2AAEDF8E401A15CA /* Pods_SurveySlice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 378E6F0543FE71B7A2386800 /* Pods_SurveySlice.framework */; };
 /* End PBXBuildFile section */
 
@@ -19,8 +20,9 @@
 		9D89348E20471B7600773F59 /* SurveySlice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SurveySlice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D89349120471B7600773F59 /* SurveySlice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SurveySlice.h; sourceTree = "<group>"; };
 		9D89349220471B7600773F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9D89349B204733B600773F59 /* InitialProfiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialProfiler.swift; sourceTree = "<group>"; };
-		9D89349C204733B600773F59 /* InitialProfiler.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InitialProfiler.xib; sourceTree = "<group>"; };
+		9D8934C02048D00500773F59 /* InitialProfiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialProfiler.swift; sourceTree = "<group>"; };
+		9D8934C12048D00500773F59 /* InitialProfiler.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InitialProfiler.xib; sourceTree = "<group>"; };
+		9D8934CA2048D43400773F59 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD3713789A7DAF85B7BCB9DB /* Pods-SurveySlice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurveySlice.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SurveySlice/Pods-SurveySlice.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,6 +59,7 @@
 		9D89349020471B7600773F59 /* SurveySlice */ = {
 			isa = PBXGroup;
 			children = (
+				9D8934C92048D42500773F59 /* Resources */,
 				9D89349A2047323C00773F59 /* ViewControllers */,
 				9D89349120471B7600773F59 /* SurveySlice.h */,
 				9D89349220471B7600773F59 /* Info.plist */,
@@ -67,10 +70,18 @@
 		9D89349A2047323C00773F59 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				9D89349B204733B600773F59 /* InitialProfiler.swift */,
-				9D89349C204733B600773F59 /* InitialProfiler.xib */,
+				9D8934C02048D00500773F59 /* InitialProfiler.swift */,
+				9D8934C12048D00500773F59 /* InitialProfiler.xib */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9D8934C92048D42500773F59 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9D8934CA2048D43400773F59 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		DAACECEE355661F239E7DF93 /* Frameworks */ = {
@@ -162,7 +173,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D89349E204733B600773F59 /* InitialProfiler.xib in Resources */,
+				9D8934CB2048D43400773F59 /* Assets.xcassets in Resources */,
+				9D8934C32048D00500773F59 /* InitialProfiler.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,7 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D89349D204733B600773F59 /* InitialProfiler.swift in Sources */,
+				9D8934C22048D00500773F59 /* InitialProfiler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
