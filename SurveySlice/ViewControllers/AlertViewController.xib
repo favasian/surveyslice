@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Avenir.ttc">
+            <string>Avenir-Heavy</string>
+            <string>Avenir-Roman</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AlertViewController" customModule="SurveySlice" customModuleProvider="target">
+            <connections>
+                <outlet property="alertImageView" destination="Mv6-Gm-Qu8" id="3Va-w2-hOK"/>
+                <outlet property="alertTextLabel" destination="Td3-gX-434" id="djV-IW-T5h"/>
+                <outlet property="alertTitleLabel" destination="Jrt-SB-kBt" id="zra-Ab-1og"/>
+                <outlet property="button" destination="p8k-g5-hbj" id="fCp-EE-JoR"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="7GZ-kW-13S">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p8k-g5-hbj">
+                    <rect key="frame" x="35" y="603" width="304" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="304" id="tjv-YK-UYb"/>
+                        <constraint firstAttribute="height" constant="44" id="yRs-Pe-uDc"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
+                    <state key="normal" title="Continue" backgroundImage="button"/>
+                    <state key="selected" backgroundImage="buttonPressed"/>
+                    <connections>
+                        <action selector="buttonPressed:" destination="-1" eventType="touchUpInside" id="BYh-38-BHv"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alert" translatesAutoresizingMaskIntoConstraints="NO" id="Mv6-Gm-Qu8">
+                    <rect key="frame" x="66" y="191.5" width="243" height="220"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="243" id="0jK-dt-mu5"/>
+                        <constraint firstAttribute="height" constant="220" id="94F-jm-EW1"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+200 Coins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jrt-SB-kBt">
+                    <rect key="frame" x="88" y="211.5" width="199" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="199" id="5Q7-xE-BQO"/>
+                        <constraint firstAttribute="height" constant="21" id="CCE-cM-yg7"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please complete the following 11 survey questions to earn 200 coins" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Td3-gX-434">
+                    <rect key="frame" x="93" y="241.5" width="188" height="149"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="149" id="N7i-gx-XzT"/>
+                        <constraint firstAttribute="width" constant="188" id="qdk-Rp-Pno"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Td3-gX-434" firstAttribute="top" secondItem="Mv6-Gm-Qu8" secondAttribute="top" constant="50" id="0AN-SC-21A"/>
+                <constraint firstItem="Mv6-Gm-Qu8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="2rN-ep-jlH"/>
+                <constraint firstItem="7GZ-kW-13S" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="39h-NE-euw"/>
+                <constraint firstItem="Jrt-SB-kBt" firstAttribute="top" secondItem="Mv6-Gm-Qu8" secondAttribute="top" constant="20" id="8pg-6W-drb"/>
+                <constraint firstItem="Jrt-SB-kBt" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="CLY-7m-iBP"/>
+                <constraint firstItem="7GZ-kW-13S" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="JDB-U9-T9e"/>
+                <constraint firstItem="Mv6-Gm-Qu8" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-32" id="Po0-rl-UJH"/>
+                <constraint firstItem="7GZ-kW-13S" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="S29-Bq-6VV"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="p8k-g5-hbj" secondAttribute="bottom" constant="20" id="doo-Jk-Qv1"/>
+                <constraint firstItem="p8k-g5-hbj" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="gP5-9e-joz"/>
+                <constraint firstItem="7GZ-kW-13S" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="nj8-1V-YYX"/>
+                <constraint firstItem="Td3-gX-434" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="rp8-cW-hGl"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="39.5" y="53.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="alert" width="441" height="400"/>
+        <image name="background" width="375" height="667"/>
+        <image name="button" width="450" height="65"/>
+        <image name="buttonPressed" width="450" height="65"/>
+    </resources>
+</document>
