@@ -34,11 +34,19 @@ public class InitialProfiler: UINavigationController {
         if let navImage = UIImage(named: "navigation", in: Globals.appBundle(), compatibleWith: nil) {
             nav.navigationBar.setBackgroundImage(navImage.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .stretch), for: .default)
         }
-        let vc = AlertViewController.instantiate(title: "Survey Slice", text: "Please complete the following 11 survey questions to earn 200 coins")
-        let btn = UIBarButtonItem(title: "Cancel", style: .plain, target: nav, action: #selector(InitialProfiler.cancel))
-        btn.tintColor = UIColor.white
-        vc.navigationItem.setLeftBarButton(btn, animated: false)
+        let vc = AlertViewController.instantiate(title: "Survey Slice", text: "Please complete the following 11 question survey to earn 200 coins", backNavBtnTitle: "Exit")
+        vc.delegate = nav
         nav.viewControllers = [vc]
         return nav
+    }
+}
+
+extension InitialProfiler: AlertViewDelegate {
+    func backNavBtnTapped() {
+        self.cancel()
+    }
+    
+    func bottomBtnTapped() {
+        print("Bottom button tapped")
     }
 }

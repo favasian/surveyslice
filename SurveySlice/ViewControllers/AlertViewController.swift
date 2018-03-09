@@ -8,21 +8,29 @@
 
 import UIKit
 
+protocol AlertViewDelegate: class {
+    func backNavBtnTapped()
+    func bottomBtnTapped()
+}
+
 class AlertViewController: BaseViewController {
     @IBOutlet weak var alertTitleLabel: UILabel!
     @IBOutlet weak var alertTextLabel: UILabel!
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var alertImageView: UIImageView!
     
+    weak var delegate: AlertViewDelegate?
     var alertTitle: String?
     var alertText: String?
     var btnTitle: String?
+    var backBtnTitle: String?
     
-    public class func instantiate(title: String?, text: String, btnTitle: String="Continue") -> AlertViewController {
+    public class func instantiate(title: String?, text: String, backNavBtnTitle: String?, btnTitle: String="Continue") -> AlertViewController {
         let vc = AlertViewController(nibName: "AlertViewController", bundle: Globals.appBundle())
         vc.alertTitle = title
         vc.alertText = text
         vc.btnTitle = btnTitle
+        vc.backBtnTitle = backNavBtnTitle
         return vc
     }
     
@@ -36,15 +44,20 @@ class AlertViewController: BaseViewController {
                 self.alertImageView.image = alertNoTitle
             }
         }
+        if let bbt = self.backBtnTitle {
+            let btn = UIBarButtonItem(title: bbt, style: .plain, target: self, action: #selector(AlertViewController.backNavBtnPressed))
+            btn.tintColor = UIColor.white
+            self.navigationItem.setLeftBarButton(btn, animated: false)
+        }
         self.alertTextLabel.text = self.alertText
         self.button.setTitle(self.btnTitle, for: .normal)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @objc func backNavBtnPressed() {
+        self.delegate?.backNavBtnTapped()
     }
     
     @IBAction func buttonPressed(_ sender: Any) {
+        self.delegate?.bottomBtnTapped()
     }
 }
