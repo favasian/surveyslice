@@ -15,6 +15,10 @@
 		9D8934CF2049DFD200773F59 /* AlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8934CD2049DFD200773F59 /* AlertViewController.xib */; };
 		9D8934D22049EE1600773F59 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8934D12049EE1600773F59 /* Globals.swift */; };
 		9D8934D42049F1C700773F59 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8934D32049F1C700773F59 /* BaseViewController.swift */; };
+		9D8934D62053697700773F59 /* BaseQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8934D52053697700773F59 /* BaseQuestionViewController.swift */; };
+		9D8934D92053699A00773F59 /* GenderQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8934D72053699A00773F59 /* GenderQuestionViewController.swift */; };
+		9D8934DA2053699A00773F59 /* GenderQuestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8934D82053699A00773F59 /* GenderQuestionViewController.xib */; };
+		9DAABDEE2053714B00D85EE8 /* BottomButtonableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAABDED2053714B00D85EE8 /* BottomButtonableViewController.swift */; };
 		AAD19ABF2AAEDF8E401A15CA /* Pods_SurveySlice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 378E6F0543FE71B7A2386800 /* Pods_SurveySlice.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +35,10 @@
 		9D8934CD2049DFD200773F59 /* AlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertViewController.xib; sourceTree = "<group>"; };
 		9D8934D12049EE1600773F59 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		9D8934D32049F1C700773F59 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		9D8934D52053697700773F59 /* BaseQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseQuestionViewController.swift; sourceTree = "<group>"; };
+		9D8934D72053699A00773F59 /* GenderQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderQuestionViewController.swift; sourceTree = "<group>"; };
+		9D8934D82053699A00773F59 /* GenderQuestionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenderQuestionViewController.xib; sourceTree = "<group>"; };
+		9DAABDED2053714B00D85EE8 /* BottomButtonableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonableViewController.swift; sourceTree = "<group>"; };
 		DD3713789A7DAF85B7BCB9DB /* Pods-SurveySlice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurveySlice.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SurveySlice/Pods-SurveySlice.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +92,10 @@
 				9D8934CC2049DFD200773F59 /* AlertViewController.swift */,
 				9D8934CD2049DFD200773F59 /* AlertViewController.xib */,
 				9D8934D32049F1C700773F59 /* BaseViewController.swift */,
+				9DAABDED2053714B00D85EE8 /* BottomButtonableViewController.swift */,
+				9D8934D52053697700773F59 /* BaseQuestionViewController.swift */,
+				9D8934D72053699A00773F59 /* GenderQuestionViewController.swift */,
+				9D8934D82053699A00773F59 /* GenderQuestionViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -195,6 +207,7 @@
 			files = (
 				9D8934CB2048D43400773F59 /* Assets.xcassets in Resources */,
 				9D8934C32048D00500773F59 /* InitialProfiler.xib in Resources */,
+				9D8934DA2053699A00773F59 /* GenderQuestionViewController.xib in Resources */,
 				9D8934CF2049DFD200773F59 /* AlertViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,7 +258,10 @@
 				9D8934C22048D00500773F59 /* InitialProfiler.swift in Sources */,
 				9D8934D42049F1C700773F59 /* BaseViewController.swift in Sources */,
 				9D8934CE2049DFD200773F59 /* AlertViewController.swift in Sources */,
+				9DAABDEE2053714B00D85EE8 /* BottomButtonableViewController.swift in Sources */,
+				9D8934D92053699A00773F59 /* GenderQuestionViewController.swift in Sources */,
 				9D8934D22049EE1600773F59 /* Globals.swift in Sources */,
+				9D8934D62053697700773F59 /* BaseQuestionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

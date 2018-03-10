@@ -35,7 +35,7 @@ public class InitialProfiler: UINavigationController {
             nav.navigationBar.setBackgroundImage(navImage.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .stretch), for: .default)
         }
         let vc = AlertViewController.instantiate(title: "Survey Slice", text: "Please complete the following 11 question survey to earn 200 coins", backNavBtnTitle: "Exit")
-        vc.delegate = nav
+        vc.alertViewDelegate = nav
         nav.viewControllers = [vc]
         return nav
     }

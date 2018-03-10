@@ -13,13 +13,13 @@ protocol AlertViewDelegate: class {
     func bottomBtnTapped()
 }
 
-class AlertViewController: BaseViewController {
+class AlertViewController: BottomButtonableViewController {
+    
     @IBOutlet weak var alertTitleLabel: UILabel!
     @IBOutlet weak var alertTextLabel: UILabel!
-    @IBOutlet weak var button: UIButton!
     @IBOutlet weak var alertImageView: UIImageView!
     
-    weak var delegate: AlertViewDelegate?
+    weak var alertViewDelegate: AlertViewDelegate?
     var alertTitle: String?
     var alertText: String?
     var btnTitle: String?
@@ -36,6 +36,11 @@ class AlertViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupAlertViewButtons()
+        self.bottomBtnDelegate = self
+    }
+    
+    func setupAlertViewButtons() {
         if let title = alertTitle {
             self.alertTitleLabel.text = title
         } else {
@@ -50,14 +55,16 @@ class AlertViewController: BaseViewController {
             self.navigationItem.setLeftBarButton(btn, animated: false)
         }
         self.alertTextLabel.text = self.alertText
-        self.button.setTitle(self.btnTitle, for: .normal)
+        self.bottomBtn.setTitle(self.btnTitle, for: .normal)
     }
 
     @objc func backNavBtnPressed() {
-        self.delegate?.backNavBtnTapped()
+        self.alertViewDelegate?.backNavBtnTapped()
     }
-    
-    @IBAction func buttonPressed(_ sender: Any) {
-        self.delegate?.bottomBtnTapped()
+}
+
+extension AlertViewController: BottomButtonDelegate {
+    func buttonTapped() {
+        self.alertViewDelegate?.bottomBtnTapped()
     }
 }

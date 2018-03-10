@@ -21,7 +21,6 @@
                 <outlet property="alertImageView" destination="Mv6-Gm-Qu8" id="3Va-w2-hOK"/>
                 <outlet property="alertTextLabel" destination="Td3-gX-434" id="djV-IW-T5h"/>
                 <outlet property="alertTitleLabel" destination="Jrt-SB-kBt" id="zra-Ab-1og"/>
-                <outlet property="button" destination="p8k-g5-hbj" id="fCp-EE-JoR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -33,19 +32,6 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="7GZ-kW-13S">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p8k-g5-hbj">
-                    <rect key="frame" x="35" y="603" width="304" height="44"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="304" id="tjv-YK-UYb"/>
-                        <constraint firstAttribute="height" constant="44" id="yRs-Pe-uDc"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
-                    <state key="normal" title="Continue" backgroundImage="button"/>
-                    <state key="selected" backgroundImage="buttonPressed"/>
-                    <connections>
-                        <action selector="buttonPressed:" destination="-1" eventType="touchUpInside" id="BYh-38-BHv"/>
-                    </connections>
-                </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alert" translatesAutoresizingMaskIntoConstraints="NO" id="Mv6-Gm-Qu8">
                     <rect key="frame" x="66" y="191.5" width="243" height="220"/>
                     <constraints>
@@ -84,8 +70,6 @@
                 <constraint firstItem="7GZ-kW-13S" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="JDB-U9-T9e"/>
                 <constraint firstItem="Mv6-Gm-Qu8" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-32" id="Po0-rl-UJH"/>
                 <constraint firstItem="7GZ-kW-13S" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="S29-Bq-6VV"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="p8k-g5-hbj" secondAttribute="bottom" constant="20" id="doo-Jk-Qv1"/>
-                <constraint firstItem="p8k-g5-hbj" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="gP5-9e-joz"/>
                 <constraint firstItem="7GZ-kW-13S" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="nj8-1V-YYX"/>
                 <constraint firstItem="Td3-gX-434" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="rp8-cW-hGl"/>
             </constraints>
@@ -96,7 +80,5 @@
     <resources>
         <image name="alert" width="441" height="400"/>
         <image name="background" width="375" height="667"/>
-        <image name="button" width="450" height="65"/>
-        <image name="buttonPressed" width="450" height="65"/>
     </resources>
 </document>

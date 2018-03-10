@@ -11,6 +11,8 @@ import Foundation
 
 public class Globals: NSObject {
     
+    static var bottomBtnSize = CGSize(width: 304, height: 44)
+    
     class func appFont(size: CGFloat=16.0) -> UIFont {
         return  UIFont.init(name: "Avenir-Roman", size: size)!
     }
