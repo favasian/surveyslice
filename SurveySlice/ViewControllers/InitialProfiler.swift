@@ -39,6 +39,12 @@ public class InitialProfiler: UINavigationController {
         nav.viewControllers = [vc]
         return nav
     }
+    
+    private func startQuestions() {
+        let genderQ = GenderQuestionViewController(nibName: "GenderQuestionViewController", bundle: Globals.appBundle())
+        genderQ.title = "Question 1"
+        self.pushViewController(genderQ, animated: true)
+    }
 }
 
 extension InitialProfiler: AlertViewDelegate {
@@ -47,6 +53,6 @@ extension InitialProfiler: AlertViewDelegate {
     }
     
     func bottomBtnTapped() {
-        print("Bottom button tapped")
+        self.startQuestions()
     }
 }

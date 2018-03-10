@@ -12,6 +12,8 @@ import Foundation
 public class Globals: NSObject {
     
     static var bottomBtnSize = CGSize(width: 304, height: 44)
+    static var padding:CGFloat = 20
+    static var progressBarSize = CGSize(width: Globals.screenWidth() * 0.80, height: 18)
     
     class func appFont(size: CGFloat=16.0) -> UIFont {
         return  UIFont.init(name: "Avenir-Roman", size: size)!
@@ -23,5 +25,11 @@ public class Globals: NSObject {
     
     class func appBundle() -> Bundle {
         return Bundle(for: self.classForCoder())
+    }
+    
+    class func screenWidth() -> CGFloat {
+        let op1 = UIScreen.main.bounds.width
+        let op2 = UIScreen.main.bounds.height
+        return min(op1, op2)
     }
 }

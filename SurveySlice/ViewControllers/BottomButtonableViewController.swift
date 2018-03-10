@@ -24,7 +24,7 @@ class BottomButtonableViewController: BaseViewController {
     
     func setupBottomBtn() {
         bottomBtn = UIButton(type: .custom)
-        bottomBtn.frame.size = Globals.bottomBtnSize
+        bottomBtn.titleLabel?.font = Globals.appFont()
         bottomBtn.setBackgroundImage(UIImage(named: "button", in: Globals.appBundle(), compatibleWith: nil), for: .normal)
         bottomBtn.setBackgroundImage(UIImage(named: "buttonPressed", in: Globals.appBundle(), compatibleWith: nil), for: .selected)
     
