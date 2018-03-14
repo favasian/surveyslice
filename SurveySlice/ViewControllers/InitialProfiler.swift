@@ -41,8 +41,10 @@ public class InitialProfiler: UINavigationController {
     }
     
     private func startQuestions() {
+        let questionNumber = 1
         let genderQ = GenderQuestionViewController(nibName: "GenderQuestionViewController", bundle: Globals.appBundle())
-        genderQ.title = "Question 1"
+        genderQ.totalNumberOfQuestions = 5
+        genderQ.questionNumber = questionNumber
         self.pushViewController(genderQ, animated: true)
     }
 }

@@ -13,7 +13,11 @@ public class Globals: NSObject {
     
     static var bottomBtnSize = CGSize(width: 304, height: 44)
     static var padding:CGFloat = 20
-    static var progressBarSize = CGSize(width: Globals.screenWidth() * 0.80, height: 18)
+    static var smallPadding:CGFloat = 8
+    static var progressBarSize = CGSize(width: Globals.screenWidth() * 0.80, height: 36+Globals.smallPadding)
+    static var genderSwitchSize = CGSize(width: 118, height: 35)
+    
+    static var grayFont:UIColor = UIColor.darkGray
     
     class func appFont(size: CGFloat=16.0) -> UIFont {
         return  UIFont.init(name: "Avenir-Roman", size: size)!

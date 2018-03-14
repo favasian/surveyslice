@@ -9,9 +9,44 @@
 import UIKit
 
 class GenderQuestionViewController: BaseQuestionViewController {
-
+    
+    var genderSwitchMaleImage:UIImage!
+    var genderSwitchFemaleImage:UIImage!
+    var genderSwitch: UIButton!
+    
     override func viewDidLoad() {
+        self.question = "Please select your gender."
+        guard let genderSwitchMaleImage = UIImage(named: "genderSwitchMale", in: Globals.appBundle(), compatibleWith: nil)  else { fatalError("No genderSwitchMale Image") }
+        guard let genderSwitchFemaleImage = UIImage(named: "genderSwitchFemale", in: Globals.appBundle(), compatibleWith: nil)  else { fatalError("No genderSwitchFemale Image") }
+        self.genderSwitchMaleImage = genderSwitchMaleImage
+        self.genderSwitchFemaleImage = genderSwitchFemaleImage
         super.viewDidLoad()
+        setupGenderSwitch()
     }
+    
+    func setupGenderSwitch() {
+        genderSwitch = UIButton(type: .custom)
+        genderSwitch.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(genderSwitch)
+        genderSwitch.setImage(self.genderSwitchMaleImage, for: .normal)
+        
+        genderSwitch.topAnchor.constraint(equalTo: self.questionLabel.bottomAnchor, constant: Globals.padding).isActive = true
+        genderSwitch.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        
+        let widthConstraint = NSLayoutConstraint(item: genderSwitch, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Globals.genderSwitchSize.width)
+        let heightConstraint = NSLayoutConstraint(item: genderSwitch, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Globals.genderSwitchSize.height)
+        self.view.addConstraints([widthConstraint, heightConstraint])
+        
+        genderSwitch.addTarget(self, action: #selector(GenderQuestionViewController.toggleGender), for: .touchUpInside)
+    }
+    
+    @objc func toggleGender() {
+        if genderSwitch.image(for: .normal) == genderSwitchMaleImage {
+            genderSwitch.setImage(genderSwitchFemaleImage, for: .normal)
+        } else {
+            genderSwitch.setImage(genderSwitchMaleImage, for: .normal)
+        }
+    }
+    
 
 }
