@@ -40,12 +40,19 @@ public class InitialProfiler: UINavigationController {
         return nav
     }
     
-    private func startQuestions() {
-        let questionNumber = 1
-        let genderQ = GenderQuestionViewController(nibName: "GenderQuestionViewController", bundle: Globals.appBundle())
-        genderQ.totalNumberOfQuestions = 5
-        genderQ.questionNumber = questionNumber
-        self.pushViewController(genderQ, animated: true)
+    private func startQuestion(questionNumber: Int=0) {
+        var qvc:BaseQuestionViewController!
+        switch questionNumber {
+        case 0:
+            qvc = GenderQuestionViewController()
+        default:
+            print("default")
+        }
+        
+        qvc.questionDelegate = self
+        qvc.totalNumberOfQuestions = 5
+        qvc.questionNumber = questionNumber
+        self.pushViewController(qvc, animated: true)
     }
 }
 
@@ -55,6 +62,15 @@ extension InitialProfiler: AlertViewDelegate {
     }
     
     func bottomBtnTapped() {
-        self.startQuestions()
+        self.startQuestion()
+    }
+}
+
+extension InitialProfiler: QuestionViewDelegate {
+    func submittedAnswers(answers: [String]?, questionNumber: Int) {
+        if let answers = answers {
+            print(answers.joined(separator: ","))
+        }
+        //self.startQuestion(questionNumber: questionNumber+1)
     }
 }

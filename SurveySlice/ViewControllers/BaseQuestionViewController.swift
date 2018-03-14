@@ -9,17 +9,19 @@
 import UIKit
 
 protocol QuestionViewDelegate: class {
-    func nextQuestion()
+    func submittedAnswers(answers: [String]?, questionNumber: Int)
 }
 
 class BaseQuestionViewController: BottomButtonableViewController {
     
+    var questionDelegate: QuestionViewDelegate?
     var progressBar: ProgressBar!
     var questionLabel: UILabel!
     
     var question: String!
     var questionNumber: Int!
     var totalNumberOfQuestions: Int!
+    var selectedAnswers: [String]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +29,7 @@ class BaseQuestionViewController: BottomButtonableViewController {
         setupProgressBar()
         setupQuestionLabel()
         self.bottomBtn.setTitle("Next", for: .normal)
+        self.bottomBtnDelegate = self
     }
     
     func setupProgressBar() {
@@ -58,5 +61,20 @@ class BaseQuestionViewController: BottomButtonableViewController {
         let widthConstraint = NSLayoutConstraint(item: self.questionLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Globals.progressBarSize.width)
         let heightConstraint = NSLayoutConstraint(item: self.progressBar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Globals.progressBarSize.height)
         self.view.addConstraints([widthConstraint, heightConstraint])
+    }
+    
+    //Method should be overridden
+    func isValidSelectedAnswers() -> Bool {
+        return false
+    }
+}
+
+extension BaseQuestionViewController: BottomButtonDelegate {
+    func buttonTapped() {
+        if self.isValidSelectedAnswers() {
+            self.questionDelegate?.submittedAnswers(answers: self.selectedAnswers, questionNumber: self.questionNumber)
+        } else {
+            self.displayAlert(title: "Oops", message: "Invalid option")
+        }
     }
 }
