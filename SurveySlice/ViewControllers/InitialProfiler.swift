@@ -45,12 +45,14 @@ public class InitialProfiler: UINavigationController {
         switch questionNumber {
         case 0:
             qvc = GenderQuestionViewController()
+        case 1:
+            qvc = AgeQuestionViewController()
         default:
             print("default")
         }
         
         qvc.questionDelegate = self
-        qvc.totalNumberOfQuestions = 5
+        qvc.totalNumberOfQuestions = 11
         qvc.questionNumber = questionNumber
         self.pushViewController(qvc, animated: true)
     }
@@ -71,6 +73,6 @@ extension InitialProfiler: QuestionViewDelegate {
         if let answers = answers {
             print(answers.joined(separator: ","))
         }
-        //self.startQuestion(questionNumber: questionNumber+1)
+        self.startQuestion(questionNumber: questionNumber+1)
     }
 }

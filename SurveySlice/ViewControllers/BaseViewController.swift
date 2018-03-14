@@ -34,9 +34,12 @@ class BaseViewController: UIViewController {
         }
     }
  
-    func displayAlert(title: String, message: String) {
+    func displayAlert(title: String, message: String, completion: @escaping () -> ()) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        let action = UIAlertAction(title: "Okay", style: .default) { (alertAction) in
+            completion()
+        }
+        alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }
 }

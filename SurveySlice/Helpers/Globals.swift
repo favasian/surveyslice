@@ -16,6 +16,8 @@ public class Globals: NSObject {
     static var smallPadding:CGFloat = 8
     static var progressBarSize = CGSize(width: Globals.screenWidth() * 0.80, height: 36+Globals.smallPadding)
     static var genderSwitchSize = CGSize(width: 118, height: 35)
+    static var inputFieldSize = CGSize(width: 150, height: 18)
+    static var questionLabelSize = CGSize(width: Globals.screenWidth() * 0.90, height: 36)
     
     static var grayFont:UIColor = UIColor.darkGray
     
