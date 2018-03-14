@@ -23,7 +23,7 @@ class BaseQuestionViewController: BottomButtonableViewController {
     }
     
     func setupProgressBar() {
-        self.progressBar = ProgressBar.newProgressBar()
+        self.progressBar = ProgressBar.newProgressBar(steps: 10, currentStep: 5)
         self.view.addSubview(self.progressBar)
         self.progressBar.translatesAutoresizingMaskIntoConstraints = false
         self.progressBar.topAnchor.constraint(equalTo: self.view.topAnchor, constant: Globals.padding).isActive = true
