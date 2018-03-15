@@ -22,6 +22,7 @@
 		9DAABDF22059C26400D85EE8 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAABDF12059C26400D85EE8 /* Helper.swift */; };
 		9DAABDF42059D26900D85EE8 /* TextInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAABDF32059D26900D85EE8 /* TextInputViewController.swift */; };
 		9DAABDF62059E68500D85EE8 /* AgeQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAABDF52059E68500D85EE8 /* AgeQuestionViewController.swift */; };
+		9DAABDF82059EED900D85EE8 /* MultipleChoiceQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAABDF72059EED900D85EE8 /* MultipleChoiceQuestionViewController.swift */; };
 		AAD19ABF2AAEDF8E401A15CA /* Pods_SurveySlice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 378E6F0543FE71B7A2386800 /* Pods_SurveySlice.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		9DAABDF12059C26400D85EE8 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		9DAABDF32059D26900D85EE8 /* TextInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputViewController.swift; sourceTree = "<group>"; };
 		9DAABDF52059E68500D85EE8 /* AgeQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeQuestionViewController.swift; sourceTree = "<group>"; };
+		9DAABDF72059EED900D85EE8 /* MultipleChoiceQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleChoiceQuestionViewController.swift; sourceTree = "<group>"; };
 		DD3713789A7DAF85B7BCB9DB /* Pods-SurveySlice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurveySlice.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SurveySlice/Pods-SurveySlice.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +105,7 @@
 				9D8934D72053699A00773F59 /* GenderQuestionViewController.swift */,
 				9DAABDF32059D26900D85EE8 /* TextInputViewController.swift */,
 				9DAABDF52059E68500D85EE8 /* AgeQuestionViewController.swift */,
+				9DAABDF72059EED900D85EE8 /* MultipleChoiceQuestionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				9DAABDF42059D26900D85EE8 /* TextInputViewController.swift in Sources */,
 				9D8934D92053699A00773F59 /* GenderQuestionViewController.swift in Sources */,
 				9DAABDF22059C26400D85EE8 /* Helper.swift in Sources */,
+				9DAABDF82059EED900D85EE8 /* MultipleChoiceQuestionViewController.swift in Sources */,
 				9D8934D22049EE1600773F59 /* Globals.swift in Sources */,
 				9DAABDF62059E68500D85EE8 /* AgeQuestionViewController.swift in Sources */,
 				9DAABDF020539A8900D85EE8 /* ProgressBar.swift in Sources */,

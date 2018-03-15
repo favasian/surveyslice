@@ -32,7 +32,7 @@ class BottomButtonableViewController: BaseViewController {
         self.view.addSubview(bottomBtn)
         
         bottomBtn.translatesAutoresizingMaskIntoConstraints = false
-        bottomBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        bottomBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10).isActive = true
         bottomBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         let widthConstraint = NSLayoutConstraint(item: bottomBtn, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Globals.bottomBtnSize.width)
