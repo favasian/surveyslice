@@ -23,6 +23,15 @@ class BaseQuestionViewController: BottomButtonableViewController {
     var totalNumberOfQuestions: Int!
     var selectedAnswers: [String]?
     
+    init(question: String, numberOfQuestions: Int, currentQuestionNumber: Int, delgate: QuestionViewDelegate) {
+        self.question = question
+        self.totalNumberOfQuestions = numberOfQuestions
+        self.questionNumber = currentQuestionNumber
+        self.questionDelegate = delgate
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Question \(questionNumber!+1)"
@@ -71,6 +80,10 @@ class BaseQuestionViewController: BottomButtonableViewController {
     
     //Method to allow clean up after user has tried to submit an invalid option
     func cleanupAfterInvalidAnswer() {
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 }
 

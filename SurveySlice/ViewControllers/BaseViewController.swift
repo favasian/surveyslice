@@ -57,6 +57,7 @@ class BaseViewController: UIViewController {
         innerView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 0).isActive = true
         innerView.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 0).isActive = true
         innerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 1).isActive = true
+        innerView.heightAnchor.constraint(greaterThanOrEqualTo: scrollView.heightAnchor, multiplier: 1).isActive = true
         
         constraintInnerViewHeight = innerView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 1)
         constraintInnerViewHeight.isActive = true

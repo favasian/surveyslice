@@ -44,16 +44,12 @@ public class InitialProfiler: UINavigationController {
         var qvc:BaseQuestionViewController!
         switch questionNumber {
         case 0:
-            qvc = GenderQuestionViewController()
+            qvc = GenderQuestionViewController(numberOfQuestions: 11, currentQuestionNumber: questionNumber, delgate: self)
         case 1:
-            qvc = AgeQuestionViewController()
+            qvc = AgeQuestionViewController(numberOfQuestions: 11, currentQuestionNumber: questionNumber, delgate: self)
         default:
             print("default")
         }
-        
-        qvc.questionDelegate = self
-        qvc.totalNumberOfQuestions = 11
-        qvc.questionNumber = questionNumber
         self.pushViewController(qvc, animated: true)
     }
 }

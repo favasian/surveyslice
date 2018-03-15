@@ -10,9 +10,12 @@ import UIKit
 
 class AgeQuestionViewController: TextInputViewController {
 
+    init(numberOfQuestions: Int, currentQuestionNumber: Int, delgate: QuestionViewDelegate) {
+        super.init(question: "What is your age?", numberOfQuestions: numberOfQuestions, currentQuestionNumber: currentQuestionNumber, delgate: delgate)
+    }
+    
     override func viewDidLoad() {
         self.keyboardType = UIKeyboardType.numbersAndPunctuation
-        self.question = "What is your age?"
         super.viewDidLoad()
     }
 
@@ -23,5 +26,9 @@ class AgeQuestionViewController: TextInputViewController {
             return answer == "\(age)"
         }
         return false
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 }
