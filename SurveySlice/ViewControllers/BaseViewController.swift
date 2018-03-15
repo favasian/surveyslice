@@ -67,8 +67,11 @@ class BaseViewController: UIViewController {
         self.innerView.addSubview(view)
     }
     
-    func contentMayExceedViewHeight() {
+    func contentMayExceedViewHeight(_ bottomMostView: UIView?=nil) {
         constraintInnerViewHeight.isActive = false
+        if let bmv = bottomMostView {
+            bmv.bottomAnchor.constraint(lessThanOrEqualTo: self.innerView.bottomAnchor, constant: -Globals.padding).isActive = true
+        }
     }
  
     func displayAlert(title: String, message: String, completion: @escaping () -> ()) {

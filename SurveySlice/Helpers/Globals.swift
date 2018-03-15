@@ -21,6 +21,7 @@ public class Globals: NSObject {
     static var alertImageSize = CGSize(width: 243, height: 220)
     static var alertTitleSize = CGSize(width: 199, height: 21)
     static var alertTextSize = CGSize(width: 188, height: 149)
+    static var answerOptionSize = CGSize(width: 289, height: 60)
     
     static var grayFont:UIColor = UIColor.darkGray
     

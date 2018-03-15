@@ -40,6 +40,12 @@ class BottomButtonableViewController: BaseViewController {
         self.innerView.addConstraints([widthConstraint, heightConstraint])
     }
     
+    override func contentMayExceedViewHeight(_ bottomMostView: UIView?=nil) {
+        constraintInnerViewHeight.isActive = false
+        if let bmv = bottomMostView {
+            bmv.bottomAnchor.constraint(lessThanOrEqualTo: self.bottomBtn.topAnchor, constant: -Globals.padding).isActive = true
+        }
+    }
     
     @objc func bottomButtonTapped() {
         self.bottomBtnDelegate?.buttonTapped()

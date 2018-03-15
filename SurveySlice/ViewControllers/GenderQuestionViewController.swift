@@ -15,14 +15,14 @@ class GenderQuestionViewController: BaseQuestionViewController {
     var genderSwitch: UIButton!
     
     init(numberOfQuestions: Int, currentQuestionNumber: Int, delgate: QuestionViewDelegate) {
-        super.init(question: "Please select your gender.", numberOfQuestions: numberOfQuestions, currentQuestionNumber: currentQuestionNumber, delgate: delgate)
-    }
-    
-    override func viewDidLoad() {
         guard let genderSwitchMaleImage = UIImage(named: "genderSwitchMale", in: Globals.appBundle(), compatibleWith: nil)  else { fatalError("No genderSwitchMale Image") }
         guard let genderSwitchFemaleImage = UIImage(named: "genderSwitchFemale", in: Globals.appBundle(), compatibleWith: nil)  else { fatalError("No genderSwitchFemale Image") }
         self.genderSwitchMaleImage = genderSwitchMaleImage
         self.genderSwitchFemaleImage = genderSwitchFemaleImage
+        super.init(question: "Please select your gender.", numberOfQuestions: numberOfQuestions, currentQuestionNumber: currentQuestionNumber, delgate: delgate)
+    }
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
         setupGenderSwitch()
         self.selectedAnswers = ["male"]

@@ -45,6 +45,14 @@ class TextInputViewController: BaseQuestionViewController {
     override func cleanupAfterInvalidAnswer() {
         self.inputField.becomeFirstResponder()
     }
+    
+    func setSelectedAnswer(_ string: String?) {
+        if let text = string {
+            self.selectedAnswers = [text]
+        } else {
+            self.selectedAnswers = nil
+        }
+    }
 }
 
 extension TextInputViewController: UITextFieldDelegate {
@@ -55,10 +63,6 @@ extension TextInputViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("ended")
-        if let text = self.inputField.text {
-            self.selectedAnswers = [text]
-        } else {
-            self.selectedAnswers = nil
-        }
+        self.setSelectedAnswer(textField.text)
     }
 }

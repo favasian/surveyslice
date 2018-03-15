@@ -42,11 +42,15 @@ public class InitialProfiler: UINavigationController {
     
     private func startQuestion(questionNumber: Int=0) {
         var qvc:BaseQuestionViewController!
+        let numberOfQuestions = 11
         switch questionNumber {
         case 0:
-            qvc = GenderQuestionViewController(numberOfQuestions: 11, currentQuestionNumber: questionNumber, delgate: self)
+            //qvc = GenderQuestionViewController(numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self)
+            qvc = MultipleChoiceQuestionViewController(question: "Take the number between 3 and 5. What is this number minus 2?", numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self, options: ["1", "2", "3", "4"], multiSelect: false)
         case 1:
-            qvc = AgeQuestionViewController(numberOfQuestions: 11, currentQuestionNumber: questionNumber, delgate: self)
+            qvc = AgeQuestionViewController(numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self)
+        case 2:
+            qvc = MultipleChoiceQuestionViewController(question: "Take the number between 3 and 5. What is this number minus 2?", numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self, options: ["1", "2", "3", "4"], multiSelect: false)
         default:
             print("default")
         }
