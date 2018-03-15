@@ -40,17 +40,22 @@ public class InitialProfiler: UINavigationController {
         return nav
     }
     
-    private func startQuestion(questionNumber: Int=0) {
+    private func startQuestion(questionNumber: Int=1) {
         var qvc:BaseQuestionViewController!
-        let numberOfQuestions = 11
+        let numberOfQuestions = 12
         switch questionNumber {
-        case 0:
-            //qvc = GenderQuestionViewController(numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self)
-            qvc = MultipleChoiceQuestionViewController(question: "Take the number between 3 and 5. What is this number minus 2?", numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self, options: ["1", "2", "3", "4", "5", "6", "7", "8", "9"], multiSelect: true)
         case 1:
-            qvc = AgeQuestionViewController(numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self)
+            qvc = GenderQuestionViewController(numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self)
         case 2:
-            qvc = MultipleChoiceQuestionViewController(question: "Take the number between 3 and 5. What is this number minus 2?", numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self, options: ["1", "2", "3", "4", "5", "6", "7", "8", "9"], multiSelect: true)
+            qvc = NumberInputViewController(question: "What is your age?", numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self)
+        case 3,4,5,6,7,8,9,10,11:
+            let qaObject = Globals.intialProfilerMultipleQAs()[questionNumber-3]
+            let q = qaObject["question"] as! String
+            let answers = qaObject["answers"] as! [String]
+            let multiSelect = qaObject["multi"] as! Bool
+            qvc = MultipleChoiceQuestionViewController(question: q, numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self, options: answers, multiSelect: multiSelect)
+        case 12:
+            qvc = NumberInputViewController(question: "WWhat is your 5-digit Zip Code?", numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self)
         default:
             print("default")
         }

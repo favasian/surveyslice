@@ -13,7 +13,7 @@ class ProgressBar: UIView {
     var steps: Int!
     var currentStep: Int!
     
-    class func newProgressBar(steps: Int, currentStep: Int=0) -> ProgressBar {
+    class func newProgressBar(steps: Int, currentStep: Int=1) -> ProgressBar {
         let progressbar = ProgressBar.init()
         progressbar.clipsToBounds = true
         progressbar.steps = steps
@@ -36,7 +36,7 @@ class ProgressBar: UIView {
         barView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -1).isActive = true
         barView.topAnchor.constraint(equalTo: progressbar.topAnchor, constant: 1).isActive = true
         
-        let m = ((CGFloat(currentStep)/CGFloat(steps))*Globals.progressBarSize.width) - Globals.progressBarSize.width
+        let m = ((CGFloat(currentStep-1)/CGFloat(steps))*Globals.progressBarSize.width) - Globals.progressBarSize.width
         barView.leftAnchor.constraint(equalTo: progressbar.leftAnchor, constant: m).isActive = true
         
         let widthConstraint = NSLayoutConstraint(item: barView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Globals.progressBarSize.width)
@@ -50,7 +50,7 @@ class ProgressBar: UIView {
         label.font = Globals.appFont()
         label.textColor = Globals.grayFont
         label.textAlignment = .center
-        label.text = "Question \(currentStep+1)/\(steps)"
+        label.text = "Question \(currentStep)/\(steps)"
         label.leftAnchor.constraint(equalTo: progressbar.leftAnchor, constant: 0).isActive = true
         label.rightAnchor.constraint(equalTo: progressbar.rightAnchor, constant: 0).isActive = true
         label.bottomAnchor.constraint(equalTo: progressbar.bottomAnchor, constant: 0).isActive = true

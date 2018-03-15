@@ -34,7 +34,7 @@ class BaseQuestionViewController: BottomButtonableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Question \(questionNumber!+1)"
+        self.title = "Question \(questionNumber!)"
         setupProgressBar()
         setupQuestionLabel()
         self.bottomBtn.setTitle("Next", for: .normal)
