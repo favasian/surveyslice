@@ -10,13 +10,19 @@ import UIKit
 
 class BaseViewController: UIViewController {
 
+    var innerView: UIView!
+    var scrollView: UIScrollView!
+    var constraintInnerViewHeight: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if self.title == "" || self.title == nil {
             self.title = "Survey Slice"
         }
         self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.setupScrollView()
         self.setupBackgroundImage()
+        
     }
 
     func setupBackgroundImage() {
@@ -32,6 +38,36 @@ class BaseViewController: UIViewController {
             
             self.view.sendSubview(toBack: backgroundView)
         }
+    }
+    
+    func setupScrollView() {
+        scrollView = UIScrollView()
+        self.view.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        scrollView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        
+        innerView = UIView()
+        scrollView.addSubview(innerView)
+        innerView.translatesAutoresizingMaskIntoConstraints = false
+        innerView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0).isActive = true
+        innerView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 0).isActive = true
+        innerView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 0).isActive = true
+        innerView.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 0).isActive = true
+        innerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, multiplier: 1).isActive = true
+        
+        constraintInnerViewHeight = innerView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 1)
+        constraintInnerViewHeight.isActive = true
+    }
+    
+    func addSubview(_ view: UIView) {
+        self.innerView.addSubview(view)
+    }
+    
+    func contentMayExceedViewHeight() {
+        constraintInnerViewHeight.isActive = false
     }
  
     func displayAlert(title: String, message: String, completion: @escaping () -> ()) {

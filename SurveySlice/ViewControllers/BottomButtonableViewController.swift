@@ -29,15 +29,15 @@ class BottomButtonableViewController: BaseViewController {
         bottomBtn.setBackgroundImage(UIImage(named: "buttonPressed", in: Globals.appBundle(), compatibleWith: nil), for: .selected)
     
         bottomBtn.addTarget(self, action: #selector(BottomButtonableViewController.bottomButtonTapped), for: .touchUpInside)
-        self.view.addSubview(bottomBtn)
+        self.addSubview(bottomBtn)
         
         bottomBtn.translatesAutoresizingMaskIntoConstraints = false
-        bottomBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10).isActive = true
-        bottomBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        bottomBtn.bottomAnchor.constraint(equalTo: self.innerView.bottomAnchor, constant: -10).isActive = true
+        bottomBtn.centerXAnchor.constraint(equalTo: self.innerView.centerXAnchor).isActive = true
         
         let widthConstraint = NSLayoutConstraint(item: bottomBtn, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Globals.bottomBtnSize.width)
         let heightConstraint = NSLayoutConstraint(item: bottomBtn, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Globals.bottomBtnSize.height)
-        self.view.addConstraints([widthConstraint, heightConstraint])
+        self.innerView.addConstraints([widthConstraint, heightConstraint])
     }
     
     

@@ -30,7 +30,7 @@ public class InitialProfiler: UINavigationController {
     
     public class func instantiate() -> InitialProfiler {
         let nav = InitialProfiler(nibName: "InitialProfiler", bundle: Globals.appBundle())
-        nav.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white, .font: Globals.appFont(size: 22)]
+        nav.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white, .font: Globals.appFont(size: 20)]
         if let navImage = UIImage(named: "navigation", in: Globals.appBundle(), compatibleWith: nil) {
             nav.navigationBar.setBackgroundImage(navImage.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .stretch), for: .default)
         }

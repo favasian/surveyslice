@@ -27,10 +27,10 @@ class TextInputViewController: BaseQuestionViewController {
         inputField.delegate = self
         inputField.textAlignment = .center
         inputField.keyboardType = keyboardType
-        self.view.addSubview(inputField)
+        self.addSubview(inputField)
         
         inputField.topAnchor.constraint(equalTo: self.questionLabel.bottomAnchor, constant: Globals.smallPadding).isActive = true
-        inputField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        inputField.centerXAnchor.constraint(equalTo: self.innerView.centerXAnchor).isActive = true
         
         let widthConstraint = NSLayoutConstraint(item: inputField, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Globals.inputFieldSize.width)
         let heightConstraint = NSLayoutConstraint(item: inputField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Globals.inputFieldSize.height)

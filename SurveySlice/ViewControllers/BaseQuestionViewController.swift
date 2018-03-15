@@ -34,10 +34,10 @@ class BaseQuestionViewController: BottomButtonableViewController {
     
     func setupProgressBar() {
         self.progressBar = ProgressBar.newProgressBar(steps: totalNumberOfQuestions, currentStep: questionNumber)
-        self.view.addSubview(self.progressBar)
+        self.addSubview(self.progressBar)
         self.progressBar.translatesAutoresizingMaskIntoConstraints = false
-        self.progressBar.topAnchor.constraint(equalTo: self.view.topAnchor, constant: Globals.smallPadding).isActive = true
-        self.progressBar.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        self.progressBar.topAnchor.constraint(equalTo: self.innerView.topAnchor, constant: Globals.smallPadding).isActive = true
+        self.progressBar.centerXAnchor.constraint(equalTo: self.innerView.centerXAnchor).isActive = true
         
         let widthConstraint = NSLayoutConstraint(item: self.progressBar, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Globals.progressBarSize.width)
         let heightConstraint = NSLayoutConstraint(item: self.progressBar, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Globals.progressBarSize.height)
@@ -53,11 +53,11 @@ class BaseQuestionViewController: BottomButtonableViewController {
         self.questionLabel.numberOfLines = 0
         self.questionLabel.adjustsFontSizeToFitWidth = true
         
-        self.view.addSubview(self.questionLabel)
+        self.addSubview(self.questionLabel)
         self.questionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         self.questionLabel.topAnchor.constraint(equalTo: self.progressBar.bottomAnchor, constant: Globals.smallPadding).isActive = true
-        self.questionLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        self.questionLabel.centerXAnchor.constraint(equalTo: self.innerView.centerXAnchor).isActive = true
         
         let widthConstraint = NSLayoutConstraint(item: self.questionLabel, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Globals.questionLabelSize.width)
         let heightConstraint = NSLayoutConstraint(item: self.questionLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Globals.questionLabelSize.height)

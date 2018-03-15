@@ -14,7 +14,6 @@ class AgeQuestionViewController: TextInputViewController {
         self.keyboardType = UIKeyboardType.numbersAndPunctuation
         self.question = "What is your age?"
         super.viewDidLoad()
-        
     }
 
     override func isValidSelectedAnswers() -> Bool {

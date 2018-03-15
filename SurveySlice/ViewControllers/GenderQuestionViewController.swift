@@ -28,15 +28,15 @@ class GenderQuestionViewController: BaseQuestionViewController {
     func setupGenderSwitch() {
         genderSwitch = UIButton(type: .custom)
         genderSwitch.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(genderSwitch)
+        self.addSubview(genderSwitch)
         genderSwitch.setImage(self.genderSwitchMaleImage, for: .normal)
         
         genderSwitch.topAnchor.constraint(equalTo: self.questionLabel.bottomAnchor, constant: Globals.padding).isActive = true
-        genderSwitch.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        genderSwitch.centerXAnchor.constraint(equalTo: self.innerView.centerXAnchor).isActive = true
         
         let widthConstraint = NSLayoutConstraint(item: genderSwitch, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Globals.genderSwitchSize.width)
         let heightConstraint = NSLayoutConstraint(item: genderSwitch, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Globals.genderSwitchSize.height)
-        self.view.addConstraints([widthConstraint, heightConstraint])
+        self.innerView.addConstraints([widthConstraint, heightConstraint])
         
         genderSwitch.addTarget(self, action: #selector(GenderQuestionViewController.toggleGender), for: .touchUpInside)
     }
