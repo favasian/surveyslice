@@ -12,6 +12,7 @@ class MultipleChoiceQuestionViewController: BaseQuestionViewController {
 
     var options: [String]!
     var multiSelect: Bool!
+    var answerButtons:[UIButton] = []
     
     var answerOptionImage: UIImage!
     var rejectedOptionImage: UIImage!
@@ -59,14 +60,51 @@ class MultipleChoiceQuestionViewController: BaseQuestionViewController {
                 btn.topAnchor.constraint(equalTo: self.questionLabel.bottomAnchor, constant: Globals.padding).isActive = true
             }
             
+            btn.contentMode = .scaleAspectFill
             btn.titleLabel?.font = Globals.appFont()
+            btn.titleLabel?.numberOfLines = 2
             btn.titleLabel?.textColor = UIColor.white
             btn.setTitle(option, for: .normal)
             btn.contentHorizontalAlignment = .left
             btn.titleLabel?.adjustsFontSizeToFitWidth = true
-            btn.contentEdgeInsets = UIEdgeInsetsMake(-5, 80, 0, 0)
+            btn.contentEdgeInsets = Globals.answerOptionInset
+            
+            btn.addTarget(self, action: #selector(MultipleChoiceQuestionViewController.optionTapped(_:)), for: .touchUpInside)
+            answerButtons.append(btn)
             lastOption = btn
         }
         self.contentMayExceedViewHeight(lastOption)
+    }
+    
+    func setSelectedAnswersFromMultipleChoice() {
+        self.selectedAnswers = []
+        for btn in answerButtons {
+            if btn.backgroundImage(for: .normal) == selectedOptionImage {
+                if let a = btn.title(for: .normal) {
+                    self.selectedAnswers?.append(a)
+                }
+            }
+        }
+        if self.selectedAnswers!.isEmpty { self.selectedAnswers = nil }
+    }
+    
+    func clearSelectedAnswers() {
+        self.selectedAnswers = nil
+        for btn in answerButtons {
+            btn.setBackgroundImage(answerOptionImage, for: .normal)
+            btn.setBackgroundImage(selectedOptionImage, for: .highlighted)
+        }
+    }
+    
+    @objc func optionTapped(_ btn: UIButton) {
+        if btn.backgroundImage(for: .normal) != answerOptionImage {
+            btn.setBackgroundImage(answerOptionImage, for: .normal)
+            btn.setBackgroundImage(selectedOptionImage, for: .highlighted)
+        } else {
+            if !self.multiSelect { self.clearSelectedAnswers() }
+            btn.setBackgroundImage(selectedOptionImage, for: .normal)
+            btn.setBackgroundImage(answerOptionImage, for: .highlighted)
+        }
+        self.setSelectedAnswersFromMultipleChoice()
     }
 }

@@ -46,11 +46,11 @@ public class InitialProfiler: UINavigationController {
         switch questionNumber {
         case 0:
             //qvc = GenderQuestionViewController(numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self)
-            qvc = MultipleChoiceQuestionViewController(question: "Take the number between 3 and 5. What is this number minus 2?", numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self, options: ["1", "2", "3", "4"], multiSelect: false)
+            qvc = MultipleChoiceQuestionViewController(question: "Take the number between 3 and 5. What is this number minus 2?", numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self, options: ["1", "2", "3", "4", "5", "6", "7", "8", "9"], multiSelect: true)
         case 1:
             qvc = AgeQuestionViewController(numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self)
         case 2:
-            qvc = MultipleChoiceQuestionViewController(question: "Take the number between 3 and 5. What is this number minus 2?", numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self, options: ["1", "2", "3", "4"], multiSelect: false)
+            qvc = MultipleChoiceQuestionViewController(question: "Take the number between 3 and 5. What is this number minus 2?", numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self, options: ["1", "2", "3", "4", "5", "6", "7", "8", "9"], multiSelect: true)
         default:
             print("default")
         }

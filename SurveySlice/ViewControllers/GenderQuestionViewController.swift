@@ -54,10 +54,6 @@ class GenderQuestionViewController: BaseQuestionViewController {
         }
     }
     
-    override func isValidSelectedAnswers() -> Bool {
-        return true
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

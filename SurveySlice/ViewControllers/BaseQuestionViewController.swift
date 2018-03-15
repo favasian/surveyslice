@@ -73,9 +73,8 @@ class BaseQuestionViewController: BottomButtonableViewController {
         self.view.addConstraints([widthConstraint, heightConstraint])
     }
     
-    //Method should be overridden
     func isValidSelectedAnswers() -> Bool {
-        return false
+        return self.selectedAnswers != nil && !self.selectedAnswers!.isEmpty
     }
     
     //Method to allow clean up after user has tried to submit an invalid option

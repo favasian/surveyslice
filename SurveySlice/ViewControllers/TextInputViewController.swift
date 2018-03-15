@@ -38,6 +38,7 @@ class TextInputViewController: BaseQuestionViewController {
     }
     
     override func isValidSelectedAnswers() -> Bool {
+        if !super.isValidSelectedAnswers() { return false }
         guard let answer = self.selectedAnswers?.first else { return false }
         return !answer.isEmpty
     }

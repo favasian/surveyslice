@@ -20,12 +20,10 @@ class AgeQuestionViewController: TextInputViewController {
     }
 
     override func isValidSelectedAnswers() -> Bool {
-        if super.isValidSelectedAnswers() {
-            guard let answer = self.selectedAnswers?.first else { return false }
-            guard let age = Int(answer) else { return false }
-            return answer == "\(age)"
-        }
-        return false
+        if !super.isValidSelectedAnswers() { return false }
+        guard let answer = self.selectedAnswers?.first else { return false }
+        guard let age = Int(answer) else { return false }
+        return answer == "\(age)"
     }
     
     required init?(coder aDecoder: NSCoder) {
