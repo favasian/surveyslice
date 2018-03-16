@@ -14,7 +14,22 @@ public class Globals: NSObject {
     static var bottomBtnSize = CGSize(width: 304, height: 44)
     static var padding:CGFloat = 20
     static var smallPadding:CGFloat = 8
-    static var progressBarSize = CGSize(width: Globals.screenWidth() * 0.80, height: 36+Globals.smallPadding)
+    static var progressBarBackgroundSize: CGSize {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return CGSize(width: 455, height: 30)
+        } else {
+            return CGSize(width: 273, height: 18)
+        }
+    }
+    static var progressBarForegroundSize: CGSize {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return CGSize(width: 455, height: 25)
+        } else {
+            return CGSize(width: 273, height: 15)
+        }
+    }
+    static var progressBarLabelSize:CGSize = CGSize(width: Globals.screenWidth(), height: 18)
+    static var progressBarSize: CGSize = CGSize(width: Globals.progressBarBackgroundSize.width, height: Globals.progressBarBackgroundSize.height + Globals.progressBarLabelSize.height + Globals.smallPadding)
     static var genderSwitchSize = CGSize(width: 118, height: 35)
     static var inputFieldSize = CGSize(width: 150, height: 18)
     static var questionLabelSize = CGSize(width: Globals.screenWidth() * 0.90, height: 50)
