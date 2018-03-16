@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class InitialProfiler: UINavigationController {
+class InitialProfiler: AlertViewController {
 
     var submittedAnswers:[[String]?] = []
     
@@ -23,26 +23,27 @@ public class InitialProfiler: UINavigationController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-
-    @objc private func cancel() {
-        self.dismiss(animated: true) {
+    func cancel() {
+        Globals.mainVC.dismiss(animated: true) {
         }
     }
     
-    public class func instantiate() -> InitialProfiler {
-        let nav = InitialProfiler(nibName: "InitialProfiler", bundle: Globals.appBundle())
-        nav.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white, .font: Globals.appFont(size: 20)]
-        if let navImage = UIImage(named: "navigation", in: Globals.appBundle(), compatibleWith: nil) {
-            nav.navigationBar.setBackgroundImage(navImage.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .stretch), for: .default)
+    init(displayIncorrectAnswerAlert: Bool=false) {
+        if displayIncorrectAnswerAlert {
+            super.init(title: "Oops", text: "You didn't take enough time to complete this Initial Survey", backNavBtnTitle: "Exit", btnTitle: "Start Over")
+        } else {
+            super.init(title: "Survey Slice", text: "Please complete the following 11 question survey to earn 200 coins", backNavBtnTitle: "Exit")
         }
-        let vc = AlertViewController.instantiate(title: "Survey Slice", text: "Please complete the following 11 question survey to earn 200 coins", backNavBtnTitle: "Exit")
-        vc.alertViewDelegate = nav
-        nav.viewControllers = [vc]
-        return nav
+        
+        self.alertViewDelegate = self
     }
     
-    private func startQuestion(questionNumber: Int=1) {
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func startQuestion(questionNumber: Int=1) {
         var qvc:BaseQuestionViewController!
         let numberOfQuestions = Globals.intialProfilerQAs().count
         let qaObject = Globals.intialProfilerQAs()[questionNumber-1]
@@ -62,10 +63,10 @@ public class InitialProfiler: UINavigationController {
         default:
             print("default")
         }
-        self.pushViewController(qvc, animated: true)
+        Globals.mainVC.pushViewController(qvc, animated: true)
     }
     
-    private func areSubmittedAnswersCorrect() -> Bool {
+    func areSubmittedAnswersCorrect() -> Bool {
         var index = 0
         for qaObject in Globals.intialProfilerQAs() {
             if let correctAnswers = qaObject["correctAnswers"] as? [String] {
@@ -80,11 +81,9 @@ public class InitialProfiler: UINavigationController {
         return true
     }
     
-    private func displayIncorrectAnswerAlert() {
-        self.submittedAnswers.removeAll()
-        let vc = AlertViewController.instantiate(title: "Oops", text: "You didn't take enough time to complete this Initial Survey", backNavBtnTitle: "Exit", btnTitle: "Start Over")
-        vc.alertViewDelegate = self
-        self.viewControllers = [vc]
+    func displayIncorrectAnswerAlert() {
+        let vc = InitialProfiler(displayIncorrectAnswerAlert: true)
+        Globals.mainVC.viewControllers = [vc]
     }
 }
 

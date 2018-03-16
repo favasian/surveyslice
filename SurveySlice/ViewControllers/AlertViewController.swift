@@ -25,13 +25,25 @@ class AlertViewController: BottomButtonableViewController {
     var btnTitle: String?
     var backBtnTitle: String?
     
-    public class func instantiate(title: String?, text: String, backNavBtnTitle: String?, btnTitle: String="Continue") -> AlertViewController {
-        let vc = AlertViewController()
-        vc.alertTitle = title
-        vc.alertText = text
-        vc.btnTitle = btnTitle
-        vc.backBtnTitle = backNavBtnTitle
-        return vc
+//    public class func instantiate(title: String?, text: String, backNavBtnTitle: String?, btnTitle: String="Continue") -> AlertViewController {
+//        let vc = AlertViewController()
+//        vc.alertTitle = title
+//        vc.alertText = text
+//        vc.btnTitle = btnTitle
+//        vc.backBtnTitle = backNavBtnTitle
+//        return vc
+//    }
+    
+    init(title: String?, text: String, backNavBtnTitle: String?, btnTitle: String="Continue") {
+        super.init(nibName: nil, bundle: nil)
+        self.alertTitle = title
+        self.alertText = text
+        self.btnTitle = btnTitle
+        self.backBtnTitle = backNavBtnTitle
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {

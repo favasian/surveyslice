@@ -38,6 +38,15 @@ public class Globals: NSObject {
     static var alertTextSize = CGSize(width: 188, height: 149)
     static var answerOptionSize = CGSize(width: 320, height: 66)
     static var answerOptionInset = UIEdgeInsetsMake(-5, 75, 0, 20)
+    static let mainVC = SurveySliceController()
+    
+    static var surveyPackSize:CGSize {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return CGSize(width: 234.5, height: 216)
+        } else {
+            return CGSize(width: 142, height: 130)
+        }
+    }
     
     static var grayFont:UIColor = UIColor.darkGray
     
