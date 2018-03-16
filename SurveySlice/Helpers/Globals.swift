@@ -17,7 +17,7 @@ public class Globals: NSObject {
     static var progressBarSize = CGSize(width: Globals.screenWidth() * 0.80, height: 36+Globals.smallPadding)
     static var genderSwitchSize = CGSize(width: 118, height: 35)
     static var inputFieldSize = CGSize(width: 150, height: 18)
-    static var questionLabelSize = CGSize(width: Globals.screenWidth() * 0.90, height: 60)
+    static var questionLabelSize = CGSize(width: Globals.screenWidth() * 0.90, height: 50)
     static var alertImageSize = CGSize(width: 243, height: 220)
     static var alertTitleSize = CGSize(width: 199, height: 21)
     static var alertTextSize = CGSize(width: 188, height: 149)
