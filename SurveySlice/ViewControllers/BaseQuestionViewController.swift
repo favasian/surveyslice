@@ -8,6 +8,19 @@
 
 import UIKit
 
+
+enum QuestionType {
+    case gender
+    case number
+    case text
+    case multipleChoice
+}
+
+enum AnswerValidation {
+    case length
+}
+
+
 protocol QuestionViewDelegate: class {
     func submittedAnswers(answers: [String]?, questionNumber: Int)
 }
@@ -22,12 +35,14 @@ class BaseQuestionViewController: BottomButtonableViewController {
     var questionNumber: Int!
     var totalNumberOfQuestions: Int!
     var selectedAnswers: [String]?
+    var validations: [AnswerValidation: Any]?
     
-    init(question: String, numberOfQuestions: Int, currentQuestionNumber: Int, delgate: QuestionViewDelegate) {
+    init(question: String, numberOfQuestions: Int, currentQuestionNumber: Int, delgate: QuestionViewDelegate, validations: [AnswerValidation: Any]?=nil) {
         self.question = question
         self.totalNumberOfQuestions = numberOfQuestions
         self.questionNumber = currentQuestionNumber
         self.questionDelegate = delgate
+        self.validations = validations
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -74,7 +89,20 @@ class BaseQuestionViewController: BottomButtonableViewController {
     }
     
     func isValidSelectedAnswers() -> Bool {
-        return self.selectedAnswers != nil && !self.selectedAnswers!.isEmpty
+        guard let answers =  self.selectedAnswers else { return false }
+        if answers.isEmpty { return false }
+        guard let validations = self.validations else { return true }
+        for key in validations.keys {
+            switch key {
+            case .length:
+                for answer in answers {
+                    if let length = validations[key] as? Int {
+                        if answer.count != length { return false }
+                    }
+                }
+            }
+        }
+        return true
     }
     
     //Method to allow clean up after user has tried to submit an invalid option
@@ -91,7 +119,7 @@ extension BaseQuestionViewController: BottomButtonDelegate {
         if self.isValidSelectedAnswers() {
             self.questionDelegate?.submittedAnswers(answers: self.selectedAnswers, questionNumber: self.questionNumber)
         } else {
-            self.displayAlert(title: "Oops", message: "Invalid option", completion: {
+            self.displayAlert(title: "Oops", message: "Invalid Answer", completion: {
                 self.cleanupAfterInvalidAnswer()
             })
         }

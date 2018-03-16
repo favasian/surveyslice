@@ -36,7 +36,13 @@ class ProgressBar: UIView {
         barView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -1).isActive = true
         barView.topAnchor.constraint(equalTo: progressbar.topAnchor, constant: 1).isActive = true
         
-        let m = ((CGFloat(currentStep-1)/CGFloat(steps))*Globals.progressBarSize.width) - Globals.progressBarSize.width
+        var m:CGFloat
+        if steps == currentStep {
+            m = 0
+        } else {
+            m = ((CGFloat(currentStep-1)/CGFloat(steps))*Globals.progressBarSize.width) - Globals.progressBarSize.width
+        }
+        
         barView.leftAnchor.constraint(equalTo: progressbar.leftAnchor, constant: m).isActive = true
         
         let widthConstraint = NSLayoutConstraint(item: barView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Globals.progressBarSize.width)

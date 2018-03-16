@@ -44,53 +44,83 @@ public class Globals: NSObject {
         return min(op1, op2)
     }
     
-    class func intialProfilerMultipleQAs() -> [[String:Any]] {
+    class func intialProfilerQAs() -> [[String:Any]] {
         return [
             [
+                "question": "Please select your gender.",
+                "options": [],
+                "multi": false,
+                "type": QuestionType.gender
+            ],
+            [
+                "question": "What is your age?",
+                "options": [],
+                "multi": false,
+                "type": QuestionType.number
+            ],
+            [
                 "question": "Take the number between 3 and 5. What is this number minus 2?",
-                "answers": ["1", "2", "3", "4", "5"],
-                "multi": false
+                "options": ["1", "2", "3", "4", "5"],
+                "multi": false,
+                "type": QuestionType.multipleChoice,
+                "correctAnswers": ["2"]
             ],
             [
                 "question": "How many hours a week do you spend playing games on your phone?",
-                "answers": ["0-3 hours", "4-7 hours", "8-13 hours", "14-19 hours", "20+ hours"],
-                "multi": false
+                "options": ["0-3 hours", "4-7 hours", "8-13 hours", "14-19 hours", "20+ hours"],
+                "multi": false,
+                "type": QuestionType.multipleChoice
             ],
             [
                 "question": "How much would you estimate you spend on in-app purchases each year?",
-                "answers": ["Nothing", "$1.00-$5.00", "$5.01-$15.00", "$15.01-$35.00", "$35.01-$50.00", "$50.01-$75.00", "Over $75.00", "Prefer not to answer"],
-                "multi": false
+                "options": ["Nothing", "$1.00-$5.00", "$5.01-$15.00", "$15.01-$35.00", "$35.01-$50.00", "$50.01-$75.00", "Over $75.00", "Prefer not to answer"],
+                "multi": false,
+                "type": QuestionType.multipleChoice
             ],
             [
                 "question": "Are you willing to pay a monthly fee to play a game?",
-                "answers": ["Yes", "No", "It depends"],
-                "multi": false
+                "options": ["Yes", "No", "It depends"],
+                "multi": false,
+                "type": QuestionType.multipleChoice
             ],
             [
                 "question": "In your lifetime, which of the following have you used? (please select all that apply)",
-                "answers": ["Jackhammer", "Trident Spear", "Smartphone", "Wrist Watch", "Pencil", "Shears"],
-                "multi": true
+                "options": ["Jackhammer", "Trident Spear", "Smartphone", "Wrist Watch", "Pencil", "Shears"],
+                "multi": true,
+                "type": QuestionType.multipleChoice,
+                "correctAnswers": ["Smartphone", "Pencil"]
             ],
             [
                 "question": "Which of the following game apps do you enjoy? (please select all that apply)",
-                "answers": ["First Person Shooter", "Arcade Games", "Sports", "Action/Adventure", "Simulation", "Educational", "Survival", "Strategy", "Puzzle", "Role Playing", "Trivia", "Casino", "Word", "Card", "Racing", "Music"],
-                "multi": true
+                "options": ["First Person Shooter", "Arcade Games", "Sports", "Action/Adventure", "Simulation", "Educational", "Survival", "Strategy", "Puzzle", "Role Playing", "Trivia", "Casino", "Word", "Card", "Racing", "Music"],
+                "multi": true,
+                "type": QuestionType.multipleChoice
             ],
             [
                 "question": "Which of the following apps do you enjoy? (please select all that apply)",
-                "answers": ["AR Apps", "Books", "Business", "Education", "Entertainment", "Finance", "Food & Drink", "Health & Fitness", "Kids", "Lifestyle", "Magazine & Newspapers", "Medical", "Music", "Navigation", "News", "Photo & Video", "Productivity", "Reference", "Shopping", "Social Networking", "Sports", "Travel", "Utilities", "Weather"],
-                "multi": true
+                "options": ["AR Apps", "Books", "Business", "Education", "Entertainment", "Finance", "Food & Drink", "Health & Fitness", "Kids", "Lifestyle", "Magazine & Newspapers", "Medical", "Music", "Navigation", "News", "Photo & Video", "Productivity", "Reference", "Shopping", "Social Networking", "Sports", "Travel", "Utilities", "Weather"],
+                "multi": true,
+                "type": QuestionType.multipleChoice
             ],
             [
                 "question": "Which games do you prefer?",
-                "answers": ["Online, Multiplayer games", "Single Player games"],
-                "multi": false
+                "options": ["Online, Multiplayer games", "Single Player games"],
+                "multi": false,
+                "type": QuestionType.multipleChoice
             ],
             [
                 "question": "What are your thoughts on in-app ads?",
-                "answers": ["I'll delete an app if I see an ad", "I can tolerate a few here and there", "Ads can be helpful sometimes", "I enjoy looking at ads & discovering new apps"],
-                "multi": false
-            ]
+                "options": ["I'll delete an app if I see an ad", "I can tolerate a few here and there", "Ads can be helpful sometimes", "I enjoy looking at ads & discovering new apps"],
+                "multi": false,
+                "type": QuestionType.multipleChoice
+            ],
+            [
+                "question": "What is your 5-digit Zip Code?",
+                "options": [],
+                "multi": false,
+                "type": QuestionType.number,
+                "validations": [AnswerValidation.length: 5]
+            ],
         ]
     }
 }
