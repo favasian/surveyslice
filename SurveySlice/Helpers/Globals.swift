@@ -49,6 +49,7 @@ public class Globals: NSObject {
     }
     
     static var grayFont:UIColor = UIColor.darkGray
+    static var lightGray:UIColor = UIColor(hexString: "#939598")!
     
     class func appFont(size: CGFloat=16.0) -> UIFont {
         return  UIFont.init(name: "Avenir-Roman", size: size)!

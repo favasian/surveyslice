@@ -26,10 +26,11 @@ public class SurveySliceController: UINavigationController {
             nav.navigationBar.setBackgroundImage(navImage.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .stretch), for: .default)
         }
         var vc:UIViewController
-        //if initialProfilerFinished {
-        //} else {
+        if initialProfilerFinished {
+            vc = SurveyWallViewController()
+        } else {
              vc = InitialProfiler()
-        //}
+        }
         nav.viewControllers = [vc]
         return nav
     }
