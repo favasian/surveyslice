@@ -29,7 +29,7 @@ class TextInputViewController: BaseQuestionViewController {
         inputField.keyboardType = keyboardType
         self.addSubview(inputField)
         
-        inputField.topAnchor.constraint(equalTo: self.questionLabel.bottomAnchor, constant: Globals.smallPadding).isActive = true
+        inputField.topAnchor.constraint(equalTo: self.questionLabel.bottomAnchor, constant: 0).isActive = true
         inputField.centerXAnchor.constraint(equalTo: self.innerView.centerXAnchor).isActive = true
         
         let widthConstraint = NSLayoutConstraint(item: inputField, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Globals.inputFieldSize.width)

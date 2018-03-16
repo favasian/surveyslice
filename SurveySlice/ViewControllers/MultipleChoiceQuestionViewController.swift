@@ -61,7 +61,7 @@ class MultipleChoiceQuestionViewController: BaseQuestionViewController {
             }
             
             btn.contentMode = .scaleAspectFill
-            btn.titleLabel?.font = Globals.appFont()
+            btn.titleLabel?.font = Globals.heavyAppfont(size: 14)
             btn.titleLabel?.numberOfLines = 2
             btn.titleLabel?.textColor = UIColor.white
             btn.setTitle(option, for: .normal)
