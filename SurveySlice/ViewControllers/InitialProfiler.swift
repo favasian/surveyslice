@@ -32,7 +32,7 @@ class InitialProfiler: AlertViewController {
         if displayIncorrectAnswerAlert {
             super.init(title: "Oops", text: "You didn't take enough time to complete this Initial Survey", backNavBtnTitle: "Exit", btnTitle: "Start Over")
         } else {
-            super.init(title: "Survey Slice", text: "Please complete the following 11 question survey to earn 200 coins", backNavBtnTitle: "Exit")
+            super.init(title: "Survey Slice", text: "Please complete the following 11 questions survey to earn 200 coins", backNavBtnTitle: "Exit")
         }
         
         self.alertViewDelegate = self
