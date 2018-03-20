@@ -26,7 +26,7 @@ class BottomButtonableViewController: BaseViewController {
         bottomBtn = UIButton(type: .custom)
         bottomBtn.titleLabel?.font = Globals.appFont()
         bottomBtn.setBackgroundImage(UIImage(named: "button", in: Globals.appBundle(), compatibleWith: nil), for: .normal)
-        bottomBtn.setBackgroundImage(UIImage(named: "buttonPressed", in: Globals.appBundle(), compatibleWith: nil), for: .selected)
+        bottomBtn.setBackgroundImage(UIImage(named: "buttonPressed", in: Globals.appBundle(), compatibleWith: nil), for: .highlighted)
     
         bottomBtn.addTarget(self, action: #selector(BottomButtonableViewController.bottomButtonTapped), for: .touchUpInside)
         self.addSubview(bottomBtn)
@@ -49,5 +49,9 @@ class BottomButtonableViewController: BaseViewController {
     
     @objc func bottomButtonTapped() {
         self.bottomBtnDelegate?.buttonTapped()
+    }
+    
+    override func preferredScreenEdgesDeferringSystemGestures() -> UIRectEdge {
+        return .bottom
     }
 }

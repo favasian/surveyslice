@@ -9,6 +9,10 @@
 import Foundation
 
 public class Helper: NSObject {
-
+    class func delay(delay: TimeInterval, block: @escaping () -> ()) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            block()
+        }
+    }
 }
 

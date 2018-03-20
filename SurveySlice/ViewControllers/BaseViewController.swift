@@ -13,6 +13,7 @@ class BaseViewController: UIViewController {
     var innerView: UIView!
     var scrollView: UIScrollView!
     var constraintInnerViewHeight: NSLayoutConstraint!
+    var subNavBar: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,9 +46,20 @@ class BaseViewController: UIViewController {
         self.view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-        scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
         scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
         scrollView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        
+        if let subNavBar = self.subNavBar {
+            self.view.addSubview(subNavBar)
+            subNavBar.translatesAutoresizingMaskIntoConstraints = false
+            subNavBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+            subNavBar.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+            subNavBar.heightAnchor.constraint(equalToConstant: Globals.subNavBarHeight).isActive = true
+            subNavBar.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            scrollView.topAnchor.constraint(equalTo: subNavBar.bottomAnchor, constant: 0).isActive = true
+        } else {
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        }
         
         innerView = UIView()
         scrollView.addSubview(innerView)

@@ -39,6 +39,34 @@ public class Globals: NSObject {
     static var answerOptionSize = CGSize(width: 320, height: 66)
     static var answerOptionInset = UIEdgeInsetsMake(-5, 75, 0, 20)
     static let mainVC = SurveySliceController()
+    static var subNavBarHeight:CGFloat {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return 65
+        } else {
+            return 45.5
+        }
+    }
+    static var surveySliceImageSize:CGSize {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return CGSize(width: 209.5, height: 50)
+        } else {
+            return CGSize(width: 140, height: 33)
+        }
+    }
+    static var statIconImageSize:CGSize {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return CGSize(width: 45, height: 45)
+        } else {
+            return CGSize(width: 31, height: 31)
+        }
+    }
+    static var subNavSidePadding:CGFloat {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return 20
+        } else {
+            return 16
+        }
+    }
     
     static var surveyPackSize:CGSize {
         if UIDevice.current.userInterfaceIdiom == .pad {
