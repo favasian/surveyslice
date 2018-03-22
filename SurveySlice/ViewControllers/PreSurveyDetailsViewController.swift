@@ -47,7 +47,7 @@ class PreSurveyDetailsViewController: BottomButtonableViewController {
     
     func setupView() {
         let label1 = UILabel()
-        label1.text = "You have been pre-qualified for this survey! To continue with the survey, you must first download \(appName!) and use the app for at least \(minTimeActivity!) minutes"
+        label1.text = "You have been pre-qualified for this survey! To continue with the survey, you must first download \(appName!) and use the app for at least \(minTimeActivity!) minutes."
         label1.font = Globals.appFont()
         label1.textColor = Globals.grayFont
         label1.numberOfLines = 0
