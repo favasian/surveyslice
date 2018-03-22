@@ -68,6 +68,8 @@ public class Globals: NSObject {
         }
     }
     
+    static var appIconSize: CGSize = CGSize(width: 80, height: 80)
+    
     static var surveyPackSize:CGSize {
         if UIDevice.current.userInterfaceIdiom == .pad {
             return CGSize(width: 234.5, height: 216)
@@ -82,6 +84,7 @@ public class Globals: NSObject {
             return CGSize(width: 414, height: 30.67)
         }
     }
+    static var starWidthRatio:CGFloat = 5.1599
     
     static var grayFont:UIColor = UIColor.darkGray
     static var lightGray:UIColor = UIColor(hexString: "#939598")!

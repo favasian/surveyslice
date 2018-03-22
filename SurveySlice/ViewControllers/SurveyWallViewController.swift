@@ -176,6 +176,7 @@ class SurveyWallViewController: BottomButtonableViewController {
             guard let currency = campaign["currency"] as? String else { fatalError("currency does not exist") }
             guard let avgTime = campaign["avgTime"] as? Int else { fatalError("avgTime does not exist") }
             let sp = SurveyPack(currencyAmount: currencyAmount, currency: currency, avgTime: avgTime)
+            sp.surveyPackDelegate = self
             lastRow.addSubview(sp)
             sp.translatesAutoresizingMaskIntoConstraints = false
             sp.heightAnchor.constraint(equalToConstant: Globals.surveyPackSize.height).isActive = true
@@ -205,5 +206,12 @@ extension SurveyWallViewController: BottomButtonDelegate {
     func buttonTapped() {
         var campaigns = self.moreCampaigns()
         self.displaySurveyPacks(campaigns, append: true)
+    }
+}
+
+extension SurveyWallViewController: SurveyPackDelegate {
+    func tapped() {
+        let vc = PreSurveyDetailsViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

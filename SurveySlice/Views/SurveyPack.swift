@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol SurveyPackDelegate: class {
+    func tapped()
+}
+
 class SurveyPack: UIView {
+    
+    var surveyPackDelegate: SurveyPackDelegate?
     
     init(currencyAmount: Int, currency: String, avgTime: Int=10) {
         super.init(frame: CGRect(x: 0, y: 0, width: Globals.surveyPackSize.width, height: Globals.surveyPackSize.height))
@@ -98,6 +104,13 @@ class SurveyPack: UIView {
         minuteLabel.topAnchor.constraint(equalTo: averageLabel.bottomAnchor, constant: 0).isActive = true
         minuteLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: labelSidePadding).isActive = true
         minuteLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -labelSidePadding).isActive = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(SurveyPack.tapped))
+        self.addGestureRecognizer(tap)
+    }
+    
+    @objc func tapped() {
+        self.surveyPackDelegate?.tapped()
     }
     
     required init?(coder aDecoder: NSCoder) {

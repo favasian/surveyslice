@@ -15,6 +15,8 @@ protocol BottomButtonDelegate: class {
 class BottomButtonableViewController: BaseViewController {
 
     var bottomBtn: UIButton!
+    var bottomBtnTitle: String?
+    
     weak var bottomBtnDelegate: BottomButtonDelegate?
     
     override func viewDidLoad() {
@@ -38,6 +40,10 @@ class BottomButtonableViewController: BaseViewController {
         let widthConstraint = NSLayoutConstraint(item: bottomBtn, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Globals.bottomBtnSize.width)
         let heightConstraint = NSLayoutConstraint(item: bottomBtn, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: Globals.bottomBtnSize.height)
         self.innerView.addConstraints([widthConstraint, heightConstraint])
+        
+        if let title = self.bottomBtnTitle {
+            bottomBtn.setTitle(title, for: .normal)
+        }
     }
     
     override func contentMayExceedViewHeight(_ bottomMostView: UIView?=nil) {
