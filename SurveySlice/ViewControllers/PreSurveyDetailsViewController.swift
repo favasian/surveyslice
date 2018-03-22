@@ -15,9 +15,15 @@ class PreSurveyDetailsViewController: BottomButtonableViewController {
     var appImage: UIImage!
     var appCompanyName: String!
     var starRating: Int!
+    var url: String!
+    var campaign: [String:Any]!
     
-    init() {
+    var surveyWallVC: SurveyWallViewController!
+    
+    init(campaign: [String:Any], surveyWallVC: SurveyWallViewController) {
         super.init(nibName: nil, bundle: nil)
+        self.campaign = campaign
+        self.surveyWallVC = surveyWallVC
         self.bottomBtnTitle = "Download"
         self.appName = "Instagram"
         self.minTimeActivity = 10
@@ -25,6 +31,8 @@ class PreSurveyDetailsViewController: BottomButtonableViewController {
         self.appImage = appIcon
         self.appCompanyName = "Facebook Inc"
         self.starRating = 4
+        self.url = "https://itunes.apple.com/us/app/instagram/id389801252?mt=8"
+        self.bottomBtnDelegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -125,10 +133,21 @@ class PreSurveyDetailsViewController: BottomButtonableViewController {
         
         self.contentMayExceedViewHeight(appImageView)
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+
+extension PreSurveyDetailsViewController: BottomButtonDelegate {
+    func buttonTapped() {
+        if let url = URL(string: self.url) {
+            if UIApplication.shared.canOpenURL(url) {
+                self.surveyWallVC.downloadedCampaigns.insert(campaign, at: 0)
+                UIApplication.shared.openURL(url)
+            }
+        }
+        
     }
 }

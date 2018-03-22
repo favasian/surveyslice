@@ -17,6 +17,8 @@ class SurveyWallViewController: BottomButtonableViewController {
     var headerLabel:UILabel!
     var currency:String!
     var dividerImage: UIImage!
+    var downloadedCampaigns:[[String:Any]] = []
+    
     static var packPerRow:Int {
         if UIDevice.current.userInterfaceIdiom == .pad {
             return 3
@@ -40,13 +42,21 @@ class SurveyWallViewController: BottomButtonableViewController {
         self.bottomBtn.setTitle("Show More Surveys", for: .normal)
         self.setupNavigationBtns()
         self.setupHeaderLabel()
-        
-        
-        let started:[[String: Any]] = self.moreCampaigns(1)
-        displaySurveyPacks(started, append: false, header: "Downloaded")
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.displayDownloadedAndReadySurveyPacks()
+    }
+    
+    func displayDownloadedAndReadySurveyPacks() {
         let campaigns:[[String: Any]] = self.moreCampaigns()
-        displaySurveyPacks(campaigns, append: true, header: "Ready to Start")
+        if self.downloadedCampaigns.count > 0 {
+            displaySurveyPacks(self.downloadedCampaigns, append: false, header: "Downloaded")
+            displaySurveyPacks(campaigns, append: true, header: "Ready to Start")
+        } else {
+            displaySurveyPacks(campaigns, append: false)
+        }
         
     }
     
@@ -81,8 +91,7 @@ class SurveyWallViewController: BottomButtonableViewController {
     }
     
     @objc func refreshSurveyPacks() {
-        let campaigns:[[String: Any]] = self.moreCampaigns()
-        displaySurveyPacks(campaigns)
+        self.displayDownloadedAndReadySurveyPacks()
         Helper.delay(delay: 0.5) {
             self.scrollView.setContentOffset(.zero, animated: true)
         }
@@ -172,10 +181,7 @@ class SurveyWallViewController: BottomButtonableViewController {
                 self.lastRow = newLastRow
             }
             guard let lastRow = self.lastRow else { fatalError("last row does not exist") }
-            guard let currencyAmount = campaign["currencyAmount"] as? Int else { fatalError("currency amount does not exist") }
-            guard let currency = campaign["currency"] as? String else { fatalError("currency does not exist") }
-            guard let avgTime = campaign["avgTime"] as? Int else { fatalError("avgTime does not exist") }
-            let sp = SurveyPack(currencyAmount: currencyAmount, currency: currency, avgTime: avgTime)
+            let sp = SurveyPack(campaign: campaign)
             sp.surveyPackDelegate = self
             lastRow.addSubview(sp)
             sp.translatesAutoresizingMaskIntoConstraints = false
@@ -210,8 +216,8 @@ extension SurveyWallViewController: BottomButtonDelegate {
 }
 
 extension SurveyWallViewController: SurveyPackDelegate {
-    func tapped() {
-        let vc = PreSurveyDetailsViewController()
+    func tapped(campaign: [String:Any]) {
+        let vc = PreSurveyDetailsViewController(campaign: campaign, surveyWallVC: self)
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

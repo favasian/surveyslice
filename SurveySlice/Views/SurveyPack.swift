@@ -9,15 +9,21 @@
 import UIKit
 
 protocol SurveyPackDelegate: class {
-    func tapped()
+    func tapped(campaign: [String:Any])
 }
 
 class SurveyPack: UIView {
     
     var surveyPackDelegate: SurveyPackDelegate?
+    var campaign: [String:Any]!
     
-    init(currencyAmount: Int, currency: String, avgTime: Int=10) {
+    init(campaign: [String:Any]) {
         super.init(frame: CGRect(x: 0, y: 0, width: Globals.surveyPackSize.width, height: Globals.surveyPackSize.height))
+        
+        self.campaign = campaign
+        guard let currencyAmount = campaign["currencyAmount"] as? Int else { fatalError("currency amount does not exist") }
+        guard let currency = campaign["currency"] as? String else { fatalError("currency does not exist") }
+        guard let avgTime = campaign["avgTime"] as? Int else { fatalError("avgTime does not exist") }
         
         var bigLabelFont:UIFont!
         var bigLabelHeight:CGFloat!
@@ -110,7 +116,7 @@ class SurveyPack: UIView {
     }
     
     @objc func tapped() {
-        self.surveyPackDelegate?.tapped()
+        self.surveyPackDelegate?.tapped(campaign: self.campaign)
     }
     
     required init?(coder aDecoder: NSCoder) {
