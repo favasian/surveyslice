@@ -75,6 +75,13 @@ public class Globals: NSObject {
             return CGSize(width: 142, height: 130)
         }
     }
+    static var dividerSize:CGSize {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return CGSize(width: 768, height: 46)
+        } else {
+            return CGSize(width: 414, height: 30.67)
+        }
+    }
     
     static var grayFont:UIColor = UIColor.darkGray
     static var lightGray:UIColor = UIColor(hexString: "#939598")!

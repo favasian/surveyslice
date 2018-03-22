@@ -13,9 +13,10 @@ class SurveyWallViewController: BottomButtonableViewController {
     
     var lastSurveyPack: UIView?
     var lastRow: UIView?
-    var surveyPackRows:[UIView] = []
+    var addedViews:[UIView] = []
     var headerLabel:UILabel!
     var currency:String!
+    var dividerImage: UIImage!
     static var packPerRow:Int {
         if UIDevice.current.userInterfaceIdiom == .pad {
             return 3
@@ -27,6 +28,8 @@ class SurveyWallViewController: BottomButtonableViewController {
     
     override func viewDidLoad() {
         guard let appIcon = UIImage(named: "tempAppIcon", in: Globals.appBundle(), compatibleWith: nil)  else { fatalError("No tempAppIcon Image") }
+        guard let divider = UIImage(named: "divider", in: Globals.appBundle(), compatibleWith: nil)  else { fatalError("No divider Image") }
+        self.dividerImage = divider
         self.currency = "Coins"
         
         
@@ -35,25 +38,35 @@ class SurveyWallViewController: BottomButtonableViewController {
         super.viewDidLoad()
         self.bottomBtnDelegate = self
         self.bottomBtn.setTitle("Show More Surveys", for: .normal)
-        
-        self.setupHeaderLabel()
-        let campaigns:[[String: Any]] = self.moreCampaigns()
-        displaySurveyPacks(campaigns)
         self.setupNavigationBtns()
+        self.setupHeaderLabel()
+        
+        
+        let started:[[String: Any]] = self.moreCampaigns(1)
+        displaySurveyPacks(started, append: false, header: "Downloaded")
+        
+        let campaigns:[[String: Any]] = self.moreCampaigns()
+        displaySurveyPacks(campaigns, append: true, header: "Ready to Start")
+        
     }
     
     func setupHeaderLabel() {
-        self.headerLabel = UILabel()
-        self.headerLabel.text = "Please select a survey to continue and earn \(self.currency!)"
-        self.headerLabel.font = Globals.appFont()
-        self.headerLabel.textColor = Globals.grayFont
-        self.headerLabel.numberOfLines = 0
+        self.headerLabel = newHeaderLabel("Please select a survey to continue and earn \(self.currency!)")
         self.addSubview(self.headerLabel)
         self.headerLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.headerLabel.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        self.headerLabel.heightAnchor.constraint(equalToConstant: 45).isActive = true
         self.headerLabel.topAnchor.constraint(equalTo: self.innerView.topAnchor, constant: Globals.smallPadding).isActive = true
         self.headerLabel.leftAnchor.constraint(equalTo: self.innerView.leftAnchor, constant: Globals.padding).isActive = true
         self.headerLabel.rightAnchor.constraint(equalTo: self.innerView.rightAnchor, constant: -Globals.padding).isActive = true
+    }
+    
+    func newHeaderLabel(_ title: String) -> UILabel {
+        let label = UILabel()
+        label.text = title
+        label.font = Globals.appFont()
+        label.textColor = Globals.grayFont
+        label.numberOfLines = 0
+        return label
     }
     
     func setupNavigationBtns() {
@@ -80,8 +93,8 @@ class SurveyWallViewController: BottomButtonableViewController {
         }
     }
     
-    func moreCampaigns() -> [[String: Any]] {
-        var array = [
+    func moreCampaigns(_ count:Int=12) -> [[String: Any]] {
+        let array:[[String:Any]] = [
             ["currencyAmount": 100, "currency": "Coins", "avgTime": 2],
             ["currencyAmount": 500, "currency": "Coins", "avgTime": 5],
             ["currencyAmount": 300, "currency": "Coins", "avgTime": 3],
@@ -95,13 +108,47 @@ class SurveyWallViewController: BottomButtonableViewController {
             ["currencyAmount": 250, "currency": "Coins", "avgTime": 12],
             ["currencyAmount": 100, "currency": "Coins", "avgTime": 3]
         ]
-        return GKRandomSource.sharedRandom().arrayByShufflingObjects(in: array) as! [[String: Any]]
+        var campaigns:[[String:Any]] = []
+        var index = 0
+        for a in array {
+            campaigns.append(a)
+            index += 1
+            if index > count { break }
+        }
+        return GKRandomSource.sharedRandom().arrayByShufflingObjects(in: campaigns) as! [[String: Any]]
     }
     
-    func displaySurveyPacks(_ campaigns: [[String: Any]], append: Bool=false) {
+    func displaySurveyPacks(_ campaigns: [[String: Any]], append: Bool=false, header: String?=nil) {
         if !append {
-            for row in surveyPackRows { row.removeFromSuperview() }
+            for row in addedViews { row.removeFromSuperview() }
             self.lastRow = nil
+        }
+        
+        if let headerString = header {
+            let divider = UIImageView(image: dividerImage)
+            divider.contentMode = .scaleAspectFill
+            self.addSubview(divider)
+            
+            divider.translatesAutoresizingMaskIntoConstraints = false
+            divider.heightAnchor.constraint(equalToConstant: Globals.dividerSize.height).isActive = true
+            divider.widthAnchor.constraint(equalToConstant: Globals.dividerSize.width).isActive = true
+            divider.centerXAnchor.constraint(equalTo: self.innerView.centerXAnchor).isActive = true
+            if let lastRow = self.lastRow {
+                divider.topAnchor.constraint(equalTo: lastRow.bottomAnchor, constant: 0).isActive = true
+            } else {
+                divider.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor, constant: Globals.smallPadding).isActive = true
+            }
+            self.addedViews.append(divider)
+            
+            let headerRowLabel = newHeaderLabel(headerString)
+            self.addSubview(headerRowLabel)
+            headerRowLabel.translatesAutoresizingMaskIntoConstraints = false
+            headerRowLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            headerRowLabel.leftAnchor.constraint(equalTo: self.innerView.leftAnchor, constant: Globals.padding).isActive = true
+            headerRowLabel.rightAnchor.constraint(equalTo: self.innerView.rightAnchor, constant: -Globals.padding).isActive = true
+            headerRowLabel.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: 0).isActive = true
+            self.addedViews.append(headerRowLabel)
+            self.lastRow = headerRowLabel
         }
         
         var columnIndex = 0
@@ -121,7 +168,7 @@ class SurveyWallViewController: BottomButtonableViewController {
                 } else {
                     newLastRow.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor, constant: Globals.smallPadding).isActive = true
                 }
-                self.surveyPackRows.append(newLastRow)
+                self.addedViews.append(newLastRow)
                 self.lastRow = newLastRow
             }
             guard let lastRow = self.lastRow else { fatalError("last row does not exist") }
