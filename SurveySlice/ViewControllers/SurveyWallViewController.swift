@@ -14,6 +14,8 @@ class SurveyWallViewController: BottomButtonableViewController {
     var lastSurveyPack: UIView?
     var lastRow: UIView?
     var surveyPackRows:[UIView] = []
+    var headerLabel:UILabel!
+    var currency:String!
     static var packPerRow:Int {
         if UIDevice.current.userInterfaceIdiom == .pad {
             return 3
@@ -25,14 +27,33 @@ class SurveyWallViewController: BottomButtonableViewController {
     
     override func viewDidLoad() {
         guard let appIcon = UIImage(named: "tempAppIcon", in: Globals.appBundle(), compatibleWith: nil)  else { fatalError("No tempAppIcon Image") }
+        self.currency = "Coins"
+        
+        
         let navBar = SubNavSurveyWall(appIcon: appIcon)
         self.subNavBar = navBar
         super.viewDidLoad()
         self.bottomBtnDelegate = self
         self.bottomBtn.setTitle("Show More Surveys", for: .normal)
+        
+        self.setupHeaderLabel()
         let campaigns:[[String: Any]] = self.moreCampaigns()
         displaySurveyPacks(campaigns)
         self.setupNavigationBtns()
+    }
+    
+    func setupHeaderLabel() {
+        self.headerLabel = UILabel()
+        self.headerLabel.text = "Please select a survey to continue and earn \(self.currency!)"
+        self.headerLabel.font = Globals.appFont()
+        self.headerLabel.textColor = Globals.grayFont
+        self.headerLabel.numberOfLines = 0
+        self.addSubview(self.headerLabel)
+        self.headerLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.headerLabel.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        self.headerLabel.topAnchor.constraint(equalTo: self.innerView.topAnchor, constant: Globals.smallPadding).isActive = true
+        self.headerLabel.leftAnchor.constraint(equalTo: self.innerView.leftAnchor, constant: Globals.padding).isActive = true
+        self.headerLabel.rightAnchor.constraint(equalTo: self.innerView.rightAnchor, constant: -Globals.padding).isActive = true
     }
     
     func setupNavigationBtns() {
@@ -98,7 +119,7 @@ class SurveyWallViewController: BottomButtonableViewController {
                 if let lastRow = self.lastRow {
                     newLastRow.topAnchor.constraint(equalTo: lastRow.bottomAnchor, constant: Globals.smallPadding).isActive = true
                 } else {
-                    newLastRow.topAnchor.constraint(equalTo: self.innerView.topAnchor, constant: Globals.smallPadding).isActive = true
+                    newLastRow.topAnchor.constraint(equalTo: self.headerLabel.bottomAnchor, constant: Globals.smallPadding).isActive = true
                 }
                 self.surveyPackRows.append(newLastRow)
                 self.lastRow = newLastRow
