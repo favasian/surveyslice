@@ -9,8 +9,8 @@
 import UIKit
 
 protocol AlertViewDelegate: class {
-    func backNavBtnTapped()
-    func bottomBtnTapped()
+    func backNavBtnTapped(_ alertViewController: AlertViewController)
+    func bottomBtnTapped(_ alertViewController: AlertViewController)
 }
 
 class AlertViewController: BottomButtonableViewController {
@@ -119,12 +119,12 @@ class AlertViewController: BottomButtonableViewController {
     }
 
     @objc func backNavBtnPressed() {
-        self.alertViewDelegate?.backNavBtnTapped()
+        self.alertViewDelegate?.backNavBtnTapped(self)
     }
 }
 
 extension AlertViewController: BottomButtonDelegate {
     func buttonTapped() {
-        self.alertViewDelegate?.bottomBtnTapped()
+        self.alertViewDelegate?.bottomBtnTapped(self)
     }
 }

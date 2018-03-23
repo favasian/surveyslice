@@ -145,6 +145,7 @@ extension PreSurveyDetailsViewController: BottomButtonDelegate {
         if let url = URL(string: self.url) {
             if UIApplication.shared.canOpenURL(url) {
                 self.surveyWallVC.downloadedCampaigns.insert(campaign, at: 0)
+                Globals.mainVC.popToRootViewController(animated: false)
                 UIApplication.shared.openURL(url)
             }
         }

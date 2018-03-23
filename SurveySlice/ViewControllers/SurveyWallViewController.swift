@@ -108,14 +108,14 @@ class SurveyWallViewController: BottomButtonableViewController {
             ["currencyAmount": 500, "currency": "Coins", "avgTime": 5],
             ["currencyAmount": 300, "currency": "Coins", "avgTime": 3],
             ["currencyAmount": 200, "currency": "Coins", "avgTime": 12],
-            ["currencyAmount": 100, "currency": "Coins", "avgTime": 10],
-            ["currencyAmount": 100, "currency": "Coins", "avgTime": 1],
+            ["currencyAmount": 150, "currency": "Coins", "avgTime": 10],
+            ["currencyAmount": 140, "currency": "Coins", "avgTime": 1],
             ["currencyAmount": 600, "currency": "Coins", "avgTime": 4],
             ["currencyAmount": 700, "currency": "Coins", "avgTime": 3],
             ["currencyAmount": 350, "currency": "Coins", "avgTime": 12],
-            ["currencyAmount": 200, "currency": "Coins", "avgTime": 13],
-            ["currencyAmount": 250, "currency": "Coins", "avgTime": 12],
-            ["currencyAmount": 100, "currency": "Coins", "avgTime": 3]
+            ["currencyAmount": 250, "currency": "Coins", "avgTime": 13],
+            ["currencyAmount": 280, "currency": "Coins", "avgTime": 12],
+            ["currencyAmount": 110, "currency": "Coins", "avgTime": 3]
         ]
         var campaigns:[[String:Any]] = []
         var index = 0
@@ -206,18 +206,54 @@ class SurveyWallViewController: BottomButtonableViewController {
         }
         self.contentMayExceedViewHeight(self.lastRow)
     }
+    
+    func alreadyDownloaded(_ campaign: [String:Any]) -> Bool {
+        // this is a made up method and should be changed later
+        guard let amount = campaign["currencyAmount"] as? Int else { fatalError() }
+        for downloaded in self.downloadedCampaigns {
+            guard let downloadedAmount = downloaded["currencyAmount"] as? Int else { fatalError() }
+            if amount == downloadedAmount { return true }
+        }
+        return false
+    }
+    
+    func removeFromDownloaded(_ campaign: [String:Any]) {
+        // this is a made up method and should be changed later
+        guard let amount = campaign["currencyAmount"] as? Int else { fatalError() }
+        var index = 0
+        for downloaded in self.downloadedCampaigns {
+            guard let downloadedAmount = downloaded["currencyAmount"] as? Int else { fatalError() }
+            if amount == downloadedAmount {
+                self.downloadedCampaigns.remove(at: index)
+                return
+            }
+            index += 1
+        }
+    }
 }
 
 extension SurveyWallViewController: BottomButtonDelegate {
     func buttonTapped() {
-        var campaigns = self.moreCampaigns()
+        let campaigns = self.moreCampaigns()
         self.displaySurveyPacks(campaigns, append: true)
     }
 }
 
 extension SurveyWallViewController: SurveyPackDelegate {
     func tapped(campaign: [String:Any]) {
-        let vc = PreSurveyDetailsViewController(campaign: campaign, surveyWallVC: self)
-        self.navigationController?.pushViewController(vc, animated: true)
+        if self.alreadyDownloaded(campaign) {
+            let vc = SurveyViewController(campaign: campaign)
+            vc.surveyDelegate = self
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = PreSurveyDetailsViewController(campaign: campaign, surveyWallVC: self)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+}
+
+extension SurveyWallViewController: SurveyDelegate  {
+    func surveyCompleted(_ campaign: [String : Any]) {
+        self.removeFromDownloaded(campaign)
     }
 }

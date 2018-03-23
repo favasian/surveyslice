@@ -186,4 +186,51 @@ public class Globals: NSObject {
             ],
         ]
     }
+    
+    class func dummySurveyQuestions() -> [[String:Any]] {
+        return [
+            [
+                "question": "Did you enjoy using the app?",
+                "options": ["Yes", "No"],
+                "multi": false,
+                "type": QuestionType.multipleChoice
+            ],
+            [
+                "question": "What do you think the app needs work on?",
+                "options": ["Useability", "More Visuals", "Not enough content", "Not enough users", "I didn't understand how to use the app"],
+                "multi": false,
+                "type": QuestionType.multipleChoice
+            ],
+            [
+                "question": "Would you use the app again in the future?",
+                "options": ["Yes", "No", "It depends"],
+                "multi": false,
+                "type": QuestionType.multipleChoice
+            ],
+            [
+                "question": "Would you pay an In App Purchase for more features in the app?",
+                "options": ["Yes", "No", "It depends"],
+                "multi": false,
+                "type": QuestionType.multipleChoice,
+            ],
+            [
+                "question": "How likely would you share this app with your friends or on social media?",
+                "options": ["Not likely at all", "Somewhat likely", "Absolutely"],
+                "multi": false,
+                "type": QuestionType.multipleChoice
+            ],
+            [
+                "question": "Have you used any other app like this before?",
+                "options": ["Yes", "No"],
+                "multi": false,
+                "type": QuestionType.multipleChoice
+            ],
+            [
+                "question": "Which of these apps have you used before (Select all that apply)",
+                "options": ["Facebook", "Messenger", "Twitter", "Snapchat"],
+                "multi": true,
+                "type": QuestionType.multipleChoice
+            ]
+        ]
+    }
 }
