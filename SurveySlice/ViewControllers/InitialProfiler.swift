@@ -88,11 +88,11 @@ class InitialProfiler: AlertViewController {
 }
 
 extension InitialProfiler: AlertViewDelegate {
-    func backNavBtnTapped(_ alertViewController: AlertViewController) {
+    func backNavBtnTapped() {
         self.cancel()
     }
     
-    func bottomBtnTapped(_ alertViewController: AlertViewController) {
+    func bottomBtnTapped() {
         self.startQuestion()
     }
 }
