@@ -18,9 +18,10 @@ public protocol SurveySliceAppDelegate: class {
 public class SurveySliceApp {
     
     var api_key: String?
-    var app_id: String?
     var idfa: String?
     var delegate: SurveySliceAppDelegate!
+    
+    var devApp: DevApp?
     var surveyee: Surveyee?
     
     public static var shared = Globals.app
@@ -29,12 +30,29 @@ public class SurveySliceApp {
         self.setIDFA()
     }
     
-    func tryToFetchAndSetSurveyee() {
+    func fetchAndSetVars(app_id: String) {
+        self.fetchAndSetApp(app_id: app_id) { [weak self] in
+            self?.fetchAndSetSurveyee()
+        }
+    }
+    
+    func fetchAndSetSurveyee() {
         if let idfa = self.idfa {
             Surveyee.fetch(idfa: idfa, completionHandler: { [weak self] (surveyee) in
                 self?.surveyee = surveyee
             })
         }
+    }
+    
+    func fetchAndSetApp(app_id: String, completion: @escaping () -> ()) {
+        DevApp.fetch(app_id: app_id, completionHandler: { [weak self] (devApp) in
+            if let devApp = devApp {
+                self?.devApp = devApp
+                completion()
+            } else {
+                Helper.logError("App with id (\(app_id)) does not exist")
+            }
+        })
     }
     
     func setIDFA() {
@@ -57,8 +75,7 @@ public class SurveySliceApp {
     //Public methods
     public func initWith(api_key: String, app_id: String) {
         self.api_key = api_key
-        self.app_id = app_id
-        self.tryToFetchAndSetSurveyee()
+        self.fetchAndSetVars(app_id: app_id)
     }
     
     public func printIDFA(){
@@ -84,8 +101,8 @@ public class SurveySliceApp {
             Helper.logError("Api Key not set")
             return false
         }
-        guard let app_id = self.app_id else {
-            Helper.logError("App ID not set")
+        guard let devApp = self.devApp else {
+            Helper.logError("App with supplied ID does not exist")
             return false
         }
        

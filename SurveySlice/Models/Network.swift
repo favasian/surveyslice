@@ -63,10 +63,21 @@ class Network: NSObject {
 //        }
 //    }
     
-    func networkWrapper(completionHandler: @escaping (NSDictionary?, NSError?) -> (), network: (String, String, @escaping ()->())->() ) {
-        if self.internetAvailable && Globals.app.api_key != nil && Globals.app.app_id != nil {
+    func baseNetworkWrapper(completionHandler: @escaping (NSDictionary?, NSError?) -> (), network: (String, String, @escaping ()->())->() ) {
+        if self.internetAvailable && Globals.app.api_key != nil && Globals.app.devApp?.app_id != nil {
             let bgTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
-            network(Globals.app.api_key!, Globals.app.app_id!, {
+            network(Globals.app.api_key!, Globals.app.devApp!.app_id, {
+                UIApplication.shared.endBackgroundTask(bgTask)
+            })
+        } else {
+            completionHandler(nil, self.noInternetError)
+        }
+    }
+    
+    func apiKeyOnlyNetworkWrapper(completionHandler: @escaping (NSDictionary?, NSError?) -> (), network: (String, @escaping ()->())->() ) {
+        if self.internetAvailable && Globals.app.api_key != nil {
+            let bgTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+            network(Globals.app.api_key!, {
                 UIApplication.shared.endBackgroundTask(bgTask)
             })
         } else {
@@ -75,12 +86,12 @@ class Network: NSObject {
     }
     
     func fetchSurveyee(idfa: String, completionHandler: @escaping (NSDictionary?, NSError?) -> ()) {
-        self.networkWrapper(completionHandler: completionHandler) { (api_key, app_id, networkingFinished) in
+        self.baseNetworkWrapper(completionHandler: completionHandler) { (api_key, app_id, networkingFinished) in
             var acceptableCodes = [200, 404]
-            Alamofire.request(self.baseURL + "/app/\(app_id)/surveyees/\(idfa).json?api_key=" + api_key).validate(statusCode: acceptableCodes).responseJSON { response in
+            Alamofire.request(self.baseURL + "/app/\(app_id)/surveyees/\(idfa)?api_key=" + api_key).validate(statusCode: acceptableCodes).responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    print("API fetchSurveyee: success")
+                    Helper.logInfo("Successfully Fetched Surveyee Data")
                     if response.response?.statusCode == 404 {
                         completionHandler(nil, nil)
                     } else {
@@ -88,7 +99,25 @@ class Network: NSObject {
                         completionHandler(dict, nil)
                     }
                 case .failure(let error):
-                    print("API fetchSurveyee: failure fetchUser")
+                    Helper.logError("Failure Fetching Surveyee Data")
+                    completionHandler(nil, error as NSError?)
+                }
+                networkingFinished()
+            }
+        }
+    }
+    
+    func fetchApp(app_id: String, completionHandler: @escaping (NSDictionary?, NSError?) -> ()) {
+        self.apiKeyOnlyNetworkWrapper(completionHandler: completionHandler) { (api_key, networkingFinished) in
+            Alamofire.request(self.baseURL + "/app/\(app_id)?api_key=" + api_key).validate().responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    Helper.logInfo("Successfully Fetched App Data")
+                    let dict = value as? NSDictionary
+                    completionHandler(dict, nil)
+                case .failure(let error):
+                    Helper.logError("Failure Fetching App Data")
+                    print(error)
                     completionHandler(nil, error as NSError?)
                 }
                 networkingFinished()
