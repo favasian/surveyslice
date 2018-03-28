@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "88E9EC28B8B46C3631E6B242B50F4442"
-               BlueprintName = "Alamofire"
+               BlueprintIdentifier = "C730EAF13AB29A05763A1EE228712DAE"
+               BlueprintName = "ReachabilitySwift"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "Alamofire.framework">
+               BuildableName = "ReachabilitySwift.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

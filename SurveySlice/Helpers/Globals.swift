@@ -11,6 +11,12 @@ import Foundation
 
 public class Globals: NSObject {
     
+    static let mainVC = MainSurveySliceController()
+    static let app = SurveySliceApp()
+    
+    
+    
+    
     static var bottomBtnSize = CGSize(width: 304, height: 44)
     static var padding:CGFloat = 20
     static var smallPadding:CGFloat = 8
@@ -38,7 +44,6 @@ public class Globals: NSObject {
     static var alertTextSize = CGSize(width: 188, height: 149)
     static var answerOptionSize = CGSize(width: 320, height: 66)
     static var answerOptionInset = UIEdgeInsetsMake(-5, 75, 0, 20)
-    static let mainVC = SurveySliceController()
     static var subNavBarHeight:CGFloat {
         if UIDevice.current.userInterfaceIdiom == .pad {
             return 65

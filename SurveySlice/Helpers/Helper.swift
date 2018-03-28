@@ -14,5 +14,17 @@ public class Helper: NSObject {
             block()
         }
     }
+    
+    class func logError(_ str: String) {
+        print("[SurveySlice] ERROR: \(str)")
+    }
+    
+    class func logInfo(_ str: String) {
+        print("[SurveySlice] INFO: \(str)")
+    }
+    
+    class func logWarning(_ str: String) {
+        print("[SurveySlice] WARNING: \(str)")
+    }
 }
 

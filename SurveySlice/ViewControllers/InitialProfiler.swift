@@ -24,8 +24,7 @@ class InitialProfiler: AlertViewController {
     }
     
     func cancel() {
-        Globals.mainVC.dismiss(animated: true) {
-        }
+        Globals.mainVC.dismiss()
     }
     
     init(displayIncorrectAnswerAlert: Bool=false) {

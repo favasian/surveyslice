@@ -8,25 +8,26 @@
 
 import UIKit
 
-public class SurveySliceController: UINavigationController {
+class MainSurveySliceController: UINavigationController {
 
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    @objc private func cancel() {
+    func dismiss() {
         self.dismiss(animated: true) {
+            Globals.app.didDismiss()
         }
     }
     
-    public class func instantiate(_ initialProfilerFinished: Bool) -> SurveySliceController {
+    class func instantiate() -> MainSurveySliceController {
         let nav = Globals.mainVC
         nav.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white, .font: Globals.appFont(size: 20)]
         if let navImage = UIImage(named: "navigation", in: Globals.appBundle(), compatibleWith: nil) {
             nav.navigationBar.setBackgroundImage(navImage.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .stretch), for: .default)
         }
         var vc:UIViewController
-        if initialProfilerFinished {
+        if let surveyee = Globals.app.surveyee {
             vc = SurveyWallViewController()
         } else {
              vc = InitialProfiler()

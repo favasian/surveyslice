@@ -78,6 +78,7 @@ class SurveyViewController: AlertViewController {
     func finishSurvey() {
         self.surveyDelegate?.surveyCompleted(self.campaign)
         Globals.mainVC.popToRootViewController(animated: true)
+        Globals.app.surveyCompleted(currencyAmount: self.currencyAmount, currency: self.currency)
     }
 }
 

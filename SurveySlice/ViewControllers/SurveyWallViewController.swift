@@ -98,8 +98,7 @@ class SurveyWallViewController: BottomButtonableViewController {
     }
     
     @objc func backNavBtnPressed() {
-        Globals.mainVC.dismiss(animated: true) {
-        }
+        Globals.mainVC.dismiss()
     }
     
     func moreCampaigns(_ count:Int=12) -> [[String: Any]] {
