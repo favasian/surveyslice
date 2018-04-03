@@ -11,7 +11,7 @@ import UIKit
 class TextInputViewController: BaseQuestionViewController {
 
     var inputField: UITextField!
-    var keyboardType: UIKeyboardType!
+    var keyboardType: UIKeyboardType = .default
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,7 @@ class TextInputViewController: BaseQuestionViewController {
     
     override func isValidSelectedAnswers() -> Bool {
         if !super.isValidSelectedAnswers() { return false }
-        guard let answer = self.selectedAnswers?.first else { return false }
+        guard let answer = self.selectedAnswers.first else { return false }
         return !answer.isEmpty
     }
     
@@ -51,7 +51,7 @@ class TextInputViewController: BaseQuestionViewController {
         if let text = string {
             self.selectedAnswers = [text]
         } else {
-            self.selectedAnswers = nil
+            self.selectedAnswers = []
         }
     }
 }

@@ -101,8 +101,8 @@ extension SurveyViewController: AlertViewDelegate {
 }
 
 extension SurveyViewController: QuestionViewDelegate {
-    func submittedAnswers(answers: [String]?, questionNumber: Int) {
-        if let answers = answers { print(answers.joined(separator: ",")) }
+    func submittedAnswers(answers: [String], questionNumber: Int) {
+        print(answers.joined(separator: ","))
         
         let questionIndex = questionNumber - 1
         if self.surveyQuestions.count >= questionNumber + 1 {

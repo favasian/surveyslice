@@ -13,7 +13,7 @@ class Surveyee {
     var idfa: String
     
     init(surveyeeData: NSDictionary) {
-        guard let idfa = surveyeeData.value(forKey: "idfa") as? String else { fatalError("Survyee no IDFA") }
+        guard let idfa = surveyeeData.value(forKey: "idfa") as? String else { fatalError("Surveyee no IDFA") }
         self.idfa = idfa
     }
     
@@ -29,6 +29,23 @@ class Surveyee {
                 }
                 let surveyee = Surveyee(surveyeeData: surveyeeData)
                 completionHandler(surveyee)
+            }
+        }
+    }
+    
+    class func createFromInitialProfilerAnswers(_ submittedAnswers: [[String]], completion: @escaping (Surveyee?)->()) {
+        guard let idfa = Globals.app.idfa else { fatalError("Surveyee no IDFA") }
+        let demographicParams = Demographic.initialProfileAnswersToApiHash(answers: submittedAnswers)
+        Network.shared.createSurveyee(idfa: idfa, demographicParams: demographicParams) { (surveyeeData, error) in
+            if let _ = error {
+                completion(nil)
+            } else {
+                guard let surveyeeData = surveyeeData else {
+                    completion(nil)
+                    return
+                }
+                let surveyee = Surveyee(surveyeeData: surveyeeData)
+                completion(surveyee)
             }
         }
     }

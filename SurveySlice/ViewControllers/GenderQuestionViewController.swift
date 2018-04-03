@@ -25,7 +25,7 @@ class GenderQuestionViewController: BaseQuestionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupGenderSwitch()
-        self.selectedAnswers = ["male"]
+        self.selectedAnswers = ["Male"]
     }
     
     func setupGenderSwitch() {
@@ -47,10 +47,10 @@ class GenderQuestionViewController: BaseQuestionViewController {
     @objc func toggleGender() {
         if genderSwitch.image(for: .normal) == genderSwitchMaleImage {
             genderSwitch.setImage(genderSwitchFemaleImage, for: .normal)
-            self.selectedAnswers = ["female"]
+            self.selectedAnswers = ["Female"]
         } else {
             genderSwitch.setImage(genderSwitchMaleImage, for: .normal)
-            self.selectedAnswers = ["male"]
+            self.selectedAnswers = ["Male"]
         }
     }
     

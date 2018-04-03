@@ -81,15 +81,15 @@ class MultipleChoiceQuestionViewController: BaseQuestionViewController {
         for btn in answerButtons {
             if btn.backgroundImage(for: .normal) == selectedOptionImage {
                 if let a = btn.title(for: .normal) {
-                    self.selectedAnswers?.append(a)
+                    self.selectedAnswers.append(a)
                 }
             }
         }
-        if self.selectedAnswers!.isEmpty { self.selectedAnswers = nil }
+        if self.selectedAnswers.isEmpty { self.selectedAnswers = [] }
     }
     
     func clearSelectedAnswers() {
-        self.selectedAnswers = nil
+        self.selectedAnswers = []
         for btn in answerButtons {
             btn.setBackgroundImage(answerOptionImage, for: .normal)
             btn.setBackgroundImage(selectedOptionImage, for: .highlighted)

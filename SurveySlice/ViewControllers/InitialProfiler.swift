@@ -7,10 +7,11 @@
 //
 
 import UIKit
+//import SwiftSpinner
 
 class InitialProfiler: AlertViewController {
 
-    var submittedAnswers:[[String]?] = []
+    var submittedAnswers:[[String]] = []
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +43,21 @@ class InitialProfiler: AlertViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func createSurveyeeWithAnswers() {
+        //SwiftSpinner.show("Finishing Up Survey")
+        Surveyee.createFromInitialProfilerAnswers(self.submittedAnswers) { (surveyee) in
+            guard let surveyee = surveyee else {
+                return
+            }
+            Globals.app.surveyee = surveyee
+            Globals.mainVC.showSurveyWall()
+        }
+    }
+    
     func startQuestion(questionNumber: Int=1) {
         var qvc:BaseQuestionViewController!
-        let numberOfQuestions = Globals.intialProfilerQAs().count
-        let qaObject = Globals.intialProfilerQAs()[questionNumber-1]
+        let numberOfQuestions = Demographic.intialProfilerQAs().count
+        let qaObject = Demographic.intialProfilerQAs()[questionNumber-1]
         let q = qaObject["question"] as! String
         let answers = qaObject["options"] as! [String]
         let multiSelect = qaObject["multi"] as! Bool
@@ -57,6 +69,10 @@ class InitialProfiler: AlertViewController {
             qvc = GenderQuestionViewController(numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self)
         case .number:
             qvc = NumberInputViewController(question: q, numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self, validations: validations)
+        case .text:
+            let tivc = TextInputViewController(question: q, numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self, validations: validations)
+            tivc.keyboardType = .numbersAndPunctuation
+            qvc = tivc
         case .multipleChoice:
             qvc = MultipleChoiceQuestionViewController(question: q, numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self, options: answers, multiSelect: multiSelect)
         default:
@@ -67,11 +83,11 @@ class InitialProfiler: AlertViewController {
     
     func areSubmittedAnswersCorrect() -> Bool {
         var index = 0
-        for qaObject in Globals.intialProfilerQAs() {
+        for qaObject in Demographic.intialProfilerQAs() {
             if let correctAnswers = qaObject["correctAnswers"] as? [String] {
                 for answer in correctAnswers {
                     if !self.submittedAnswers.indices.contains(index) { return false }
-                    guard let submittedAnswers = self.submittedAnswers[index] else { return false }
+                    let submittedAnswers = self.submittedAnswers[index] //else { return false }
                     if !submittedAnswers.contains(answer) { return false }
                 }
             }
@@ -97,8 +113,8 @@ extension InitialProfiler: AlertViewDelegate {
 }
 
 extension InitialProfiler: QuestionViewDelegate {
-    func submittedAnswers(answers: [String]?, questionNumber: Int) {
-        if let answers = answers { print(answers.joined(separator: ",")) }
+    func submittedAnswers(answers: [String], questionNumber: Int) {
+        print(answers.joined(separator: ","))
         
         let questionIndex = questionNumber - 1
         if submittedAnswers.indices.contains(questionIndex) {
@@ -106,10 +122,10 @@ extension InitialProfiler: QuestionViewDelegate {
         } else {
             submittedAnswers.append(answers)
         }
-        if Globals.intialProfilerQAs().count >= questionNumber + 1 {
+        if Demographic.intialProfilerQAs().count >= questionNumber + 1 {
             self.startQuestion(questionNumber: questionNumber+1)
         } else if self.areSubmittedAnswersCorrect() {
-            self.cancel()
+            self.createSurveyeeWithAnswers()
         } else {
            self.displayIncorrectAnswerAlert()
         }

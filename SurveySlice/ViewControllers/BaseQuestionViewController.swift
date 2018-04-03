@@ -22,7 +22,7 @@ enum AnswerValidation {
 
 
 protocol QuestionViewDelegate: class {
-    func submittedAnswers(answers: [String]?, questionNumber: Int)
+    func submittedAnswers(answers: [String], questionNumber: Int)
 }
 
 class BaseQuestionViewController: BottomButtonableViewController {
@@ -34,7 +34,7 @@ class BaseQuestionViewController: BottomButtonableViewController {
     var question: String!
     var questionNumber: Int!
     var totalNumberOfQuestions: Int!
-    var selectedAnswers: [String]?
+    var selectedAnswers:[String] = []
     var validations: [AnswerValidation: Any]?
     
     init(question: String, numberOfQuestions: Int, currentQuestionNumber: Int, delgate: QuestionViewDelegate, validations: [AnswerValidation: Any]?=nil) {
@@ -89,7 +89,7 @@ class BaseQuestionViewController: BottomButtonableViewController {
     }
     
     func isValidSelectedAnswers() -> Bool {
-        guard let answers =  self.selectedAnswers else { return false }
+        let answers =  self.selectedAnswers
         if answers.isEmpty { return false }
         guard let validations = self.validations else { return true }
         for key in validations.keys {

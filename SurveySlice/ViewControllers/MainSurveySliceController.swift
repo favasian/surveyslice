@@ -35,4 +35,8 @@ class MainSurveySliceController: UINavigationController {
         nav.viewControllers = [vc]
         return nav
     }
+    
+    func showSurveyWall() {
+        self.viewControllers = [SurveyWallViewController()]
+    }
 }

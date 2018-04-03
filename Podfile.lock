@@ -1,15 +1,18 @@
 PODS:
   - Alamofire (4.7.0)
   - ReachabilitySwift (3)
+  - SwiftSpinner (1.5.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - ReachabilitySwift (~> 3)
+  - SwiftSpinner
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
+  SwiftSpinner: 4c058c7a1d6b444dd2e1d70988ead40783097133
 
-PODFILE CHECKSUM: 2e40d7c424b2f8c3d7f20a91349a2d17ddd90f6c
+PODFILE CHECKSUM: 0da64e8e86317bce298740fcf134208a741b0fef
 
 COCOAPODS: 1.4.0

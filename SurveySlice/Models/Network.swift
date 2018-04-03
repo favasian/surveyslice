@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-//import ReachabilitySwift
+import ReachabilitySwift
 
 class Network: NSObject {
     let baseURL:String!
@@ -18,7 +18,7 @@ class Network: NSObject {
     var session: URLSession!
     
     static let shared = Network()
-    //var reachability: Reachability!
+    var reachability: Reachability!
     var noInternetError: NSError!
     var internetAvailable = true
     
@@ -32,36 +32,36 @@ class Network: NSObject {
         if __PRODUCTION {
             baseURL = "https://survey-co.herokuapp.com/api/v1"
         } else {
-            baseURL = "https://survey-co.herokuapp.com/api/v1"
+            baseURL = "http://localhost:3000/api/v1"
         }
     }
     
-//    func setupReachability() {
-//        self.reachability = Reachability()!
-//        self.noInternetError = NSError(domain: "No Internet Available", code: 1, userInfo: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: ReachabilityChangedNotification,object: reachability)
-//        do{
-//            try reachability.startNotifier()
-//        }catch{
-//            self.internetAvailable = true
-//            print("could not start reachability notifier")
-//        }
-//    }
-//
-//    func reachabilityChanged(note: NSNotification) {
-//        let reachability = note.object as! Reachability
-//        if reachability.isReachable {
-//            if reachability.isReachableViaWiFi {
-//                print("Reachable via WiFi")
-//            } else {
-//                print("Reachable via Cellular")
-//            }
-//            self.internetAvailable = true
-//        } else {
-//            self.internetAvailable = false
-//            print("Network not reachable")
-//        }
-//    }
+    func setupReachability() {
+        self.reachability = Reachability()!
+        self.noInternetError = NSError(domain: "No Internet Available", code: 1, userInfo: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: ReachabilityChangedNotification,object: reachability)
+        do{
+            try reachability.startNotifier()
+        }catch{
+            self.internetAvailable = true
+            print("could not start reachability notifier")
+        }
+    }
+
+    @objc func reachabilityChanged(note: NSNotification) {
+        let reachability = note.object as! Reachability
+        if reachability.isReachable {
+            if reachability.isReachableViaWiFi {
+                print("Reachable via WiFi")
+            } else {
+                print("Reachable via Cellular")
+            }
+            self.internetAvailable = true
+        } else {
+            self.internetAvailable = false
+            print("Network not reachable")
+        }
+    }
     
     func baseNetworkWrapper(completionHandler: @escaping (NSDictionary?, NSError?) -> (), network: (String, String, @escaping ()->())->() ) {
         if self.internetAvailable && Globals.app.api_key != nil && Globals.app.devApp?.app_id != nil {
@@ -118,6 +118,26 @@ class Network: NSObject {
                 case .failure(let error):
                     Helper.logError("Failure Fetching App Data")
                     print(error)
+                    completionHandler(nil, error as NSError?)
+                }
+                networkingFinished()
+            }
+        }
+    }
+    
+    func createSurveyee(idfa: String, demographicParams: [String:Any], completionHandler: @escaping (NSDictionary?, NSError?) -> ()) {
+        print("demo param")
+        print(demographicParams)
+        let parameters:[String:Any] = ["idfa": idfa, "demographic_attributes": demographicParams]
+         self.baseNetworkWrapper(completionHandler: completionHandler) { (api_key, app_id, networkingFinished) in
+            Alamofire.request(self.baseURL + "/app/\(app_id)/surveyees?api_key=" + api_key, method: .post, parameters: parameters as? Parameters, encoding: JSONEncoding.default).validate().responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    Helper.logInfo("Successfully Created Surveyee")
+                    let dict = value as? NSDictionary
+                    completionHandler(dict, nil)
+                case .failure(let error):
+                    Helper.logInfo("Failure Creating Surveyee")
                     completionHandler(nil, error as NSError?)
                 }
                 networkingFinished()

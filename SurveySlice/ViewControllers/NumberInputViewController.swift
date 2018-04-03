@@ -17,7 +17,7 @@ class NumberInputViewController: TextInputViewController {
 
     override func isValidSelectedAnswers() -> Bool {
         if !super.isValidSelectedAnswers() { return false }
-        guard let answer = self.selectedAnswers?.first else { return false }
+        guard let answer = self.selectedAnswers.first else { return false }
         return CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: answer))
     }
 }

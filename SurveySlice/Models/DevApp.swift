@@ -37,7 +37,6 @@ class DevApp {
     class func fetch(app_id: String, completionHandler: @escaping (DevApp?) -> ()) {
         Network.shared.fetchApp(app_id: app_id) { (appData, error) in
             if let _ = error {
-                print(error)
                 completionHandler(nil)
             } else {
                 guard let appData = appData else {
