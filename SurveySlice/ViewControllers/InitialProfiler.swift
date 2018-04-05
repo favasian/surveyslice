@@ -32,7 +32,7 @@ class InitialProfiler: AlertViewController {
         if displayIncorrectAnswerAlert {
             super.init(title: "Oops", text: "You didn't take enough time to complete this Initial Survey", backNavBtnTitle: "Exit", btnTitle: "Start Over")
         } else {
-            super.init(title: "Survey Slice", text: "Please complete the following 11 questions survey to earn 200 coins", backNavBtnTitle: "Exit")
+            super.init(title: "Survey Slice", text: "Please first complete the following \(Demographic.intialProfilerQAs().count) questions survey", backNavBtnTitle: "Exit")
         }
         
         self.alertViewDelegate = self
@@ -75,6 +75,8 @@ class InitialProfiler: AlertViewController {
             qvc = tivc
         case .multipleChoice:
             qvc = MultipleChoiceQuestionViewController(question: q, numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self, options: answers, multiSelect: multiSelect)
+        case .country:
+            qvc = CountrySelectionViewController(question: q, numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self)
         default:
             print("default")
         }

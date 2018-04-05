@@ -18,6 +18,7 @@
 		9D549D9A2064802C00D50A0F /* SurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D549D992064802B00D50A0F /* SurveyViewController.swift */; };
 		9D549D9D2069C35C00D50A0F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D549D9C2069C35C00D50A0F /* Network.swift */; };
 		9D549D9F2069C60400D50A0F /* SurveySliceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D549D9E2069C60400D50A0F /* SurveySliceApp.swift */; };
+		9D7F7A4D2075A1E200DFF492 /* CountrySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7F7A4C2075A1E200DFF492 /* CountrySelectionViewController.swift */; };
 		9D89349320471B7600773F59 /* SurveySlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D89349120471B7600773F59 /* SurveySlice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9D8934C22048D00500773F59 /* InitialProfiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8934C02048D00500773F59 /* InitialProfiler.swift */; };
 		9D8934C32048D00500773F59 /* InitialProfiler.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8934C12048D00500773F59 /* InitialProfiler.xib */; };
@@ -52,6 +53,7 @@
 		9D549D992064802B00D50A0F /* SurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyViewController.swift; sourceTree = "<group>"; };
 		9D549D9C2069C35C00D50A0F /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		9D549D9E2069C60400D50A0F /* SurveySliceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveySliceApp.swift; sourceTree = "<group>"; };
+		9D7F7A4C2075A1E200DFF492 /* CountrySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionViewController.swift; sourceTree = "<group>"; };
 		9D89348E20471B7600773F59 /* SurveySlice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SurveySlice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D89349120471B7600773F59 /* SurveySlice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SurveySlice.h; sourceTree = "<group>"; };
 		9D89349220471B7600773F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				9D549D8E205C539300D50A0F /* MainSurveySliceController.swift */,
 				9D549D972064017400D50A0F /* PreSurveyDetailsViewController.swift */,
 				9D549D992064802B00D50A0F /* SurveyViewController.swift */,
+				9D7F7A4C2075A1E200DFF492 /* CountrySelectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				9DAABDF82059EED900D85EE8 /* MultipleChoiceQuestionViewController.swift in Sources */,
 				9D549D9F2069C60400D50A0F /* SurveySliceApp.swift in Sources */,
 				9D549D8F205C539300D50A0F /* MainSurveySliceController.swift in Sources */,
+				9D7F7A4D2075A1E200DFF492 /* CountrySelectionViewController.swift in Sources */,
 				9D8934D22049EE1600773F59 /* Globals.swift in Sources */,
 				9D549D91205C67F200D50A0F /* Extensions.swift in Sources */,
 				9D549D982064017400D50A0F /* PreSurveyDetailsViewController.swift in Sources */,

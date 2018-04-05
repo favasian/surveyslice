@@ -14,6 +14,7 @@ enum QuestionType {
     case number
     case text
     case multipleChoice
+    case country
 }
 
 enum AnswerValidation {

@@ -123,5 +123,6 @@ Pod::Spec.new do |s|
   s.dependency 'Alamofire', '~> 4.0'
   s.dependency 'ReachabilitySwift', '~> 3'
   s.dependency 'SwiftSpinner', '~> 1.5.0'
+  s.dependency 'CountryPickerSwift', '~> 1.7.1'
 
 end

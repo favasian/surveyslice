@@ -140,6 +140,14 @@ class Demographic {
                 "multi": false,
                 "type": QuestionType.text,
                 "isDemographic": true,
+                "demographicKey": "zip"
+            ],
+            [
+                "question": "What country do live in?",
+                "options": [],
+                "multi": false,
+                "type": QuestionType.country,
+                "isDemographic": true,
                 "demographicKey": "country"
             ],
         ]

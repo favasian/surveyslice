@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A468B2CCD6C943491372A61BBD719458"
+               BlueprintIdentifier = "8722382664BD662CC4C34D20BB5C4805"
                BuildableName = "Pods_SurveySlice.framework"
                BlueprintName = "Pods-SurveySlice"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -26,7 +26,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
@@ -37,7 +36,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -47,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A468B2CCD6C943491372A61BBD719458"
+            BlueprintIdentifier = "8722382664BD662CC4C34D20BB5C4805"
             BuildableName = "Pods_SurveySlice.framework"
             BlueprintName = "Pods-SurveySlice"
             ReferencedContainer = "container:Pods.xcodeproj">
