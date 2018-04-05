@@ -1,21 +1,24 @@
 PODS:
   - Alamofire (4.7.0)
   - CountryPickerSwift (1.7.1)
+  - Gloss (2.0.0)
   - ReachabilitySwift (3)
   - SwiftSpinner (1.5.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - CountryPickerSwift
+  - Gloss (~> 2.0)
   - ReachabilitySwift (~> 3)
   - SwiftSpinner (~> 1.5.0)
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
   CountryPickerSwift: d46dcaadc64fd6e0f00c98dd23a432de858a5193
+  Gloss: b67617f327406adfd47adf20172d00680a3a31bd
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   SwiftSpinner: 4c058c7a1d6b444dd2e1d70988ead40783097133
 
-PODFILE CHECKSUM: 3425f070499046500c890b493d6b0384bf3c2da8
+PODFILE CHECKSUM: d46dcc30f1f2a3a740d4da41088b28f9e4f32afe
 
 COCOAPODS: 1.4.0

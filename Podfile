@@ -6,4 +6,5 @@ target 'SurveySlice' do
   pod 'ReachabilitySwift', '~> 3'
   pod 'SwiftSpinner', '~> 1.5.0'
   pod 'CountryPickerSwift'
+  pod 'Gloss', '~> 2.0'
 end

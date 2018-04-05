@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import Gloss
 
-class DevApp {
+struct DevApp: JSONDecodable {
     
     var app_id: String
     var name: String
@@ -17,13 +18,13 @@ class DevApp {
     var icon: String
     var status: String
     
-    init(appData: NSDictionary) {
-        guard let app_id = appData.value(forKey: "app_id") as? String else { fatalError("DevApp no app_id") }
-        guard let name = appData.value(forKey: "name") as? String else { fatalError("DevApp no name") }
-        guard let currency = appData.value(forKey: "currency") as? String else { fatalError("DevApp no currency") }
-        guard let currencyAmountPerDollar = appData.value(forKey: "currency_amount_per_dollar") as? Int else { fatalError("DevApp no currency_amount_per_dollar") }
-        guard let icon = appData.value(forKey: "icon") as? String else { fatalError("DevApp no icon") }
-        guard let status = appData.value(forKey: "status") as? String else { fatalError("DevApp no status") }
+    init?(json: JSON) {
+        guard let app_id: String = "app_id" <~~ json else { return nil }
+        guard let name: String = "name" <~~ json else { return nil }
+        guard let currency: String = "currency" <~~ json else { return nil }
+        guard let currencyAmountPerDollar: Int = "currency_amount_per_dollar" <~~ json else { return nil }
+        guard let icon: String = "icon" <~~ json else { return nil }
+        guard let status: String = "status" <~~ json else { return nil }
         
         self.app_id = app_id
         self.name = name
@@ -32,19 +33,14 @@ class DevApp {
         self.icon = icon
         self.status = status
     }
-    
-    
-    class func fetch(app_id: String, completionHandler: @escaping (DevApp?) -> ()) {
+
+    static func fetch(app_id: String, completionHandler: @escaping (DevApp?) -> ()) {
         Network.shared.fetchApp(app_id: app_id) { (appData, error) in
-            if let _ = error {
-                completionHandler(nil)
-            } else {
-                guard let appData = appData else {
-                    completionHandler(nil)
-                    return
-                }
-                let devApp = DevApp(appData: appData)
+            if let appData = appData {
+                let devApp = DevApp(json: appData)
                 completionHandler(devApp)
+            } else {
+                completionHandler(nil)
             }
         }
     }

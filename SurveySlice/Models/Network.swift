@@ -63,7 +63,7 @@ class Network: NSObject {
         }
     }
     
-    func baseNetworkWrapper(completionHandler: @escaping (NSDictionary?, NSError?) -> (), network: (String, String, @escaping ()->())->() ) {
+    func baseNetworkWrapper(completionHandler: @escaping ([String: Any]?, NSError?) -> (), network: (String, String, @escaping ()->())->() ) {
         if self.internetAvailable && Globals.app.api_key != nil && Globals.app.devApp?.app_id != nil {
             let bgTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
             network(Globals.app.api_key!, Globals.app.devApp!.app_id, {
@@ -74,7 +74,7 @@ class Network: NSObject {
         }
     }
     
-    func apiKeyOnlyNetworkWrapper(completionHandler: @escaping (NSDictionary?, NSError?) -> (), network: (String, @escaping ()->())->() ) {
+    func apiKeyOnlyNetworkWrapper(completionHandler: @escaping ([String: Any]?, NSError?) -> (), network: (String, @escaping ()->())->() ) {
         if self.internetAvailable && Globals.app.api_key != nil {
             let bgTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
             network(Globals.app.api_key!, {
@@ -85,7 +85,7 @@ class Network: NSObject {
         }
     }
     
-    func fetchSurveyee(idfa: String, completionHandler: @escaping (NSDictionary?, NSError?) -> ()) {
+    func fetchSurveyee(idfa: String, completionHandler: @escaping ([String: Any]?, NSError?) -> ()) {
         self.baseNetworkWrapper(completionHandler: completionHandler) { (api_key, app_id, networkingFinished) in
             var acceptableCodes = [200, 404]
             Alamofire.request(self.baseURL + "/app/\(app_id)/surveyees/\(idfa)?api_key=" + api_key).validate(statusCode: acceptableCodes).responseJSON { response in
@@ -95,7 +95,7 @@ class Network: NSObject {
                     if response.response?.statusCode == 404 {
                         completionHandler(nil, nil)
                     } else {
-                        let dict = value as? NSDictionary
+                        let dict = value as? [String: Any]
                         completionHandler(dict, nil)
                     }
                 case .failure(let error):
@@ -107,13 +107,13 @@ class Network: NSObject {
         }
     }
     
-    func fetchApp(app_id: String, completionHandler: @escaping (NSDictionary?, NSError?) -> ()) {
+    func fetchApp(app_id: String, completionHandler: @escaping ([String: Any]?, NSError?) -> ()) {
         self.apiKeyOnlyNetworkWrapper(completionHandler: completionHandler) { (api_key, networkingFinished) in
             Alamofire.request(self.baseURL + "/app/\(app_id)?api_key=" + api_key).validate().responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     Helper.logInfo("Successfully Fetched App Data")
-                    let dict = value as? NSDictionary
+                    let dict = value as? [String: Any]
                     completionHandler(dict, nil)
                 case .failure(let error):
                     Helper.logError("Failure Fetching App Data")
@@ -125,7 +125,7 @@ class Network: NSObject {
         }
     }
     
-    func createSurveyee(idfa: String, demographicParams: [String:Any], completionHandler: @escaping (NSDictionary?, NSError?) -> ()) {
+    func createSurveyee(idfa: String, demographicParams: [String:Any], completionHandler: @escaping ([String: Any]?, NSError?) -> ()) {
         print("demo param")
         print(demographicParams)
         let parameters:[String:Any] = ["idfa": idfa, "demographic_attributes": demographicParams]
@@ -134,7 +134,7 @@ class Network: NSObject {
                 switch response.result {
                 case .success(let value):
                     Helper.logInfo("Successfully Created Surveyee")
-                    let dict = value as? NSDictionary
+                    let dict = value as? [String: Any]
                     completionHandler(dict, nil)
                 case .failure(let error):
                     Helper.logInfo("Failure Creating Surveyee")

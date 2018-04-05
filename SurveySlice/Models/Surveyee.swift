@@ -7,33 +7,29 @@
 //
 
 import Foundation
+import Gloss
 
-class Surveyee {
+struct Surveyee: JSONDecodable {
     
     var idfa: String
     
-    init(surveyeeData: NSDictionary) {
-        guard let idfa = surveyeeData.value(forKey: "idfa") as? String else { fatalError("Surveyee no IDFA") }
+    init?(json: JSON) {
+        guard let idfa: String = "idfa" <~~ json else { return nil }
         self.idfa = idfa
     }
     
-    
-    class func fetch(idfa: String, completionHandler: @escaping (Surveyee?) -> ()) {
+    static func fetch(idfa: String, completionHandler: @escaping (Surveyee?) -> ()) {
         Network.shared.fetchSurveyee(idfa: idfa) { (surveyeeData, error) in
-            if let _ = error {
-                completionHandler(nil)
-            } else {
-                guard let surveyeeData = surveyeeData else {
-                    completionHandler(nil)
-                    return
-                }
-                let surveyee = Surveyee(surveyeeData: surveyeeData)
+            if let surveyeeData = surveyeeData {
+                let surveyee = Surveyee(json: surveyeeData)
                 completionHandler(surveyee)
+            } else {
+                completionHandler(nil)
             }
         }
     }
     
-    class func createFromInitialProfilerAnswers(_ submittedAnswers: [[String]], completion: @escaping (Surveyee?)->()) {
+    static func createFromInitialProfilerAnswers(_ submittedAnswers: [[String]], completion: @escaping (Surveyee?)->()) {
         guard let idfa = Globals.app.idfa else { fatalError("Surveyee no IDFA") }
         let demographicParams = Demographic.initialProfileAnswersToApiHash(answers: submittedAnswers)
         Network.shared.createSurveyee(idfa: idfa, demographicParams: demographicParams) { (surveyeeData, error) in
@@ -44,7 +40,7 @@ class Surveyee {
                     completion(nil)
                     return
                 }
-                let surveyee = Surveyee(surveyeeData: surveyeeData)
+                let surveyee = Surveyee(json: surveyeeData)
                 completion(surveyee)
             }
         }
