@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol PreSurveyDetailsDelegate: class {
+    func tappedToContinue(campaign: Campaign)
+}
+
+
 class PreSurveyDetailsViewController: BottomButtonableViewController {
 
     var appName: String!
@@ -16,14 +21,15 @@ class PreSurveyDetailsViewController: BottomButtonableViewController {
     var appCompanyName: String!
     var starRating: Int!
     var url: String!
-    var campaign: [String:Any]!
+    var campaign: Campaign
+    var delegate: PreSurveyDetailsDelegate?
     
     var surveyWallVC: SurveyWallViewController!
     
-    init(campaign: [String:Any], surveyWallVC: SurveyWallViewController) {
-        super.init(nibName: nil, bundle: nil)
+    init(campaign: Campaign) {
         self.campaign = campaign
-        self.surveyWallVC = surveyWallVC
+        super.init(nibName: nil, bundle: nil)
+        
         self.bottomBtnTitle = "Download"
         self.appName = "Instagram"
         self.minTimeActivity = 10
@@ -142,9 +148,9 @@ class PreSurveyDetailsViewController: BottomButtonableViewController {
 
 extension PreSurveyDetailsViewController: BottomButtonDelegate {
     func buttonTapped() {
+        self.delegate?.tappedToContinue(campaign: self.campaign)
         if let url = URL(string: self.url) {
             if UIApplication.shared.canOpenURL(url) {
-                self.surveyWallVC.downloadedCampaigns.insert(campaign, at: 0)
                 Globals.mainVC.popToRootViewController(animated: false)
                 UIApplication.shared.openURL(url)
             }

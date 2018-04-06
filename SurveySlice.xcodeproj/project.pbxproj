@@ -18,6 +18,8 @@
 		9D549D9A2064802C00D50A0F /* SurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D549D992064802B00D50A0F /* SurveyViewController.swift */; };
 		9D549D9D2069C35C00D50A0F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D549D9C2069C35C00D50A0F /* Network.swift */; };
 		9D549D9F2069C60400D50A0F /* SurveySliceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D549D9E2069C60400D50A0F /* SurveySliceApp.swift */; };
+		9D6742CB2076822F0049B50A /* Campaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6742CA2076822F0049B50A /* Campaign.swift */; };
+		9D6742CD207683E20049B50A /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6742CC207683E20049B50A /* Survey.swift */; };
 		9D7F7A4D2075A1E200DFF492 /* CountrySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7F7A4C2075A1E200DFF492 /* CountrySelectionViewController.swift */; };
 		9D89349320471B7600773F59 /* SurveySlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D89349120471B7600773F59 /* SurveySlice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9D8934C22048D00500773F59 /* InitialProfiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8934C02048D00500773F59 /* InitialProfiler.swift */; };
@@ -36,6 +38,7 @@
 		9DAABDF62059E68500D85EE8 /* NumberInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAABDF52059E68500D85EE8 /* NumberInputViewController.swift */; };
 		9DAABDF82059EED900D85EE8 /* MultipleChoiceQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAABDF72059EED900D85EE8 /* MultipleChoiceQuestionViewController.swift */; };
 		9DABFFC32069E49900DE63A5 /* Surveyee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DABFFC22069E49900DE63A5 /* Surveyee.swift */; };
+		9DB8E9B92077CEDF00615509 /* CampaignList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8E9B82077CEDF00615509 /* CampaignList.swift */; };
 		AAD19ABF2AAEDF8E401A15CA /* Pods_SurveySlice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 378E6F0543FE71B7A2386800 /* Pods_SurveySlice.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +56,8 @@
 		9D549D992064802B00D50A0F /* SurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyViewController.swift; sourceTree = "<group>"; };
 		9D549D9C2069C35C00D50A0F /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		9D549D9E2069C60400D50A0F /* SurveySliceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveySliceApp.swift; sourceTree = "<group>"; };
+		9D6742CA2076822F0049B50A /* Campaign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Campaign.swift; sourceTree = "<group>"; };
+		9D6742CC207683E20049B50A /* Survey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
 		9D7F7A4C2075A1E200DFF492 /* CountrySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionViewController.swift; sourceTree = "<group>"; };
 		9D89348E20471B7600773F59 /* SurveySlice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SurveySlice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D89349120471B7600773F59 /* SurveySlice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SurveySlice.h; sourceTree = "<group>"; };
@@ -73,6 +78,7 @@
 		9DAABDF52059E68500D85EE8 /* NumberInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInputViewController.swift; sourceTree = "<group>"; };
 		9DAABDF72059EED900D85EE8 /* MultipleChoiceQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleChoiceQuestionViewController.swift; sourceTree = "<group>"; };
 		9DABFFC22069E49900DE63A5 /* Surveyee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Surveyee.swift; sourceTree = "<group>"; };
+		9DB8E9B82077CEDF00615509 /* CampaignList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignList.swift; sourceTree = "<group>"; };
 		DD3713789A7DAF85B7BCB9DB /* Pods-SurveySlice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurveySlice.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SurveySlice/Pods-SurveySlice.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +112,9 @@
 				9DABFFC22069E49900DE63A5 /* Surveyee.swift */,
 				9D290748206BF02200D9302E /* DevApp.swift */,
 				9D29074A206C23C100D9302E /* Demographic.swift */,
+				9D6742CA2076822F0049B50A /* Campaign.swift */,
+				9D6742CC207683E20049B50A /* Survey.swift */,
+				9DB8E9B82077CEDF00615509 /* CampaignList.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -330,6 +339,7 @@
 				9D549D9420614EF000D50A0F /* SubNavSurveyWall.swift in Sources */,
 				9D29074B206C23C100D9302E /* Demographic.swift in Sources */,
 				9DAABDF42059D26900D85EE8 /* TextInputViewController.swift in Sources */,
+				9D6742CD207683E20049B50A /* Survey.swift in Sources */,
 				9D8934D92053699A00773F59 /* GenderQuestionViewController.swift in Sources */,
 				9DABFFC32069E49900DE63A5 /* Surveyee.swift in Sources */,
 				9DAABDF22059C26400D85EE8 /* Helper.swift in Sources */,
@@ -344,6 +354,8 @@
 				9DAABDF62059E68500D85EE8 /* NumberInputViewController.swift in Sources */,
 				9DAABDF020539A8900D85EE8 /* ProgressBar.swift in Sources */,
 				9D549D8B205C387C00D50A0F /* SurveyWallViewController.swift in Sources */,
+				9D6742CB2076822F0049B50A /* Campaign.swift in Sources */,
+				9DB8E9B92077CEDF00615509 /* CampaignList.swift in Sources */,
 				9D290749206BF02200D9302E /* DevApp.swift in Sources */,
 				9D8934D62053697700773F59 /* BaseQuestionViewController.swift in Sources */,
 			);

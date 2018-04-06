@@ -14,10 +14,17 @@ class SurveyWallViewController: BottomButtonableViewController {
     var lastSurveyPack: UIView?
     var lastRow: UIView?
     var addedViews:[UIView] = []
+    var surveyPacks:[SurveyPack] = []
     var headerLabel:UILabel!
     var currency:String!
     var dividerImage: UIImage!
-    var downloadedCampaigns:[[String:Any]] = []
+    var alreadyDownloadedCampaigns:[Campaign] = []
+    var notYetDownloadedCampaigns:[Campaign] = []
+    var nextPage: Int?
+    
+    var isDragging = false
+    
+    var campaignIdsViewedThisSession:[Int] = []
     
     static var packPerRow:Int {
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -27,12 +34,15 @@ class SurveyWallViewController: BottomButtonableViewController {
         }
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     override func viewDidLoad() {
         guard let appIcon = UIImage(named: "tempAppIcon", in: Globals.appBundle(), compatibleWith: nil)  else { fatalError("No tempAppIcon Image") }
         guard let divider = UIImage(named: "divider", in: Globals.appBundle(), compatibleWith: nil)  else { fatalError("No divider Image") }
         self.dividerImage = divider
-        self.currency = "Coins"
+        self.currency = Globals.app.devApp!.currency
         
         
         let navBar = SubNavSurveyWall(appIcon: appIcon)
@@ -42,20 +52,72 @@ class SurveyWallViewController: BottomButtonableViewController {
         self.bottomBtn.setTitle("Show More Surveys", for: .normal)
         self.setupNavigationBtns()
         self.setupHeaderLabel()
+        self.fetchAndRefreshCampaigns()
+        self.scrollView.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(SurveyWallViewController.displayFetchedSurveyPacks), name: .UIApplicationWillEnterForeground, object: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.displayDownloadedAndReadySurveyPacks()
+    @objc func fetchAndRefreshCampaigns() {
+        self.nextPage = nil
+        let taskGroup = DispatchGroup()
+        taskGroup.enter()
+        Campaign.fetch(already_started: true, page: 1) { [weak self] (campaignList) in
+            if let campaigns = campaignList?.campaigns {
+                self?.alreadyDownloadedCampaigns = campaigns
+                self?.campaignIdsViewedThisSession.append(contentsOf: campaigns.map({ (c) -> Int in
+                    return c.id
+                }))
+            } else {
+                self?.alreadyDownloadedCampaigns.removeAll()
+            }
+            taskGroup.leave()
+        }
+        
+        Campaign.fetch(already_started: false, page: 1) { [weak self] (campaignList) in
+            if let campaigns = campaignList?.campaigns {
+                self?.notYetDownloadedCampaigns = campaigns
+            } else {
+                self?.notYetDownloadedCampaigns = []
+            }
+            self?.nextPage = campaignList?.nextPage
+            if let _ = campaignList?.nextPage {
+                self?.bottomBtn.alpha = 1
+            } else {
+                self?.bottomBtn.alpha = 0
+            }
+            taskGroup.notify(queue: DispatchQueue.main, work: DispatchWorkItem(block: {
+                self?.displayFetchedSurveyPacks()
+                Helper.delay(delay: 0.5) { [weak self] in
+                    self?.scrollView.setContentOffset(.zero, animated: true)
+                    self?.createImpressionsForVisibleCampaigns()
+                }
+            }))
+        }
     }
     
-    func displayDownloadedAndReadySurveyPacks() {
-        let campaigns:[[String: Any]] = self.moreCampaigns()
-        if self.downloadedCampaigns.count > 0 {
-            displaySurveyPacks(self.downloadedCampaigns, append: false, header: "Downloaded")
-            displaySurveyPacks(campaigns, append: true, header: "Ready to Start")
+    func fetchAndDisplayMoreCampaigns() {
+        guard let nextPage = self.nextPage else { return }
+        Campaign.fetch(already_started: false, page: nextPage) { [weak self] (campaignList) in
+            if let campaigns = campaignList?.campaigns {
+                self?.notYetDownloadedCampaigns.append(contentsOf: campaigns)
+                self?.displaySurveyPacks(campaigns, append: true, header: nil)
+                self?.createImpressionsForVisibleCampaigns()
+            }
+            self?.nextPage = campaignList?.nextPage
+            if let _ = campaignList?.nextPage {
+                self?.bottomBtn.alpha = 1
+            } else {
+                self?.bottomBtn.alpha = 0
+            }
+        }
+    }
+    
+    @objc func displayFetchedSurveyPacks() {
+        if self.alreadyDownloadedCampaigns.count > 0 {
+            displaySurveyPacks(self.alreadyDownloadedCampaigns, append: false, header: "Downloaded")
+            displaySurveyPacks(self.notYetDownloadedCampaigns, append: true, header: "Ready to Start")
         } else {
-            displaySurveyPacks(campaigns, append: false)
+            displaySurveyPacks(self.notYetDownloadedCampaigns, append: false)
         }
         
     }
@@ -85,51 +147,48 @@ class SurveyWallViewController: BottomButtonableViewController {
         self.navigationItem.setLeftBarButton(btn, animated: false)
         
         guard let refreshImage = UIImage(named: "refresh", in: Globals.appBundle(), compatibleWith: nil)  else { fatalError("No refresh Image") }
-        let refreshBtn = UIBarButtonItem(image: refreshImage, style: .plain, target: self, action: #selector(SurveyWallViewController.refreshSurveyPacks))
+        let refreshBtn = UIBarButtonItem(image: refreshImage, style: .plain, target: self, action: #selector(SurveyWallViewController.fetchAndRefreshCampaigns))
         refreshBtn.width = 20
         self.navigationItem.setRightBarButton(refreshBtn, animated: false)
-    }
-    
-    @objc func refreshSurveyPacks() {
-        self.displayDownloadedAndReadySurveyPacks()
-        Helper.delay(delay: 0.5) {
-            self.scrollView.setContentOffset(.zero, animated: true)
-        }
     }
     
     @objc func backNavBtnPressed() {
         Globals.mainVC.dismiss()
     }
     
-    func moreCampaigns(_ count:Int=12) -> [[String: Any]] {
-        let array:[[String:Any]] = [
-            ["currencyAmount": 100, "currency": "Coins", "avgTime": 2],
-            ["currencyAmount": 500, "currency": "Coins", "avgTime": 5],
-            ["currencyAmount": 300, "currency": "Coins", "avgTime": 3],
-            ["currencyAmount": 200, "currency": "Coins", "avgTime": 12],
-            ["currencyAmount": 150, "currency": "Coins", "avgTime": 10],
-            ["currencyAmount": 140, "currency": "Coins", "avgTime": 1],
-            ["currencyAmount": 600, "currency": "Coins", "avgTime": 4],
-            ["currencyAmount": 700, "currency": "Coins", "avgTime": 3],
-            ["currencyAmount": 350, "currency": "Coins", "avgTime": 12],
-            ["currencyAmount": 250, "currency": "Coins", "avgTime": 13],
-            ["currencyAmount": 280, "currency": "Coins", "avgTime": 12],
-            ["currencyAmount": 110, "currency": "Coins", "avgTime": 3]
-        ]
-        var campaigns:[[String:Any]] = []
-        var index = 0
-        for a in array {
-            campaigns.append(a)
-            index += 1
-            if index > count { break }
+    func markAsDownloaded(_ campaign: Campaign) {
+        Network.shared.createInstall(campaign: campaign) { (response, error) in
+            if error == nil {
+                let index = self.notYetDownloadedCampaigns.index(where: { (c1) -> Bool in
+                    return c1.id == campaign.id
+                })
+                if let index = index {
+                    self.notYetDownloadedCampaigns.remove(at: index)
+                    self.alreadyDownloadedCampaigns.insert(campaign, at: 0)
+                }
+            }
         }
-        return GKRandomSource.sharedRandom().arrayByShufflingObjects(in: campaigns) as! [[String: Any]]
     }
     
-    func displaySurveyPacks(_ campaigns: [[String: Any]], append: Bool=false, header: String?=nil) {
+    func createImpressionsForVisibleCampaigns() {
+        for sp in self.surveyPacks {
+            if !self.campaignIdsViewedThisSession.contains(sp.campaign.id) {
+                let spFrame = sp.convert(sp.bounds, to: self.view)
+                if self.scrollView.frame.contains(spFrame) {
+                    self.campaignIdsViewedThisSession.append(sp.campaign.id)
+                    Network.shared.createImpression(campaign: sp.campaign) { (response, error) in
+                    }
+                }
+            }
+
+        }
+    }
+    
+    func displaySurveyPacks(_ campaigns: [Campaign], append: Bool=false, header: String?=nil) {
         if !append {
             for row in addedViews { row.removeFromSuperview() }
             self.lastRow = nil
+            self.surveyPacks = []
         }
         
         if let headerString = header {
@@ -180,9 +239,12 @@ class SurveyWallViewController: BottomButtonableViewController {
                 self.lastRow = newLastRow
             }
             guard let lastRow = self.lastRow else { fatalError("last row does not exist") }
+            
             let sp = SurveyPack(campaign: campaign)
             sp.surveyPackDelegate = self
             lastRow.addSubview(sp)
+            surveyPacks.append(sp)
+            
             sp.translatesAutoresizingMaskIntoConstraints = false
             sp.heightAnchor.constraint(equalToConstant: Globals.surveyPackSize.height).isActive = true
             sp.widthAnchor.constraint(equalToConstant: Globals.surveyPackSize.width).isActive = true
@@ -206,24 +268,18 @@ class SurveyWallViewController: BottomButtonableViewController {
         self.contentMayExceedViewHeight(self.lastRow)
     }
     
-    func alreadyDownloaded(_ campaign: [String:Any]) -> Bool {
-        // this is a made up method and should be changed later
-        guard let amount = campaign["currencyAmount"] as? Int else { fatalError() }
-        for downloaded in self.downloadedCampaigns {
-            guard let downloadedAmount = downloaded["currencyAmount"] as? Int else { fatalError() }
-            if amount == downloadedAmount { return true }
+    func alreadyDownloaded(_ campaign: Campaign) -> Bool {
+        for downloaded in self.alreadyDownloadedCampaigns {
+            if campaign.id == downloaded.id { return true }
         }
         return false
     }
     
-    func removeFromDownloaded(_ campaign: [String:Any]) {
-        // this is a made up method and should be changed later
-        guard let amount = campaign["currencyAmount"] as? Int else { fatalError() }
+    func removeFromDownloaded(_ campaign: Campaign) {
         var index = 0
-        for downloaded in self.downloadedCampaigns {
-            guard let downloadedAmount = downloaded["currencyAmount"] as? Int else { fatalError() }
-            if amount == downloadedAmount {
-                self.downloadedCampaigns.remove(at: index)
+        for downloaded in self.alreadyDownloadedCampaigns {
+            if downloaded.id == campaign.id {
+                self.alreadyDownloadedCampaigns.remove(at: index)
                 return
             }
             index += 1
@@ -233,26 +289,59 @@ class SurveyWallViewController: BottomButtonableViewController {
 
 extension SurveyWallViewController: BottomButtonDelegate {
     func buttonTapped() {
-        let campaigns = self.moreCampaigns()
-        self.displaySurveyPacks(campaigns, append: true)
+        self.fetchAndDisplayMoreCampaigns()
     }
 }
 
 extension SurveyWallViewController: SurveyPackDelegate {
-    func tapped(campaign: [String:Any]) {
+    func tapped(campaign: Campaign) {
         if self.alreadyDownloaded(campaign) {
-            let vc = SurveyViewController(campaign: campaign)
-            vc.surveyDelegate = self
-            self.navigationController?.pushViewController(vc, animated: true)
+            print("tapped already downloaded")
+//            let vc = SurveyViewController(campaign: campaign)
+//            vc.surveyDelegate = self
+//            self.navigationController?.pushViewController(vc, animated: true)
         } else {
-            let vc = PreSurveyDetailsViewController(campaign: campaign, surveyWallVC: self)
+            Network.shared.createClick(campaign: campaign) { (response, error) in
+            }
+            let vc = PreSurveyDetailsViewController(campaign: campaign)
+            vc.delegate = self
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }
 
-extension SurveyWallViewController: SurveyDelegate  {
-    func surveyCompleted(_ campaign: [String : Any]) {
-        self.removeFromDownloaded(campaign)
+//extension SurveyWallViewController: SurveyDelegate  {
+//    func surveyCompleted(_ campaign: Campaign) {
+//        self.removeFromDownloaded(campaign)
+//    }
+//}
+
+extension SurveyWallViewController: PreSurveyDetailsDelegate {
+    func tappedToContinue(campaign: Campaign) {
+        self.markAsDownloaded(campaign)
+    }
+}
+
+extension SurveyWallViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        self.isDragging = false
+        if !decelerate {
+            self.createImpressionsForVisibleCampaigns()
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        self.createImpressionsForVisibleCampaigns()
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.isDragging = true
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.isDragging {
+            self.createImpressionsForVisibleCampaigns()
+        }
+        
     }
 }

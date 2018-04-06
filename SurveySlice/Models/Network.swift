@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 import ReachabilitySwift
+import Gloss
+
 
 class Network: NSObject {
     let baseURL:String!
@@ -63,7 +65,29 @@ class Network: NSObject {
         }
     }
     
-    func baseNetworkWrapper(completionHandler: @escaping ([String: Any]?, NSError?) -> (), network: (String, String, @escaping ()->())->() ) {
+    func baseSurveyeeNetworkWrapper(completionHandler: @escaping ([JSON]?, NSError?) -> (), network: (String, String, String, @escaping ()->())->() ) {
+        if self.internetAvailable && Globals.app.api_key != nil && Globals.app.devApp?.app_id != nil && Globals.app.surveyee?.idfa != nil{
+            let bgTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+            network(Globals.app.api_key!, Globals.app.devApp!.app_id, Globals.app.surveyee!.idfa, {
+                UIApplication.shared.endBackgroundTask(bgTask)
+            })
+        } else {
+            completionHandler(nil, self.noInternetError)
+        }
+    }
+    
+    func baseSurveyeeNetworkWrapper(completionHandler: @escaping (JSON?, NSError?) -> (), network: (String, String, String, @escaping ()->())->() ) {
+        if self.internetAvailable && Globals.app.api_key != nil && Globals.app.devApp?.app_id != nil && Globals.app.surveyee?.idfa != nil{
+            let bgTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
+            network(Globals.app.api_key!, Globals.app.devApp!.app_id, Globals.app.surveyee!.idfa, {
+                UIApplication.shared.endBackgroundTask(bgTask)
+            })
+        } else {
+            completionHandler(nil, self.noInternetError)
+        }
+    }
+    
+    func baseNetworkWrapper(completionHandler: @escaping (JSON?, NSError?) -> (), network: (String, String, @escaping ()->())->() ) {
         if self.internetAvailable && Globals.app.api_key != nil && Globals.app.devApp?.app_id != nil {
             let bgTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
             network(Globals.app.api_key!, Globals.app.devApp!.app_id, {
@@ -74,7 +98,7 @@ class Network: NSObject {
         }
     }
     
-    func apiKeyOnlyNetworkWrapper(completionHandler: @escaping ([String: Any]?, NSError?) -> (), network: (String, @escaping ()->())->() ) {
+    func apiKeyOnlyNetworkWrapper(completionHandler: @escaping (JSON?, NSError?) -> (), network: (String, @escaping ()->())->() ) {
         if self.internetAvailable && Globals.app.api_key != nil {
             let bgTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
             network(Globals.app.api_key!, {
@@ -85,7 +109,7 @@ class Network: NSObject {
         }
     }
     
-    func fetchSurveyee(idfa: String, completionHandler: @escaping ([String: Any]?, NSError?) -> ()) {
+    func fetchSurveyee(idfa: String, completionHandler: @escaping (JSON?, NSError?) -> ()) {
         self.baseNetworkWrapper(completionHandler: completionHandler) { (api_key, app_id, networkingFinished) in
             var acceptableCodes = [200, 404]
             Alamofire.request(self.baseURL + "/app/\(app_id)/surveyees/\(idfa)?api_key=" + api_key).validate(statusCode: acceptableCodes).responseJSON { response in
@@ -95,7 +119,7 @@ class Network: NSObject {
                     if response.response?.statusCode == 404 {
                         completionHandler(nil, nil)
                     } else {
-                        let dict = value as? [String: Any]
+                        let dict = value as? [String:Any]
                         completionHandler(dict, nil)
                     }
                 case .failure(let error):
@@ -107,7 +131,7 @@ class Network: NSObject {
         }
     }
     
-    func fetchApp(app_id: String, completionHandler: @escaping ([String: Any]?, NSError?) -> ()) {
+    func fetchApp(app_id: String, completionHandler: @escaping (JSON?, NSError?) -> ()) {
         self.apiKeyOnlyNetworkWrapper(completionHandler: completionHandler) { (api_key, networkingFinished) in
             Alamofire.request(self.baseURL + "/app/\(app_id)?api_key=" + api_key).validate().responseJSON { response in
                 switch response.result {
@@ -125,7 +149,7 @@ class Network: NSObject {
         }
     }
     
-    func createSurveyee(idfa: String, demographicParams: [String:Any], completionHandler: @escaping ([String: Any]?, NSError?) -> ()) {
+    func createSurveyee(idfa: String, demographicParams: [String:Any], completionHandler: @escaping (JSON?, NSError?) -> ()) {
         print("demo param")
         print(demographicParams)
         let parameters:[String:Any] = ["idfa": idfa, "demographic_attributes": demographicParams]
@@ -138,6 +162,56 @@ class Network: NSObject {
                     completionHandler(dict, nil)
                 case .failure(let error):
                     Helper.logInfo("Failure Creating Surveyee")
+                    completionHandler(nil, error as NSError?)
+                }
+                networkingFinished()
+            }
+        }
+    }
+    
+    func fetchCampaigns(already_started: Bool, page: Int, completionHandler: @escaping (JSON?, NSError?) -> ()) {
+        self.baseSurveyeeNetworkWrapper(completionHandler: completionHandler) { (api_key, app_id, idfa, networkingFinished) in
+            let url = self.baseURL + "/app/\(app_id)/surveyees/\(idfa)/campaigns"
+            var params:[String:Any] = ["api_key": api_key, "page": page]
+            if already_started { params["already_started"] = "true" }
+            Alamofire.request(url, parameters: params).validate().responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    Helper.logInfo("Successfully Fetched Campaigns Data")
+                    let dict = value as? JSON
+                    completionHandler(dict, nil)
+                case .failure(let error):
+                    Helper.logError("Failure Fetching Campaigns Data")
+                    print(error)
+                    completionHandler(nil, error as NSError?)
+                }
+                networkingFinished()
+            }
+        }
+    }
+    
+    func createInstall(campaign: Campaign, completionHandler: @escaping (JSON?, NSError?) -> ()) {
+        self.createCampaignActivity(type: "installs", campaign: campaign, completionHandler: completionHandler)
+    }
+    
+    func createClick(campaign: Campaign, completionHandler: @escaping (JSON?, NSError?) -> ()) {
+        self.createCampaignActivity(type: "clicks", campaign: campaign, completionHandler: completionHandler)
+    }
+    
+    func createImpression(campaign: Campaign, completionHandler: @escaping (JSON?, NSError?) -> ()) {
+        self.createCampaignActivity(type: "impressions", campaign: campaign, completionHandler: completionHandler)
+    }
+    
+    func createCampaignActivity(type: String, campaign: Campaign, completionHandler: @escaping (JSON?, NSError?) -> ()) {
+        self.baseSurveyeeNetworkWrapper(completionHandler: completionHandler) { (api_key, app_id, idfa, networkingFinished) in
+            let url = self.baseURL +  "/app/\(app_id)/surveyees/\(idfa)/campaigns/\(campaign.id)/\(type)?api_key=" + api_key
+            Alamofire.request(url, method: .post, encoding: JSONEncoding.default).validate().responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    Helper.logInfo("Successfully Created \(type)")
+                    completionHandler(nil, nil)
+                case .failure(let error):
+                    Helper.logInfo("Failure Creating \(type)")
                     completionHandler(nil, error as NSError?)
                 }
                 networkingFinished()
