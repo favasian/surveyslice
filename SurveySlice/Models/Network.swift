@@ -222,6 +222,14 @@ class Network: NSObject {
         self.createCampaignActivity(type: "impressions", campaign: campaign, completionHandler: completionHandler)
     }
     
+    func createSurveyStart(campaign: Campaign, completionHandler: @escaping (JSON?, NSError?) -> ()) {
+        self.createCampaignActivity(type: "survey_starts", campaign: campaign, completionHandler: completionHandler)
+    }
+    
+    func createCompletion(campaign: Campaign, completionHandler: @escaping (JSON?, NSError?) -> ()) {
+        self.createCampaignActivity(type: "completions", campaign: campaign, completionHandler: completionHandler)
+    }
+    
     func createCampaignActivity(type: String, campaign: Campaign, completionHandler: @escaping (JSON?, NSError?) -> ()) {
         self.baseSurveyeeNetworkWrapper(completionHandler: completionHandler) { (api_key, app_id, idfa, networkingFinished) in
             let url = self.baseURL +  "/app/\(app_id)/surveyees/\(idfa)/campaigns/\(campaign.id)/\(type)?api_key=" + api_key
@@ -232,6 +240,26 @@ class Network: NSObject {
                     completionHandler(nil, nil)
                 case .failure(let error):
                     Helper.logInfo("Failure Creating \(type)")
+                    completionHandler(nil, error as NSError?)
+                }
+                networkingFinished()
+            }
+        }
+    }
+    
+    func fetchQuestions(forSurveyId: Int, completionHandler: @escaping (JSON?, NSError?) -> ()) {
+        self.baseSurveyeeNetworkWrapper(completionHandler: completionHandler) { (api_key, app_id, idfa, networkingFinished) in
+            let url = self.baseURL + "/app/\(app_id)/surveyees/\(idfa)/surveys/\(forSurveyId)/questions"
+            let params:[String:Any] = ["api_key": api_key]
+            Alamofire.request(url, parameters: params).validate().responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    Helper.logInfo("Successfully Fetched Questions Data")
+                    let dict = value as? JSON
+                    completionHandler(dict, nil)
+                case .failure(let error):
+                    Helper.logError("Failure Fetching Questions Data")
+                    print(error)
                     completionHandler(nil, error as NSError?)
                 }
                 networkingFinished()

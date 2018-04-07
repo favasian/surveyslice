@@ -10,18 +10,13 @@ import UIKit
 import SDWebImage
 
 protocol PreSurveyDetailsDelegate: class {
-    func tappedToContinue(campaign: Campaign)
+    func tappedToContinueToSurvey(campaign: Campaign, survey: Survey)
+    func tappedToVisitUrl(campaign: Campaign, survey: Survey, url: String)
+    func tappedToDownloadApp(campaign: Campaign, survey: Survey, url: String)
 }
 
 
 class PreSurveyDetailsViewController: BottomButtonableViewController {
-
-//    var appName: String?
-//    var minTimeActivity: Int?
-//    var appImageUrl: String?
-//    var appCompanyName: String?
-//    var starRating: Int?
-//    var url: String?
     
     var campaign: Campaign
     var survey: Survey
@@ -149,6 +144,8 @@ class PreSurveyDetailsViewController: BottomButtonableViewController {
         
         if let preSurveyApp = self.survey.preSurveyApp {
             let appImageView = UIImageView()
+            appImageView.layer.cornerRadius = Globals.appIconSize.height/4.0
+            appImageView.layer.masksToBounds = true
             self.addSubview(appImageView)
             appImageView.translatesAutoresizingMaskIntoConstraints = false
             appImageView.topAnchor.constraint(equalTo: lastLabel.bottomAnchor, constant: Globals.padding).isActive = true
@@ -219,21 +216,24 @@ class PreSurveyDetailsViewController: BottomButtonableViewController {
 
 extension PreSurveyDetailsViewController: BottomButtonDelegate {
     func buttonTapped() {
-        self.delegate?.tappedToContinue(campaign: self.campaign)
-        if let stringURL = self.survey.preSurveyUrl {
-            if let url = URL(string: stringURL) {
+        if let url = self.survey.preSurveyUrl, url != "" {
+            if self.isLinkApp {
+                self.delegate?.tappedToDownloadApp(campaign: self.campaign, survey: self.survey, url: url)
+            } else {
+                self.delegate?.tappedToVisitUrl(campaign: self.campaign, survey: self.survey, url: url)
+            }
+            if let url = URL(string: url) {
                 if UIApplication.shared.canOpenURL(url) {
                     Globals.mainVC.popToRootViewController(animated: false)
                     UIApplication.shared.openURL(url)
                 } else {
-                    
+                    self.displayAlert(title: "Oops", message: "There was an error loading the link") {
+                        self.navigationController?.popViewController(animated: true)
+                    }
                 }
-            } else {
-                
             }
         } else {
-            
+            self.delegate?.tappedToContinueToSurvey(campaign: self.campaign, survey: self.survey)
         }
-        
     }
 }

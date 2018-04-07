@@ -19,8 +19,8 @@ class SurveyWallViewController: BottomButtonableViewController {
     var headerLabel:UILabel!
     var currency:String!
     var dividerImage: UIImage!
-    var alreadyDownloadedCampaigns:[Campaign] = []
-    var notYetDownloadedCampaigns:[Campaign] = []
+    var alreadyStartedCampaigns:[Campaign] = []
+    var notYetStartedCampaigns:[Campaign] = []
     var nextPage: Int?
     
     var isDragging = false
@@ -64,21 +64,21 @@ class SurveyWallViewController: BottomButtonableViewController {
         taskGroup.enter()
         Campaign.fetch(already_started: true, page: 1) { [weak self] (campaignList) in
             if let campaigns = campaignList?.campaigns {
-                self?.alreadyDownloadedCampaigns = campaigns
+                self?.alreadyStartedCampaigns = campaigns
                 self?.campaignIdsViewedThisSession.append(contentsOf: campaigns.map({ (c) -> Int in
                     return c.id
                 }))
             } else {
-                self?.alreadyDownloadedCampaigns.removeAll()
+                self?.alreadyStartedCampaigns.removeAll()
             }
             taskGroup.leave()
         }
         
         Campaign.fetch(already_started: false, page: 1) { [weak self] (campaignList) in
             if let campaigns = campaignList?.campaigns {
-                self?.notYetDownloadedCampaigns = campaigns
+                self?.notYetStartedCampaigns = campaigns
             } else {
-                self?.notYetDownloadedCampaigns = []
+                self?.notYetStartedCampaigns = []
             }
             self?.nextPage = campaignList?.nextPage
             if let _ = campaignList?.nextPage {
@@ -100,7 +100,7 @@ class SurveyWallViewController: BottomButtonableViewController {
         guard let nextPage = self.nextPage else { return }
         Campaign.fetch(already_started: false, page: nextPage) { [weak self] (campaignList) in
             if let campaigns = campaignList?.campaigns {
-                self?.notYetDownloadedCampaigns.append(contentsOf: campaigns)
+                self?.notYetStartedCampaigns.append(contentsOf: campaigns)
                 self?.displaySurveyPacks(campaigns, append: true, header: nil)
                 self?.createImpressionsForVisibleCampaigns()
             }
@@ -114,11 +114,11 @@ class SurveyWallViewController: BottomButtonableViewController {
     }
     
     @objc func displayFetchedSurveyPacks() {
-        if self.alreadyDownloadedCampaigns.count > 0 {
-            displaySurveyPacks(self.alreadyDownloadedCampaigns, append: false, header: "Downloaded")
-            displaySurveyPacks(self.notYetDownloadedCampaigns, append: true, header: "Ready to Start")
+        if self.alreadyStartedCampaigns.count > 0 {
+            displaySurveyPacks(self.alreadyStartedCampaigns, append: false, header: "Started")
+            displaySurveyPacks(self.notYetStartedCampaigns, append: true, header: "Ready to Start")
         } else {
-            displaySurveyPacks(self.notYetDownloadedCampaigns, append: false)
+            displaySurveyPacks(self.notYetStartedCampaigns, append: false)
         }
         
     }
@@ -157,16 +157,28 @@ class SurveyWallViewController: BottomButtonableViewController {
         Globals.mainVC.dismiss()
     }
     
-    func markAsDownloaded(_ campaign: Campaign) {
-        Network.shared.createInstall(campaign: campaign) { (response, error) in
+    func moveCampaignFromNotStartedToStarted(_ campaign: Campaign) {
+        let index = self.notYetStartedCampaigns.index(where: { (c1) -> Bool in
+            return c1.id == campaign.id
+        })
+        if let index = index {
+            self.notYetStartedCampaigns.remove(at: index)
+            self.alreadyStartedCampaigns.insert(campaign, at: 0)
+        }
+    }
+    
+    func markAsInstalled(_ campaign: Campaign) {
+        Network.shared.createInstall(campaign: campaign) { [weak self] (response, error) in
             if error == nil {
-                let index = self.notYetDownloadedCampaigns.index(where: { (c1) -> Bool in
-                    return c1.id == campaign.id
-                })
-                if let index = index {
-                    self.notYetDownloadedCampaigns.remove(at: index)
-                    self.alreadyDownloadedCampaigns.insert(campaign, at: 0)
-                }
+                self?.moveCampaignFromNotStartedToStarted(campaign)
+            }
+        }
+    }
+    
+    func markAsSurveyStarted(_ campaign: Campaign) {
+        Network.shared.createSurveyStart(campaign: campaign) { [weak self] (response, error) in
+            if error == nil {
+                self?.moveCampaignFromNotStartedToStarted(campaign)
             }
         }
     }
@@ -269,21 +281,39 @@ class SurveyWallViewController: BottomButtonableViewController {
         self.contentMayExceedViewHeight(self.lastRow)
     }
     
-    func alreadyDownloaded(_ campaign: Campaign) -> Bool {
-        for downloaded in self.alreadyDownloadedCampaigns {
-            if campaign.id == downloaded.id { return true }
+    func alreadyStarted(campaign: Campaign) -> Bool {
+        for started in self.alreadyStartedCampaigns {
+            if campaign.id == started.id { return true }
         }
         return false
     }
     
-    func removeFromDownloaded(_ campaign: Campaign) {
+    func removeFromStarted(campaign: Campaign) {
         var index = 0
-        for downloaded in self.alreadyDownloadedCampaigns {
-            if downloaded.id == campaign.id {
-                self.alreadyDownloadedCampaigns.remove(at: index)
+        for started in self.alreadyStartedCampaigns {
+            if started.id == campaign.id {
+                self.alreadyStartedCampaigns.remove(at: index)
                 return
             }
             index += 1
+        }
+    }
+    
+    func startSurvey(campaign: Campaign, survey: Survey) {
+        SwiftSpinner.show("Loading Questions...")
+        self.markAsSurveyStarted(campaign)
+        Question.fetch(forSurvey: survey) { (questions) in
+            SwiftSpinner.hide()
+            if let questions = questions {
+                let vc = SurveyViewController(campaign: campaign, survey: survey, questions: questions)
+                vc.surveyDelegate = self
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                self.displayAlert(title: "Oops", message: "Error loading Survey", completion: {
+                    
+                })
+            }
+            
         }
     }
 }
@@ -296,11 +326,13 @@ extension SurveyWallViewController: BottomButtonDelegate {
 
 extension SurveyWallViewController: SurveyPackDelegate {
     func tapped(campaign: Campaign) {
-        if self.alreadyDownloaded(campaign) {
-            print("tapped already downloaded")
-//            let vc = SurveyViewController(campaign: campaign)
-//            vc.surveyDelegate = self
-//            self.navigationController?.pushViewController(vc, animated: true)
+        if self.alreadyStarted(campaign: campaign) {
+            SwiftSpinner.show("Loading Survey...")
+            Survey.fetch(byCampaignId: campaign.id) { (survey) in
+                if let survey = survey {
+                    self.startSurvey(campaign: campaign, survey: survey)
+                }
+            }
         } else {
             SwiftSpinner.show("Loading Survey...")
             Network.shared.createClick(campaign: campaign) { (response, error) in
@@ -317,15 +349,27 @@ extension SurveyWallViewController: SurveyPackDelegate {
     }
 }
 
-//extension SurveyWallViewController: SurveyDelegate  {
-//    func surveyCompleted(_ campaign: Campaign) {
-//        self.removeFromDownloaded(campaign)
-//    }
-//}
+extension SurveyWallViewController: SurveyDelegate  {
+    func surveyCompleted(campaign: Campaign, survey: Survey) {
+        self.removeFromStarted(campaign: campaign)
+        self.displayFetchedSurveyPacks()
+        self.fetchAndRefreshCampaigns()
+    }
+}
 
 extension SurveyWallViewController: PreSurveyDetailsDelegate {
-    func tappedToContinue(campaign: Campaign) {
-        self.markAsDownloaded(campaign)
+    
+    func tappedToContinueToSurvey(campaign: Campaign, survey: Survey) {
+        self.startSurvey(campaign: campaign, survey: survey)
+    }
+    
+    func tappedToVisitUrl(campaign: Campaign, survey: Survey, url: String) {
+        //FIXME what to do if it's not an app? still create Install?
+        self.moveCampaignFromNotStartedToStarted(campaign)
+    }
+    
+    func tappedToDownloadApp(campaign: Campaign, survey: Survey, url: String) {
+        self.markAsInstalled(campaign)
     }
 }
 

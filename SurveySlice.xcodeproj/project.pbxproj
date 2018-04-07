@@ -40,6 +40,9 @@
 		9DABFFC32069E49900DE63A5 /* Surveyee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DABFFC22069E49900DE63A5 /* Surveyee.swift */; };
 		9DB8E9B92077CEDF00615509 /* CampaignList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8E9B82077CEDF00615509 /* CampaignList.swift */; };
 		9DB8E9BB2078486E00615509 /* PreSurveyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8E9BA2078486E00615509 /* PreSurveyApp.swift */; };
+		9DB8E9BD2078664600615509 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8E9BC2078664600615509 /* Question.swift */; };
+		9DB8E9BF2078666200615509 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8E9BE2078666200615509 /* Answer.swift */; };
+		9DB8E9C12078762300615509 /* QuestionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8E9C02078762300615509 /* QuestionList.swift */; };
 		AAD19ABF2AAEDF8E401A15CA /* Pods_SurveySlice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 378E6F0543FE71B7A2386800 /* Pods_SurveySlice.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +84,9 @@
 		9DABFFC22069E49900DE63A5 /* Surveyee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Surveyee.swift; sourceTree = "<group>"; };
 		9DB8E9B82077CEDF00615509 /* CampaignList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignList.swift; sourceTree = "<group>"; };
 		9DB8E9BA2078486E00615509 /* PreSurveyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreSurveyApp.swift; sourceTree = "<group>"; };
+		9DB8E9BC2078664600615509 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		9DB8E9BE2078666200615509 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
+		9DB8E9C02078762300615509 /* QuestionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionList.swift; sourceTree = "<group>"; };
 		DD3713789A7DAF85B7BCB9DB /* Pods-SurveySlice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurveySlice.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SurveySlice/Pods-SurveySlice.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,6 +124,9 @@
 				9D6742CC207683E20049B50A /* Survey.swift */,
 				9DB8E9B82077CEDF00615509 /* CampaignList.swift */,
 				9DB8E9BA2078486E00615509 /* PreSurveyApp.swift */,
+				9DB8E9BC2078664600615509 /* Question.swift */,
+				9DB8E9BE2078666200615509 /* Answer.swift */,
+				9DB8E9C02078762300615509 /* QuestionList.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -335,6 +344,7 @@
 			files = (
 				9D549D8D205C4DD600D50A0F /* SurveyPack.swift in Sources */,
 				9DB8E9BB2078486E00615509 /* PreSurveyApp.swift in Sources */,
+				9DB8E9BF2078666200615509 /* Answer.swift in Sources */,
 				9D8934C22048D00500773F59 /* InitialProfiler.swift in Sources */,
 				9D549D9A2064802C00D50A0F /* SurveyViewController.swift in Sources */,
 				9D8934D42049F1C700773F59 /* BaseViewController.swift in Sources */,
@@ -348,10 +358,12 @@
 				9DABFFC32069E49900DE63A5 /* Surveyee.swift in Sources */,
 				9DAABDF22059C26400D85EE8 /* Helper.swift in Sources */,
 				9D549D9D2069C35C00D50A0F /* Network.swift in Sources */,
+				9DB8E9BD2078664600615509 /* Question.swift in Sources */,
 				9DAABDF82059EED900D85EE8 /* MultipleChoiceQuestionViewController.swift in Sources */,
 				9D549D9F2069C60400D50A0F /* SurveySliceApp.swift in Sources */,
 				9D549D8F205C539300D50A0F /* MainSurveySliceController.swift in Sources */,
 				9D7F7A4D2075A1E200DFF492 /* CountrySelectionViewController.swift in Sources */,
+				9DB8E9C12078762300615509 /* QuestionList.swift in Sources */,
 				9D8934D22049EE1600773F59 /* Globals.swift in Sources */,
 				9D549D91205C67F200D50A0F /* Extensions.swift in Sources */,
 				9D549D982064017400D50A0F /* PreSurveyDetailsViewController.swift in Sources */,

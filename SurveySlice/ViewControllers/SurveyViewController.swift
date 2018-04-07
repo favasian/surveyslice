@@ -9,16 +9,17 @@
 import UIKit
 
 protocol SurveyDelegate: class {
-    func surveyCompleted(_ campaign: [String:Any])
+    func surveyCompleted(campaign: Campaign, survey: Survey)
 }
 
 class SurveyViewController: AlertViewController {
 
     
-    var campaign: [String:Any]!
-    var surveyQuestions: [[String:Any]]!
-    var currencyAmount: Int!
-    var currency: String!
+    var campaign: Campaign
+    var survey: Survey
+    var surveyQuestions: [Question]
+    var currencyAmount: Int
+    var currency: String
     var surveyDelegate: SurveyDelegate?
     
     override func viewDidLoad() {
@@ -42,19 +43,19 @@ class SurveyViewController: AlertViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    init(campaign: [String: Any]) {
-        guard let currencyAmount = campaign["currencyAmount"] as? Int else { fatalError("currency amount does not exist") }
-        guard let currency = campaign["currency"] as? String else { fatalError("currency does not exist") }
-        guard let avgTime = campaign["avgTime"] as? Int else { fatalError("avgTime does not exist") }
-        let sqs = Globals.dummySurveyQuestions()
+    init(campaign: Campaign, survey: Survey, questions: [Question]) {
+        let currencyAmount = campaign.awardAmount()
+        let currency = Globals.app.devApp!.currency
 
-        super.init(title: "+\(currencyAmount) \(currency)", text: "Please complete the following \(sqs.count) questions survey to earn \(currencyAmount) \(currency)", backNavBtnTitle: "Exit")
-        
         self.campaign = campaign
-        self.alertViewDelegate = self
+        self.survey = survey
+        
         self.currencyAmount = currencyAmount
         self.currency = currency
-        self.surveyQuestions = sqs
+        self.surveyQuestions = questions
+        
+        super.init(title: "+\(currencyAmount) \(currency)", text: "Please complete the following \(questions.count) questions survey to earn \(currencyAmount) \(currency)", backNavBtnTitle: "Exit")
+        self.alertViewDelegate = self
     }
     
     
@@ -66,19 +67,33 @@ class SurveyViewController: AlertViewController {
         var qvc:BaseQuestionViewController!
         let numberOfQuestions = surveyQuestions.count
         let qaObject = surveyQuestions[questionNumber-1]
-        let q = qaObject["question"] as! String
-        let answers = qaObject["options"] as! [String]
-        let multiSelect = qaObject["multi"] as! Bool
-        //let qType = qaObject["type"] as! QuestionType
+        let q = qaObject.question
+        let answers = qaObject.answers!.map { (answer) -> String in
+            return answer.answer
+        }
+        let multiSelect = qaObject.multiSelect
         
         qvc = MultipleChoiceQuestionViewController(question: q, numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self, options: answers, multiSelect: multiSelect)
         Globals.mainVC.pushViewController(qvc, animated: true)
     }
     
     func finishSurvey() {
-        self.surveyDelegate?.surveyCompleted(self.campaign)
-        Globals.mainVC.popToRootViewController(animated: true)
-        Globals.app.surveyCompleted(currencyAmount: self.currencyAmount, currency: self.currency)
+        let currencyAmount = self.currencyAmount
+        let currency = self.currency
+        let campaign = self.campaign
+        let survey = self.survey
+        Network.shared.createCompletion(campaign: self.campaign) { [weak self] (response, error) in
+            if let _ = error {
+                self?.displayAlert(title: "Oops", message: "An error occurred", completion: {
+                    Globals.mainVC.popToRootViewController(animated: true)
+                })
+            } else {
+                self?.surveyDelegate?.surveyCompleted(campaign: campaign, survey: survey)
+                Globals.mainVC.popToRootViewController(animated: true)
+                Globals.app.surveyCompleted(currencyAmount: currencyAmount, currency: currency)
+            }
+        }
+        
     }
 }
 
@@ -108,7 +123,7 @@ extension SurveyViewController: QuestionViewDelegate {
         if self.surveyQuestions.count >= questionNumber + 1 {
             self.startQuestion(questionNumber: questionNumber+1)
         } else {
-            let vc = AlertViewController(title: nil, text: "You have completed your survey and earned \(self.currencyAmount!) \(self.currency!)", backNavBtnTitle: "Finish", btnTitle: "Finish")
+            let vc = AlertViewController(title: nil, text: "You have completed your survey and earned \(self.currencyAmount) \(self.currency)", backNavBtnTitle: "Finish", btnTitle: "Finish")
             vc.alertViewDelegate = self
             Globals.mainVC.pushViewController(vc, animated: true)
         }
