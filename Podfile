@@ -7,4 +7,5 @@ target 'SurveySlice' do
   pod 'SwiftSpinner', '~> 1.5.0'
   pod 'CountryPickerSwift'
   pod 'Gloss', '~> 2.0'
+  pod 'SDWebImage', '~> 4.0'
 end

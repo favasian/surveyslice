@@ -39,6 +39,7 @@
 		9DAABDF82059EED900D85EE8 /* MultipleChoiceQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAABDF72059EED900D85EE8 /* MultipleChoiceQuestionViewController.swift */; };
 		9DABFFC32069E49900DE63A5 /* Surveyee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DABFFC22069E49900DE63A5 /* Surveyee.swift */; };
 		9DB8E9B92077CEDF00615509 /* CampaignList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8E9B82077CEDF00615509 /* CampaignList.swift */; };
+		9DB8E9BB2078486E00615509 /* PreSurveyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8E9BA2078486E00615509 /* PreSurveyApp.swift */; };
 		AAD19ABF2AAEDF8E401A15CA /* Pods_SurveySlice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 378E6F0543FE71B7A2386800 /* Pods_SurveySlice.framework */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,7 @@
 		9DAABDF72059EED900D85EE8 /* MultipleChoiceQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleChoiceQuestionViewController.swift; sourceTree = "<group>"; };
 		9DABFFC22069E49900DE63A5 /* Surveyee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Surveyee.swift; sourceTree = "<group>"; };
 		9DB8E9B82077CEDF00615509 /* CampaignList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignList.swift; sourceTree = "<group>"; };
+		9DB8E9BA2078486E00615509 /* PreSurveyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreSurveyApp.swift; sourceTree = "<group>"; };
 		DD3713789A7DAF85B7BCB9DB /* Pods-SurveySlice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurveySlice.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SurveySlice/Pods-SurveySlice.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,6 +117,7 @@
 				9D6742CA2076822F0049B50A /* Campaign.swift */,
 				9D6742CC207683E20049B50A /* Survey.swift */,
 				9DB8E9B82077CEDF00615509 /* CampaignList.swift */,
+				9DB8E9BA2078486E00615509 /* PreSurveyApp.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D549D8D205C4DD600D50A0F /* SurveyPack.swift in Sources */,
+				9DB8E9BB2078486E00615509 /* PreSurveyApp.swift in Sources */,
 				9D8934C22048D00500773F59 /* InitialProfiler.swift in Sources */,
 				9D549D9A2064802C00D50A0F /* SurveyViewController.swift in Sources */,
 				9D8934D42049F1C700773F59 /* BaseViewController.swift in Sources */,

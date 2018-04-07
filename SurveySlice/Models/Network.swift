@@ -190,6 +190,26 @@ class Network: NSObject {
         }
     }
     
+    func fetchSurvey(byCampaignId: Int, completionHandler: @escaping (JSON?, NSError?) -> ()) {
+        self.baseSurveyeeNetworkWrapper(completionHandler: completionHandler) { (api_key, app_id, idfa, networkingFinished) in
+            let url = self.baseURL + "/app/\(app_id)/surveyees/\(idfa)/surveys/\(byCampaignId)"
+            var params:[String:Any] = ["api_key": api_key]
+            Alamofire.request(url, parameters: params).validate().responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    Helper.logInfo("Successfully Fetched Survey Data")
+                    let dict = value as? JSON
+                    completionHandler(dict, nil)
+                case .failure(let error):
+                    Helper.logError("Failure Fetching Survey Data")
+                    print(error)
+                    completionHandler(nil, error as NSError?)
+                }
+                networkingFinished()
+            }
+        }
+    }
+    
     func createInstall(campaign: Campaign, completionHandler: @escaping (JSON?, NSError?) -> ()) {
         self.createCampaignActivity(type: "installs", campaign: campaign, completionHandler: completionHandler)
     }

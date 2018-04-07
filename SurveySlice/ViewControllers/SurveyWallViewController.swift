@@ -8,6 +8,7 @@
 
 import UIKit
 import GameplayKit
+import SwiftSpinner
 
 class SurveyWallViewController: BottomButtonableViewController {
     
@@ -301,11 +302,17 @@ extension SurveyWallViewController: SurveyPackDelegate {
 //            vc.surveyDelegate = self
 //            self.navigationController?.pushViewController(vc, animated: true)
         } else {
+            SwiftSpinner.show("Loading Survey...")
             Network.shared.createClick(campaign: campaign) { (response, error) in
             }
-            let vc = PreSurveyDetailsViewController(campaign: campaign)
-            vc.delegate = self
-            self.navigationController?.pushViewController(vc, animated: true)
+            Survey.fetch(byCampaignId: campaign.id) { (survey) in
+                SwiftSpinner.hide()
+                if let survey = survey {
+                    let vc = PreSurveyDetailsViewController(campaign: campaign, survey: survey)
+                    vc.delegate = self
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
         }
     }
 }

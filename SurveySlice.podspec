@@ -125,5 +125,6 @@ Pod::Spec.new do |s|
   s.dependency 'SwiftSpinner', '~> 1.5.0'
   s.dependency 'CountryPickerSwift', '~> 1.7.1'
   s.dependency 'Gloss', '~> 2.0'
+  s.dependency 'SDWebImage', '~> 4.0'
 
 end

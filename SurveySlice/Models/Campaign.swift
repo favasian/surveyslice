@@ -12,7 +12,6 @@ import Gloss
 struct Campaign: JSONDecodable {
     
     var id: Int
-    var survey: Survey?
     var bid: Double?
     var avgCompletionTime: Int?
 
@@ -21,7 +20,6 @@ struct Campaign: JSONDecodable {
         guard let bidString: NSString = "bid" <~~ json else { return nil }
         
         self.id = id
-        self.survey = "survey"  <~~ json
         self.bid = bidString.doubleValue
         self.avgCompletionTime = "avg_completion_time" <~~ json
     }
@@ -36,7 +34,6 @@ struct Campaign: JSONDecodable {
     static func fetch(already_started: Bool, page: Int, completionHandler: @escaping (CampaignList?) -> ()) {
         Network.shared.fetchCampaigns(already_started: already_started, page: page) { (campaignsData, error) in
             if let campaignsData = campaignsData {
-                print(campaignsData)
                 let campaignList = CampaignList(json: campaignsData)
                 completionHandler(campaignList)
             } else {
