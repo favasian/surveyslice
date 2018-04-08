@@ -21,6 +21,7 @@ class SurveyWallViewController: BottomButtonableViewController {
     var dividerImage: UIImage!
     var alreadyStartedCampaigns:[Campaign] = []
     var notYetStartedCampaigns:[Campaign] = []
+    var noSurveyLabel: UILabel!
     var nextPage: Int?
     
     var isDragging = false
@@ -54,10 +55,40 @@ class SurveyWallViewController: BottomButtonableViewController {
         self.setupHeaderLabel()
         self.fetchAndRefreshCampaigns()
         self.scrollView.delegate = self
+        
+        self.createNoSurveyLabel()
         NotificationCenter.default.addObserver(self, selector: #selector(SurveyWallViewController.displayFetchedSurveyPacks), name: .UIApplicationWillEnterForeground, object: nil)
     }
     
+    func createNoSurveyLabel() {
+        noSurveyLabel = UILabel()
+        noSurveyLabel.text = "No Surveys available for you right now."
+        noSurveyLabel.font = Globals.heavyAppfont()
+        noSurveyLabel.textColor = Globals.grayFont
+        noSurveyLabel.numberOfLines = 0
+        noSurveyLabel.textAlignment = .center
+        
+        self.view.addSubview(noSurveyLabel)
+        noSurveyLabel.translatesAutoresizingMaskIntoConstraints = false
+        noSurveyLabel.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        noSurveyLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        noSurveyLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        noSurveyLabel.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+    
+        self.view.sendSubview(toBack: noSurveyLabel)
+    }
+    
+    func showNoSurveyLabel() {
+        self.view.bringSubview(toFront: self.noSurveyLabel)
+    }
+    
+    func hideNoSurveyLabel() {
+        self.view.sendSubview(toBack: self.noSurveyLabel)
+    }
+    
+    
     @objc func fetchAndRefreshCampaigns() {
+        SwiftSpinner.show(duration: 10.00, title: "Loading Surveys...")
         self.nextPage = nil
         let taskGroup = DispatchGroup()
         taskGroup.enter()
@@ -86,6 +117,7 @@ class SurveyWallViewController: BottomButtonableViewController {
                 self?.bottomBtn.alpha = 0
             }
             taskGroup.notify(queue: DispatchQueue.main, work: DispatchWorkItem(block: {
+                SwiftSpinner.hide()
                 self?.displayFetchedSurveyPacks()
                 Helper.delay(delay: 0.5) { [weak self] in
                     self?.scrollView.setContentOffset(.zero, animated: true)
@@ -97,7 +129,9 @@ class SurveyWallViewController: BottomButtonableViewController {
     
     func fetchAndDisplayMoreCampaigns() {
         guard let nextPage = self.nextPage else { return }
+        SwiftSpinner.show("Loading More Surveys...")
         Campaign.fetch(already_started: false, page: nextPage) { [weak self] (campaignList) in
+            SwiftSpinner.hide()
             if let campaigns = campaignList?.campaigns {
                 self?.notYetStartedCampaigns.append(contentsOf: campaigns)
                 self?.displaySurveyPacks(campaigns, append: true, header: nil)
@@ -113,13 +147,14 @@ class SurveyWallViewController: BottomButtonableViewController {
     }
     
     @objc func displayFetchedSurveyPacks() {
+        self.hideNoSurveyLabel()
         if self.alreadyStartedCampaigns.count > 0 {
             displaySurveyPacks(self.alreadyStartedCampaigns, append: false, header: "Started")
             displaySurveyPacks(self.notYetStartedCampaigns, append: true, header: "Ready to Start")
         } else {
             displaySurveyPacks(self.notYetStartedCampaigns, append: false)
+            if self.notYetStartedCampaigns.count == 0 { self.showNoSurveyLabel() }
         }
-        
     }
     
     func setupHeaderLabel() {
