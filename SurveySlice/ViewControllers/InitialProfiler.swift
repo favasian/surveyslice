@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import SwiftSpinner
+import SwiftSpinner
 
 class InitialProfiler: AlertViewController {
 
@@ -44,9 +44,13 @@ class InitialProfiler: AlertViewController {
     }
     
     func createSurveyeeWithAnswers() {
-        //SwiftSpinner.show("Finishing Up Survey")
+        SwiftSpinner.show("Finishing Up Survey")
         Surveyee.createFromInitialProfilerAnswers(self.submittedAnswers) { (surveyee) in
+            SwiftSpinner.hide()
             guard let surveyee = surveyee else {
+                self.displayAlert(title: "Oops", message: "An error occurred", completion: {
+                    
+                })
                 return
             }
             Globals.app.surveyee = surveyee

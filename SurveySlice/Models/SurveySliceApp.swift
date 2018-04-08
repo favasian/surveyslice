@@ -19,6 +19,7 @@ public class SurveySliceApp {
     
     var api_key: String?
     var idfa: String?
+    var app_id: String?
     var delegate: SurveySliceAppDelegate!
     
     var devApp: DevApp?
@@ -30,16 +31,20 @@ public class SurveySliceApp {
         self.setIDFA()
     }
     
-    func fetchAndSetVars(app_id: String) {
+    func fetchAndSetVars(app_id: String, completion: (()->())?=nil ) {
         self.fetchAndSetApp(app_id: app_id) { [weak self] in
-            self?.fetchAndSetSurveyee()
+            self?.fetchAndSetSurveyee(completion: {
+                completion?()
+            })
+            
         }
     }
     
-    func fetchAndSetSurveyee() {
+    func fetchAndSetSurveyee(completion: (()->())?=nil) {
         if let idfa = self.idfa {
             Surveyee.fetch(idfa: idfa, completionHandler: { [weak self] (surveyee) in
                 self?.surveyee = surveyee
+                completion?()
             })
         }
     }
@@ -75,6 +80,7 @@ public class SurveySliceApp {
     //Public methods
     public func initWith(api_key: String, app_id: String) {
         self.api_key = api_key
+        self.app_id = app_id
         self.fetchAndSetVars(app_id: app_id)
     }
     
@@ -102,6 +108,9 @@ public class SurveySliceApp {
             return false
         }
         guard let devApp = self.devApp else {
+            if let app_id = self.app_id {
+                self.fetchAndSetVars(app_id: app_id) // try to set it again
+            }
             Helper.logError("App with supplied ID does not exist")
             return false
         }

@@ -68,12 +68,10 @@ class SurveyViewController: AlertViewController {
         let numberOfQuestions = surveyQuestions.count
         let qaObject = surveyQuestions[questionNumber-1]
         let q = qaObject.question
-        let answers = qaObject.answers!.map { (answer) -> String in
-            return answer.answer
-        }
         let multiSelect = qaObject.multiSelect
         
-        qvc = MultipleChoiceQuestionViewController(question: q, numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self, options: answers, multiSelect: multiSelect)
+        
+        qvc = SurveyMultipleChoiceQuestionViewController(question: q, numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self, answerOptions: qaObject.answers!, multiSelect: multiSelect)
         Globals.mainVC.pushViewController(qvc, animated: true)
     }
     
@@ -118,8 +116,12 @@ extension SurveyViewController: AlertViewDelegate {
 extension SurveyViewController: QuestionViewDelegate {
     func submittedAnswers(answers: [String], questionNumber: Int) {
         print(answers.joined(separator: ","))
-        
         let questionIndex = questionNumber - 1
+        if self.surveyQuestions.indices.contains(questionIndex) {
+            Network.shared.createResponse(answerIds: answers, questionId: self.surveyQuestions[questionIndex].id, surveyID: self.survey.id) { (response, error) in
+            }
+        }
+        
         if self.surveyQuestions.count >= questionNumber + 1 {
             self.startQuestion(questionNumber: questionNumber+1)
         } else {

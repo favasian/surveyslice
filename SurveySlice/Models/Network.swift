@@ -266,4 +266,22 @@ class Network: NSObject {
             }
         }
     }
+    
+    func createResponse(answerIds: [String], questionId: Int, surveyID: Int, completionHandler: @escaping (JSON?, NSError?) -> ()) {
+        self.baseSurveyeeNetworkWrapper(completionHandler: completionHandler) { (api_key, app_id, idfa, networkingFinished) in
+            let url = self.baseURL +  "/app/\(app_id)/surveyees/\(idfa)/surveys/\(surveyID)/questions/\(questionId)/responses?api_key=" + api_key
+            let params = ["answer_ids": answerIds]
+            Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default).validate().responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    Helper.logInfo("Successfully Created Responses")
+                    completionHandler(nil, nil)
+                case .failure(let error):
+                    Helper.logInfo("Failure Creating Responses")
+                    completionHandler(nil, error as NSError?)
+                }
+                networkingFinished()
+            }
+        }
+    }
 }
