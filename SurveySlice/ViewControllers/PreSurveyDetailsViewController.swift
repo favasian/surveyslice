@@ -43,14 +43,6 @@ class PreSurveyDetailsViewController: BottomButtonableViewController {
         } else {
             self.bottomBtnTitle = "Continue"
         }
-        
-        
-//        self.appName = self.survey.preSurveyApp?.name
-//        self.minTimeActivity = self.survey.visitedUrlMinimumMinutes
-//        self.appImageUrl = self.survey.preSurveyApp?.logo
-//        self.appCompanyName = self.survey.preSurveyApp?.developer
-//        self.starRating = self.survey.preSurveyApp?.stars
-
         self.bottomBtnDelegate = self
     }
     

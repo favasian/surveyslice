@@ -40,13 +40,12 @@ class SurveyWallViewController: BottomButtonableViewController {
     }
     
     override func viewDidLoad() {
-        guard let appIcon = UIImage(named: "tempAppIcon", in: Globals.appBundle(), compatibleWith: nil)  else { fatalError("No tempAppIcon Image") }
         guard let divider = UIImage(named: "divider", in: Globals.appBundle(), compatibleWith: nil)  else { fatalError("No divider Image") }
         self.dividerImage = divider
         self.currency = Globals.app.devApp!.currency
         
         
-        let navBar = SubNavSurveyWall(appIcon: appIcon)
+        let navBar = SubNavSurveyWall(appIconURL: Globals.app.devApp?.icon)
         self.subNavBar = navBar
         super.viewDidLoad()
         self.bottomBtnDelegate = self
@@ -169,6 +168,14 @@ class SurveyWallViewController: BottomButtonableViewController {
     
     func markAsInstalled(_ campaign: Campaign) {
         Network.shared.createInstall(campaign: campaign) { [weak self] (response, error) in
+            if error == nil {
+                self?.moveCampaignFromNotStartedToStarted(campaign)
+            }
+        }
+    }
+    
+    func markAsPreSurveyUrlOpened(_ campaign: Campaign) {
+        Network.shared.createPreSurveyUrlOpen(campaign: campaign) { [weak self] (response, error) in
             if error == nil {
                 self?.moveCampaignFromNotStartedToStarted(campaign)
             }
@@ -328,21 +335,32 @@ extension SurveyWallViewController: SurveyPackDelegate {
     func tapped(campaign: Campaign) {
         if self.alreadyStarted(campaign: campaign) {
             SwiftSpinner.show("Loading Survey...")
-            Survey.fetch(byCampaignId: campaign.id) { (survey) in
+            Survey.fetch(byCampaignId: campaign.id, checkMinTime: true) { [weak self] (survey) in
+                SwiftSpinner.hide()
                 if let survey = survey {
-                    self.startSurvey(campaign: campaign, survey: survey)
+                    if let expiration = survey.visitedUrlMinimumMinutesExpiration {
+                        if Helper.unixTimestampNow() < expiration {
+                            self?.displayAlert(title: "", message: survey.errorStringVisitedUrlMinimumMinutes(timeLeft: expiration-Helper.unixTimestampNow()), completion: {
+                                
+                            })
+                        }
+                    }
+                    self?.startSurvey(campaign: campaign, survey: survey)
+                } else {
+                    self?.displayAlert(title: "Oops", message: "An error occurred", completion: {
+                    })
                 }
             }
         } else {
             SwiftSpinner.show("Loading Survey...")
             Network.shared.createClick(campaign: campaign) { (response, error) in
             }
-            Survey.fetch(byCampaignId: campaign.id) { (survey) in
+            Survey.fetch(byCampaignId: campaign.id, checkMinTime: false)  { [weak self] (survey) in
                 SwiftSpinner.hide()
                 if let survey = survey {
                     let vc = PreSurveyDetailsViewController(campaign: campaign, survey: survey)
                     vc.delegate = self
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    self?.navigationController?.pushViewController(vc, animated: true)
                 }
             }
         }
@@ -365,7 +383,7 @@ extension SurveyWallViewController: PreSurveyDetailsDelegate {
     
     func tappedToVisitUrl(campaign: Campaign, survey: Survey, url: String) {
         //FIXME what to do if it's not an app? still create Install?
-        self.moveCampaignFromNotStartedToStarted(campaign)
+        self.markAsPreSurveyUrlOpened(campaign)
     }
     
     func tappedToDownloadApp(campaign: Campaign, survey: Survey, url: String) {

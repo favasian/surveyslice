@@ -10,7 +10,7 @@ import UIKit
 
 class SubNavSurveyWall: UIView {
 
-    init(appIcon: UIImage) {
+    init(appIconURL: String?) {
         super.init(frame: CGRect(x: 0, y: 0, width: Globals.screenWidth(), height: Globals.subNavBarHeight))
         self.translatesAutoresizingMaskIntoConstraints = false
         
@@ -25,8 +25,13 @@ class SubNavSurveyWall: UIView {
         backgroundView.contentMode = .scaleToFill
         
         
-        let appIconView = UIImageView(image: appIcon)
+        let appIconView = UIImageView()
         self.addSubview(appIconView)
+        if let appIconURL = appIconURL {
+            appIconView.sd_setImage(with: URL(string: appIconURL), completed: nil)
+        }
+        appIconView.layer.cornerRadius = Globals.statIconImageSize.height/4.0
+        appIconView.layer.masksToBounds = true
         appIconView.translatesAutoresizingMaskIntoConstraints = false
         appIconView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: Globals.subNavSidePadding).isActive = true
         let appIconHeight = Globals.statIconImageSize.height

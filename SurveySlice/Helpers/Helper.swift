@@ -26,5 +26,9 @@ public class Helper: NSObject {
     class func logWarning(_ str: String) {
         print("[SurveySlice] WARNING: \(str)")
     }
+    
+    class func unixTimestampNow() -> Int {
+        return Int(Date().timeIntervalSince1970)
+    }
 }
 

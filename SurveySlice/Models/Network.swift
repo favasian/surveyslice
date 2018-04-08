@@ -190,10 +190,11 @@ class Network: NSObject {
         }
     }
     
-    func fetchSurvey(byCampaignId: Int, completionHandler: @escaping (JSON?, NSError?) -> ()) {
+    func fetchSurvey(byCampaignId: Int, checkMinTime: Bool, completionHandler: @escaping (JSON?, NSError?) -> ()) {
         self.baseSurveyeeNetworkWrapper(completionHandler: completionHandler) { (api_key, app_id, idfa, networkingFinished) in
             let url = self.baseURL + "/app/\(app_id)/surveyees/\(idfa)/surveys/\(byCampaignId)"
             var params:[String:Any] = ["api_key": api_key]
+            if checkMinTime { params["check_min_time"] = "true" }
             Alamofire.request(url, parameters: params).validate().responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -202,12 +203,15 @@ class Network: NSObject {
                     completionHandler(dict, nil)
                 case .failure(let error):
                     Helper.logError("Failure Fetching Survey Data")
-                    print(error)
                     completionHandler(nil, error as NSError?)
                 }
                 networkingFinished()
             }
         }
+    }
+    
+    func createPreSurveyUrlOpen(campaign: Campaign, completionHandler: @escaping (JSON?, NSError?) -> ()) {
+        self.createCampaignActivity(type: "pre_survey_url_opens", campaign: campaign, completionHandler: completionHandler)
     }
     
     func createInstall(campaign: Campaign, completionHandler: @escaping (JSON?, NSError?) -> ()) {
