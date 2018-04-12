@@ -29,10 +29,14 @@ class InitialProfiler: AlertViewController {
     }
     
     init(displayIncorrectAnswerAlert: Bool=false) {
+        var currency = "in app currency"
+        if let c = Globals.app.devApp?.currency {
+            currency = c
+        }
         if displayIncorrectAnswerAlert {
             super.init(title: "Oops", text: "You didn't take enough time to complete this Initial Survey", backNavBtnTitle: "Exit", btnTitle: "Start Over")
         } else {
-            super.init(title: "Survey Slice", text: "Please first complete the following \(Demographic.intialProfilerQAs().count) questions survey", backNavBtnTitle: "Exit")
+            super.init(title: "Survey Slice", text: "Please complete the following \(Demographic.intialProfilerQAs().count) question survey to earn \(currency)", backNavBtnTitle: "Exit")
         }
         
         self.alertViewDelegate = self

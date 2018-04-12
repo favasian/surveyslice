@@ -62,7 +62,7 @@ class SurveyWallViewController: BottomButtonableViewController {
     
     func createNoSurveyLabel() {
         noSurveyLabel = UILabel()
-        noSurveyLabel.text = "No Surveys available for you right now."
+        noSurveyLabel.text = "No surveys available now. Check back later!"
         noSurveyLabel.font = Globals.heavyAppfont()
         noSurveyLabel.textColor = Globals.grayFont
         noSurveyLabel.numberOfLines = 0
