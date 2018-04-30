@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  s.description  = "Library to monetize your IOS app with Survey Slice"
+  s.description  = "Official Library to monetize your IOS app with Survey Slice"
 
   s.homepage     = "https://survey-co.herokuapp.com"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
@@ -66,7 +66,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "git@bitbucket.org:favasian06/surveyslice.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/favasian/surveyslice.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
