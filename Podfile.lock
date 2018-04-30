@@ -1,0 +1,29 @@
+PODS:
+  - Alamofire (4.7.0)
+  - CountryPickerSwift (1.7.1)
+  - Gloss (2.0.0)
+  - ReachabilitySwift (3)
+  - SDWebImage (4.3.3):
+    - SDWebImage/Core (= 4.3.3)
+  - SDWebImage/Core (4.3.3)
+  - SwiftSpinner (1.5.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.0)
+  - CountryPickerSwift
+  - Gloss (~> 2.0)
+  - ReachabilitySwift (~> 3)
+  - SDWebImage (~> 4.0)
+  - SwiftSpinner (~> 1.5.0)
+
+SPEC CHECKSUMS:
+  Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
+  CountryPickerSwift: d46dcaadc64fd6e0f00c98dd23a432de858a5193
+  Gloss: b67617f327406adfd47adf20172d00680a3a31bd
+  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
+  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
+  SwiftSpinner: 4c058c7a1d6b444dd2e1d70988ead40783097133
+
+PODFILE CHECKSUM: 84647aa5bdc3143914c7039288ff48fc045f8c4a
+
+COCOAPODS: 1.4.0

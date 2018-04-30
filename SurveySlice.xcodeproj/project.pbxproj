@@ -1,0 +1,573 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9D290749206BF02200D9302E /* DevApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D290748206BF02200D9302E /* DevApp.swift */; };
+		9D29074B206C23C100D9302E /* Demographic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D29074A206C23C100D9302E /* Demographic.swift */; };
+		9D549D8B205C387C00D50A0F /* SurveyWallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D549D8A205C387C00D50A0F /* SurveyWallViewController.swift */; };
+		9D549D8D205C4DD600D50A0F /* SurveyPack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D549D8C205C4DD600D50A0F /* SurveyPack.swift */; };
+		9D549D8F205C539300D50A0F /* MainSurveySliceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D549D8E205C539300D50A0F /* MainSurveySliceController.swift */; };
+		9D549D91205C67F200D50A0F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D549D90205C67F200D50A0F /* Extensions.swift */; };
+		9D549D9420614EF000D50A0F /* SubNavSurveyWall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D549D9320614EF000D50A0F /* SubNavSurveyWall.swift */; };
+		9D549D982064017400D50A0F /* PreSurveyDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D549D972064017400D50A0F /* PreSurveyDetailsViewController.swift */; };
+		9D549D9A2064802C00D50A0F /* SurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D549D992064802B00D50A0F /* SurveyViewController.swift */; };
+		9D549D9D2069C35C00D50A0F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D549D9C2069C35C00D50A0F /* Network.swift */; };
+		9D549D9F2069C60400D50A0F /* SurveySliceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D549D9E2069C60400D50A0F /* SurveySliceApp.swift */; };
+		9D6742CB2076822F0049B50A /* Campaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6742CA2076822F0049B50A /* Campaign.swift */; };
+		9D6742CD207683E20049B50A /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6742CC207683E20049B50A /* Survey.swift */; };
+		9D7F7A4D2075A1E200DFF492 /* CountrySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7F7A4C2075A1E200DFF492 /* CountrySelectionViewController.swift */; };
+		9D89349320471B7600773F59 /* SurveySlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D89349120471B7600773F59 /* SurveySlice.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9D8934C22048D00500773F59 /* InitialProfiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8934C02048D00500773F59 /* InitialProfiler.swift */; };
+		9D8934C32048D00500773F59 /* InitialProfiler.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8934C12048D00500773F59 /* InitialProfiler.xib */; };
+		9D8934CB2048D43400773F59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D8934CA2048D43400773F59 /* Assets.xcassets */; };
+		9D8934CE2049DFD200773F59 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8934CC2049DFD200773F59 /* AlertViewController.swift */; };
+		9D8934CF2049DFD200773F59 /* AlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8934CD2049DFD200773F59 /* AlertViewController.xib */; };
+		9D8934D22049EE1600773F59 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8934D12049EE1600773F59 /* Globals.swift */; };
+		9D8934D42049F1C700773F59 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8934D32049F1C700773F59 /* BaseViewController.swift */; };
+		9D8934D62053697700773F59 /* BaseQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8934D52053697700773F59 /* BaseQuestionViewController.swift */; };
+		9D8934D92053699A00773F59 /* GenderQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8934D72053699A00773F59 /* GenderQuestionViewController.swift */; };
+		9DAABDEE2053714B00D85EE8 /* BottomButtonableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAABDED2053714B00D85EE8 /* BottomButtonableViewController.swift */; };
+		9DAABDF020539A8900D85EE8 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAABDEF20539A8900D85EE8 /* ProgressBar.swift */; };
+		9DAABDF22059C26400D85EE8 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAABDF12059C26400D85EE8 /* Helper.swift */; };
+		9DAABDF42059D26900D85EE8 /* TextInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAABDF32059D26900D85EE8 /* TextInputViewController.swift */; };
+		9DAABDF62059E68500D85EE8 /* NumberInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAABDF52059E68500D85EE8 /* NumberInputViewController.swift */; };
+		9DAABDF82059EED900D85EE8 /* MultipleChoiceQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAABDF72059EED900D85EE8 /* MultipleChoiceQuestionViewController.swift */; };
+		9DABFFC32069E49900DE63A5 /* Surveyee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DABFFC22069E49900DE63A5 /* Surveyee.swift */; };
+		9DB8E9B92077CEDF00615509 /* CampaignList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8E9B82077CEDF00615509 /* CampaignList.swift */; };
+		9DB8E9BB2078486E00615509 /* PreSurveyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8E9BA2078486E00615509 /* PreSurveyApp.swift */; };
+		9DB8E9BD2078664600615509 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8E9BC2078664600615509 /* Question.swift */; };
+		9DB8E9BF2078666200615509 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8E9BE2078666200615509 /* Answer.swift */; };
+		9DB8E9C12078762300615509 /* QuestionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8E9C02078762300615509 /* QuestionList.swift */; };
+		9DB8E9C32079B7D700615509 /* SurveyMultipleChoiceQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8E9C22079B7D700615509 /* SurveyMultipleChoiceQuestionViewController.swift */; };
+		AAD19ABF2AAEDF8E401A15CA /* Pods_SurveySlice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 378E6F0543FE71B7A2386800 /* Pods_SurveySlice.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		11C094471AE2A25A47B44274 /* Pods-SurveySlice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurveySlice.release.xcconfig"; path = "Pods/Target Support Files/Pods-SurveySlice/Pods-SurveySlice.release.xcconfig"; sourceTree = "<group>"; };
+		378E6F0543FE71B7A2386800 /* Pods_SurveySlice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SurveySlice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D290748206BF02200D9302E /* DevApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevApp.swift; sourceTree = "<group>"; };
+		9D29074A206C23C100D9302E /* Demographic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demographic.swift; sourceTree = "<group>"; };
+		9D549D8A205C387C00D50A0F /* SurveyWallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyWallViewController.swift; sourceTree = "<group>"; };
+		9D549D8C205C4DD600D50A0F /* SurveyPack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyPack.swift; sourceTree = "<group>"; };
+		9D549D8E205C539300D50A0F /* MainSurveySliceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSurveySliceController.swift; sourceTree = "<group>"; };
+		9D549D90205C67F200D50A0F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		9D549D9320614EF000D50A0F /* SubNavSurveyWall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubNavSurveyWall.swift; sourceTree = "<group>"; };
+		9D549D972064017400D50A0F /* PreSurveyDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreSurveyDetailsViewController.swift; sourceTree = "<group>"; };
+		9D549D992064802B00D50A0F /* SurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyViewController.swift; sourceTree = "<group>"; };
+		9D549D9C2069C35C00D50A0F /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		9D549D9E2069C60400D50A0F /* SurveySliceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveySliceApp.swift; sourceTree = "<group>"; };
+		9D6742CA2076822F0049B50A /* Campaign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Campaign.swift; sourceTree = "<group>"; };
+		9D6742CC207683E20049B50A /* Survey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
+		9D7F7A4C2075A1E200DFF492 /* CountrySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionViewController.swift; sourceTree = "<group>"; };
+		9D89348E20471B7600773F59 /* SurveySlice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SurveySlice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D89349120471B7600773F59 /* SurveySlice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SurveySlice.h; sourceTree = "<group>"; };
+		9D89349220471B7600773F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9D8934C02048D00500773F59 /* InitialProfiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialProfiler.swift; sourceTree = "<group>"; };
+		9D8934C12048D00500773F59 /* InitialProfiler.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InitialProfiler.xib; sourceTree = "<group>"; };
+		9D8934CA2048D43400773F59 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9D8934CC2049DFD200773F59 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		9D8934CD2049DFD200773F59 /* AlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertViewController.xib; sourceTree = "<group>"; };
+		9D8934D12049EE1600773F59 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		9D8934D32049F1C700773F59 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		9D8934D52053697700773F59 /* BaseQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseQuestionViewController.swift; sourceTree = "<group>"; };
+		9D8934D72053699A00773F59 /* GenderQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderQuestionViewController.swift; sourceTree = "<group>"; };
+		9DAABDED2053714B00D85EE8 /* BottomButtonableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomButtonableViewController.swift; sourceTree = "<group>"; };
+		9DAABDEF20539A8900D85EE8 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		9DAABDF12059C26400D85EE8 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		9DAABDF32059D26900D85EE8 /* TextInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputViewController.swift; sourceTree = "<group>"; };
+		9DAABDF52059E68500D85EE8 /* NumberInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInputViewController.swift; sourceTree = "<group>"; };
+		9DAABDF72059EED900D85EE8 /* MultipleChoiceQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleChoiceQuestionViewController.swift; sourceTree = "<group>"; };
+		9DABFFC22069E49900DE63A5 /* Surveyee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Surveyee.swift; sourceTree = "<group>"; };
+		9DB8E9B82077CEDF00615509 /* CampaignList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignList.swift; sourceTree = "<group>"; };
+		9DB8E9BA2078486E00615509 /* PreSurveyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreSurveyApp.swift; sourceTree = "<group>"; };
+		9DB8E9BC2078664600615509 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		9DB8E9BE2078666200615509 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
+		9DB8E9C02078762300615509 /* QuestionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionList.swift; sourceTree = "<group>"; };
+		9DB8E9C22079B7D700615509 /* SurveyMultipleChoiceQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyMultipleChoiceQuestionViewController.swift; sourceTree = "<group>"; };
+		DD3713789A7DAF85B7BCB9DB /* Pods-SurveySlice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurveySlice.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SurveySlice/Pods-SurveySlice.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9D89348A20471B7600773F59 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAD19ABF2AAEDF8E401A15CA /* Pods_SurveySlice.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9D549D922060494700D50A0F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9DAABDEF20539A8900D85EE8 /* ProgressBar.swift */,
+				9D549D8C205C4DD600D50A0F /* SurveyPack.swift */,
+				9D549D9320614EF000D50A0F /* SubNavSurveyWall.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9D549D9B2069C2FE00D50A0F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9D549D9C2069C35C00D50A0F /* Network.swift */,
+				9D549D9E2069C60400D50A0F /* SurveySliceApp.swift */,
+				9DABFFC22069E49900DE63A5 /* Surveyee.swift */,
+				9D290748206BF02200D9302E /* DevApp.swift */,
+				9D29074A206C23C100D9302E /* Demographic.swift */,
+				9D6742CA2076822F0049B50A /* Campaign.swift */,
+				9D6742CC207683E20049B50A /* Survey.swift */,
+				9DB8E9B82077CEDF00615509 /* CampaignList.swift */,
+				9DB8E9BA2078486E00615509 /* PreSurveyApp.swift */,
+				9DB8E9BC2078664600615509 /* Question.swift */,
+				9DB8E9BE2078666200615509 /* Answer.swift */,
+				9DB8E9C02078762300615509 /* QuestionList.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9D89348420471B7600773F59 = {
+			isa = PBXGroup;
+			children = (
+				9D89349020471B7600773F59 /* SurveySlice */,
+				9D89348F20471B7600773F59 /* Products */,
+				EFC1D4196A0BC91EC89F095C /* Pods */,
+				DAACECEE355661F239E7DF93 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		9D89348F20471B7600773F59 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9D89348E20471B7600773F59 /* SurveySlice.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9D89349020471B7600773F59 /* SurveySlice */ = {
+			isa = PBXGroup;
+			children = (
+				9D549D9B2069C2FE00D50A0F /* Models */,
+				9D549D922060494700D50A0F /* Views */,
+				9D8934D02049EDF500773F59 /* Helpers */,
+				9D8934C92048D42500773F59 /* Resources */,
+				9D89349A2047323C00773F59 /* ViewControllers */,
+				9D89349120471B7600773F59 /* SurveySlice.h */,
+				9D89349220471B7600773F59 /* Info.plist */,
+			);
+			path = SurveySlice;
+			sourceTree = "<group>";
+		};
+		9D89349A2047323C00773F59 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9D8934C02048D00500773F59 /* InitialProfiler.swift */,
+				9D8934C12048D00500773F59 /* InitialProfiler.xib */,
+				9D8934CC2049DFD200773F59 /* AlertViewController.swift */,
+				9D8934CD2049DFD200773F59 /* AlertViewController.xib */,
+				9D8934D32049F1C700773F59 /* BaseViewController.swift */,
+				9DAABDED2053714B00D85EE8 /* BottomButtonableViewController.swift */,
+				9D8934D52053697700773F59 /* BaseQuestionViewController.swift */,
+				9D8934D72053699A00773F59 /* GenderQuestionViewController.swift */,
+				9DAABDF32059D26900D85EE8 /* TextInputViewController.swift */,
+				9DAABDF52059E68500D85EE8 /* NumberInputViewController.swift */,
+				9DAABDF72059EED900D85EE8 /* MultipleChoiceQuestionViewController.swift */,
+				9D549D8A205C387C00D50A0F /* SurveyWallViewController.swift */,
+				9D549D8E205C539300D50A0F /* MainSurveySliceController.swift */,
+				9D549D972064017400D50A0F /* PreSurveyDetailsViewController.swift */,
+				9D549D992064802B00D50A0F /* SurveyViewController.swift */,
+				9D7F7A4C2075A1E200DFF492 /* CountrySelectionViewController.swift */,
+				9DB8E9C22079B7D700615509 /* SurveyMultipleChoiceQuestionViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9D8934C92048D42500773F59 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9D8934CA2048D43400773F59 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9D8934D02049EDF500773F59 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9D8934D12049EE1600773F59 /* Globals.swift */,
+				9DAABDF12059C26400D85EE8 /* Helper.swift */,
+				9D549D90205C67F200D50A0F /* Extensions.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		DAACECEE355661F239E7DF93 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				378E6F0543FE71B7A2386800 /* Pods_SurveySlice.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EFC1D4196A0BC91EC89F095C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DD3713789A7DAF85B7BCB9DB /* Pods-SurveySlice.debug.xcconfig */,
+				11C094471AE2A25A47B44274 /* Pods-SurveySlice.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		9D89348B20471B7600773F59 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D89349320471B7600773F59 /* SurveySlice.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		9D89348D20471B7600773F59 /* SurveySlice */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9D89349620471B7600773F59 /* Build configuration list for PBXNativeTarget "SurveySlice" */;
+			buildPhases = (
+				B39D4BBD10B67ADF7489E9B4 /* [CP] Check Pods Manifest.lock */,
+				9D89348920471B7600773F59 /* Sources */,
+				9D89348A20471B7600773F59 /* Frameworks */,
+				9D89348B20471B7600773F59 /* Headers */,
+				9D89348C20471B7600773F59 /* Resources */,
+				33F1A15002CFB8BF1213C368 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SurveySlice;
+			productName = SurveySlice;
+			productReference = 9D89348E20471B7600773F59 /* SurveySlice.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9D89348520471B7600773F59 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Apps thay Pay";
+				TargetAttributes = {
+					9D89348D20471B7600773F59 = {
+						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 9D89348820471B7600773F59 /* Build configuration list for PBXProject "SurveySlice" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9D89348420471B7600773F59;
+			productRefGroup = 9D89348F20471B7600773F59 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9D89348D20471B7600773F59 /* SurveySlice */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9D89348C20471B7600773F59 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D8934CB2048D43400773F59 /* Assets.xcassets in Resources */,
+				9D8934C32048D00500773F59 /* InitialProfiler.xib in Resources */,
+				9D8934CF2049DFD200773F59 /* AlertViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		33F1A15002CFB8BF1213C368 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SurveySlice/Pods-SurveySlice-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B39D4BBD10B67ADF7489E9B4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SurveySlice-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9D89348920471B7600773F59 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9D549D8D205C4DD600D50A0F /* SurveyPack.swift in Sources */,
+				9DB8E9BB2078486E00615509 /* PreSurveyApp.swift in Sources */,
+				9DB8E9BF2078666200615509 /* Answer.swift in Sources */,
+				9D8934C22048D00500773F59 /* InitialProfiler.swift in Sources */,
+				9D549D9A2064802C00D50A0F /* SurveyViewController.swift in Sources */,
+				9D8934D42049F1C700773F59 /* BaseViewController.swift in Sources */,
+				9D8934CE2049DFD200773F59 /* AlertViewController.swift in Sources */,
+				9DAABDEE2053714B00D85EE8 /* BottomButtonableViewController.swift in Sources */,
+				9D549D9420614EF000D50A0F /* SubNavSurveyWall.swift in Sources */,
+				9D29074B206C23C100D9302E /* Demographic.swift in Sources */,
+				9DAABDF42059D26900D85EE8 /* TextInputViewController.swift in Sources */,
+				9D6742CD207683E20049B50A /* Survey.swift in Sources */,
+				9D8934D92053699A00773F59 /* GenderQuestionViewController.swift in Sources */,
+				9DABFFC32069E49900DE63A5 /* Surveyee.swift in Sources */,
+				9DAABDF22059C26400D85EE8 /* Helper.swift in Sources */,
+				9D549D9D2069C35C00D50A0F /* Network.swift in Sources */,
+				9DB8E9BD2078664600615509 /* Question.swift in Sources */,
+				9DAABDF82059EED900D85EE8 /* MultipleChoiceQuestionViewController.swift in Sources */,
+				9D549D9F2069C60400D50A0F /* SurveySliceApp.swift in Sources */,
+				9D549D8F205C539300D50A0F /* MainSurveySliceController.swift in Sources */,
+				9D7F7A4D2075A1E200DFF492 /* CountrySelectionViewController.swift in Sources */,
+				9DB8E9C12078762300615509 /* QuestionList.swift in Sources */,
+				9D8934D22049EE1600773F59 /* Globals.swift in Sources */,
+				9DB8E9C32079B7D700615509 /* SurveyMultipleChoiceQuestionViewController.swift in Sources */,
+				9D549D91205C67F200D50A0F /* Extensions.swift in Sources */,
+				9D549D982064017400D50A0F /* PreSurveyDetailsViewController.swift in Sources */,
+				9DAABDF62059E68500D85EE8 /* NumberInputViewController.swift in Sources */,
+				9DAABDF020539A8900D85EE8 /* ProgressBar.swift in Sources */,
+				9D549D8B205C387C00D50A0F /* SurveyWallViewController.swift in Sources */,
+				9D6742CB2076822F0049B50A /* Campaign.swift in Sources */,
+				9DB8E9B92077CEDF00615509 /* CampaignList.swift in Sources */,
+				9D290749206BF02200D9302E /* DevApp.swift in Sources */,
+				9D8934D62053697700773F59 /* BaseQuestionViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		9D89349420471B7600773F59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9D89349520471B7600773F59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		9D89349720471B7600773F59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD3713789A7DAF85B7BCB9DB /* Pods-SurveySlice.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = AP2WCVXFQL;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SurveySlice/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.appsthatpay.SurveySlice;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9D89349820471B7600773F59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11C094471AE2A25A47B44274 /* Pods-SurveySlice.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = AP2WCVXFQL;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SurveySlice/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.appsthatpay.SurveySlice;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9D89348820471B7600773F59 /* Build configuration list for PBXProject "SurveySlice" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D89349420471B7600773F59 /* Debug */,
+				9D89349520471B7600773F59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9D89349620471B7600773F59 /* Build configuration list for PBXNativeTarget "SurveySlice" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D89349720471B7600773F59 /* Debug */,
+				9D89349820471B7600773F59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9D89348520471B7600773F59 /* Project object */;
+}
