@@ -358,6 +358,12 @@ class SurveyWallViewController: BottomButtonableViewController {
             
         }
     }
+    
+    func startPreScreenQuestions(campaign: Campaign, survey: Survey) {
+        let vc = PreScreenViewController(survey: survey, campaign: campaign, displayIncorrectAnswerAlert: false)
+        vc.preScreenDelegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension SurveyWallViewController: BottomButtonDelegate {
@@ -380,7 +386,11 @@ extension SurveyWallViewController: SurveyPackDelegate {
                             })
                         }
                     }
-                    self?.startSurvey(campaign: campaign, survey: survey)
+                    if let preScreenQuestions = survey.preScreenQuestions, preScreenQuestions.count > 0 {
+                        self?.startPreScreenQuestions(campaign: campaign, survey: survey)
+                    } else {
+                        self?.startSurvey(campaign: campaign, survey: survey)
+                    }
                 } else {
                     self?.displayAlert(title: "Oops", message: "An error occurred", completion: {
                     })
@@ -448,4 +458,12 @@ extension SurveyWallViewController: UIScrollViewDelegate {
         }
         
     }
+}
+
+extension SurveyWallViewController: PreScreenDelegate {
+    
+    func preScreenFinishedSuccessfully(survey: Survey, campaign: Campaign) {
+        self.startSurvey(campaign: campaign, survey: survey)
+    }
+    
 }

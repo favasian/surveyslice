@@ -44,6 +44,7 @@
 		9DB8E9BF2078666200615509 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8E9BE2078666200615509 /* Answer.swift */; };
 		9DB8E9C12078762300615509 /* QuestionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8E9C02078762300615509 /* QuestionList.swift */; };
 		9DB8E9C32079B7D700615509 /* SurveyMultipleChoiceQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8E9C22079B7D700615509 /* SurveyMultipleChoiceQuestionViewController.swift */; };
+		9DC2283B20CEF00700A7F1FA /* PreScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC2283A20CEF00700A7F1FA /* PreScreenViewController.swift */; };
 		AAD19ABF2AAEDF8E401A15CA /* Pods_SurveySlice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 378E6F0543FE71B7A2386800 /* Pods_SurveySlice.framework */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +90,7 @@
 		9DB8E9BE2078666200615509 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		9DB8E9C02078762300615509 /* QuestionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionList.swift; sourceTree = "<group>"; };
 		9DB8E9C22079B7D700615509 /* SurveyMultipleChoiceQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyMultipleChoiceQuestionViewController.swift; sourceTree = "<group>"; };
+		9DC2283A20CEF00700A7F1FA /* PreScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreScreenViewController.swift; sourceTree = "<group>"; };
 		DD3713789A7DAF85B7BCB9DB /* Pods-SurveySlice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurveySlice.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SurveySlice/Pods-SurveySlice.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -185,6 +187,7 @@
 				9D549D992064802B00D50A0F /* SurveyViewController.swift */,
 				9D7F7A4C2075A1E200DFF492 /* CountrySelectionViewController.swift */,
 				9DB8E9C22079B7D700615509 /* SurveyMultipleChoiceQuestionViewController.swift */,
+				9DC2283A20CEF00700A7F1FA /* PreScreenViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				9DAABDEE2053714B00D85EE8 /* BottomButtonableViewController.swift in Sources */,
 				9D549D9420614EF000D50A0F /* SubNavSurveyWall.swift in Sources */,
 				9D29074B206C23C100D9302E /* Demographic.swift in Sources */,
+				9DC2283B20CEF00700A7F1FA /* PreScreenViewController.swift in Sources */,
 				9DAABDF42059D26900D85EE8 /* TextInputViewController.swift in Sources */,
 				9D6742CD207683E20049B50A /* Survey.swift in Sources */,
 				9D8934D92053699A00773F59 /* GenderQuestionViewController.swift in Sources */,

@@ -47,4 +47,22 @@ struct Question: JSONDecodable {
 
         }
     }
+    
+    func answerStringArray() -> [String] {
+        guard let answers = self.answers else { return [] }
+        return answers.map { (answer) -> String in
+            return answer.answer
+        }
+    }
+    
+    func correctAnswerStringArray() -> [String] {
+        guard let answers = self.answers else { return [] }
+        var correctAnswers:[String] = []
+        for answer in answers{
+            if answer.correct {
+                correctAnswers.append(answer.answer)
+            }
+        }
+        return correctAnswers
+    }
 }

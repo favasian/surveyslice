@@ -21,7 +21,7 @@ struct Survey: JSONDecodable {
     var visitedUrlMinimumMinutes: Int?
     var specialNote: String?
     var visitedUrlMinimumMinutesExpiration: Int?
-    
+    var preScreenQuestions: [Question]?
     
     var preSurveyApp: PreSurveyApp?
     
@@ -42,6 +42,8 @@ struct Survey: JSONDecodable {
         self.specialNote = "special_note" <~~ json
         self.preSurveyApp = "pre_survey_app" <~~ json
         self.visitedUrlMinimumMinutesExpiration = "visited_url_minimum_minutes_expiration" <~~ json
+        
+        self.preScreenQuestions = "pre_screen_questions" <~~ json
     }
     
     static func fetch(byCampaignId: Int, checkMinTime: Bool, completionHandler: @escaping (Survey?) -> ()) {

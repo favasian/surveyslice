@@ -24,7 +24,7 @@ class InitialProfiler: AlertViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func cancel() {
+    @objc func cancel() {
         Globals.mainVC.dismiss()
     }
     
@@ -42,6 +42,9 @@ class InitialProfiler: AlertViewController {
         self.alertViewDelegate = self
     }
     
+    override init(title: String?, text: String, backNavBtnTitle: String?, btnTitle: String="Continue") {
+        super.init(title: title, text: text, backNavBtnTitle: backNavBtnTitle, btnTitle: btnTitle)
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -91,7 +94,7 @@ class InitialProfiler: AlertViewController {
         Globals.mainVC.pushViewController(qvc, animated: true)
     }
     
-    func areSubmittedAnswersCorrect() -> Bool {
+    @objc func areSubmittedAnswersCorrect() -> Bool {
         var index = 0
         for qaObject in Demographic.intialProfilerQAs() {
             if let correctAnswers = qaObject["correctAnswers"] as? [String] {
@@ -106,7 +109,7 @@ class InitialProfiler: AlertViewController {
         return true
     }
     
-    func displayIncorrectAnswerAlert() {
+    @objc func displayIncorrectAnswerAlert() {
         let vc = InitialProfiler(displayIncorrectAnswerAlert: true)
         Globals.mainVC.viewControllers = [vc]
     }
@@ -123,7 +126,7 @@ extension InitialProfiler: AlertViewDelegate {
 }
 
 extension InitialProfiler: QuestionViewDelegate {
-    func submittedAnswers(answers: [String], questionNumber: Int) {
+    @objc func submittedAnswers(answers: [String], questionNumber: Int) {
         print(answers.joined(separator: ","))
         
         let questionIndex = questionNumber - 1

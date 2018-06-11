@@ -31,11 +31,11 @@ class Network: NSObject {
             let __PRODUCTION = true
         #endif
         session = URLSession.shared;
-       // if __PRODUCTION {
+        //if __PRODUCTION {
             baseURL = "https://survey-co.herokuapp.com/api/v1"
-        //} else {
-         //   baseURL = "http://localhost:3000/api/v1"
-       // }
+//        } else {
+//            baseURL = "http://localhost:3000/api/v1"
+//        }
     }
     
     func setupReachability() {
