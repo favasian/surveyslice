@@ -125,7 +125,7 @@ extension SurveyViewController: QuestionViewDelegate {
         if self.surveyQuestions.count >= questionNumber + 1 {
             self.startQuestion(questionNumber: questionNumber+1)
         } else {
-            let vc = AlertViewController(title: nil, text: "You have completed your survey and earned \(self.currencyAmount) \(self.currency)", backNavBtnTitle: "Finish", btnTitle: "Finish")
+            let vc = AlertViewController(title: nil, text: "You have completed your survey and earned \(self.currencyAmount) \(self.currency)!", backNavBtnTitle: "Finish", btnTitle: "Finish")
             vc.alertViewDelegate = self
             Globals.mainVC.pushViewController(vc, animated: true)
         }

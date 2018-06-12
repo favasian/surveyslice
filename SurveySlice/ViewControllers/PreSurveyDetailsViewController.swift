@@ -13,6 +13,7 @@ protocol PreSurveyDetailsDelegate: class {
     func tappedToContinueToSurvey(campaign: Campaign, survey: Survey)
     func tappedToVisitUrl(campaign: Campaign, survey: Survey, url: String)
     func tappedToDownloadApp(campaign: Campaign, survey: Survey, url: String)
+    func tappedToContinueToPreScreenQuestions(campaign: Campaign, survey: Survey)
 }
 
 
@@ -58,13 +59,17 @@ class PreSurveyDetailsViewController: BottomButtonableViewController {
     
     func setupView() {
         let label1 = UILabel()
-        var text1 = "You have been pre-qualified for this survey!"
+        var text1 = ""
+        if !self.survey.hasPreScreenQuestions() {
+            text1 = "You have been pre-qualified for this survey! "
+        }
+        
         if self.requiresLinkVisit {
             if self.isLinkApp {
                 var appName = "an app"
                 if let an = self.survey.preSurveyApp?.name, an != "" { appName = an }
                 if let urlName = self.survey.preSurveyUrlName, urlName != "" { appName = urlName }
-                text1 += " To continue with the survey, you must first download \(appName)"
+                text1 += "To continue with the survey, you must first download \(appName)"
                 if let minTime = self.survey.visitedUrlMinimumMinutes, minTime > 0 {
                     if minTime == 1 {
                         text1 += " and use the app for at least 1 minute."
@@ -88,6 +93,8 @@ class PreSurveyDetailsViewController: BottomButtonableViewController {
                     text1 += "."
                 }
             }
+        } else if self.survey.hasPreScreenQuestions() {
+            text1 += "\n\nTo continue with the survey you must first answer a few qualifying questions."
         } else {
             text1 += "\n\nTo continue with the survey, click the Continue button below."
         }
@@ -224,6 +231,8 @@ extension PreSurveyDetailsViewController: BottomButtonDelegate {
                     }
                 }
             }
+        } else if self.survey.hasPreScreenQuestions() {
+            self.delegate?.tappedToContinueToPreScreenQuestions(campaign: self.campaign, survey: self.survey)
         } else {
             self.delegate?.tappedToContinueToSurvey(campaign: self.campaign, survey: self.survey)
         }

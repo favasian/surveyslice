@@ -81,5 +81,10 @@ struct Survey: JSONDecodable {
         }
         return "You must download and use \(appName) for another \(minLeftString) before taking the survey"
     }
+    
+    func hasPreScreenQuestions() -> Bool {
+        guard let psq = self.preScreenQuestions else { return false }
+        return psq.count > 0
+    }
 }
 

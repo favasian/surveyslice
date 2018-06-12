@@ -225,6 +225,14 @@ class SurveyWallViewController: BottomButtonableViewController {
         }
     }
     
+    func markAsSurveyPreScreenQuestionsStarted(_ campaign: Campaign) {
+        Network.shared.createPreScreenQuestionsStart(campaign: campaign) { [weak self] (data, error) in
+            if error == nil {
+                self?.moveCampaignFromNotStartedToStarted(campaign)
+            }
+        }
+    }
+    
     func createImpressionsForVisibleCampaigns() {
         for sp in self.surveyPacks {
             if !self.campaignIdsViewedThisSession.contains(sp.campaign.id) {
@@ -360,6 +368,7 @@ class SurveyWallViewController: BottomButtonableViewController {
     }
     
     func startPreScreenQuestions(campaign: Campaign, survey: Survey) {
+        self.markAsSurveyPreScreenQuestionsStarted(campaign)
         let vc = PreScreenViewController(survey: survey, campaign: campaign, displayIncorrectAnswerAlert: false)
         vc.preScreenDelegate = self
         self.navigationController?.pushViewController(vc, animated: true)
@@ -434,6 +443,10 @@ extension SurveyWallViewController: PreSurveyDetailsDelegate {
     func tappedToDownloadApp(campaign: Campaign, survey: Survey, url: String) {
         self.markAsInstalled(campaign)
     }
+    
+    func tappedToContinueToPreScreenQuestions(campaign: Campaign, survey: Survey) {
+        self.startPreScreenQuestions(campaign: campaign, survey: survey)
+    }
 }
 
 extension SurveyWallViewController: UIScrollViewDelegate {
@@ -464,6 +477,14 @@ extension SurveyWallViewController: PreScreenDelegate {
     
     func preScreenFinishedSuccessfully(survey: Survey, campaign: Campaign) {
         self.startSurvey(campaign: campaign, survey: survey)
+    }
+    
+    func didCancel(survey: Survey, campaign: Campaign, failed: Bool) {
+        if failed {
+            self.removeFromStarted(campaign: campaign)
+            self.displayFetchedSurveyPacks()
+            self.fetchAndRefreshCampaigns()
+        }
     }
     
 }

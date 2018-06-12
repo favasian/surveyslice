@@ -36,7 +36,7 @@ class InitialProfiler: AlertViewController {
         if displayIncorrectAnswerAlert {
             super.init(title: "Oops", text: "You didn't take enough time to complete this Initial Survey", backNavBtnTitle: "Exit", btnTitle: "Start Over")
         } else {
-            super.init(title: "Survey Slice", text: "Please complete the following \(Demographic.intialProfilerQAs().count) question survey to earn \(currency)", backNavBtnTitle: "Exit")
+            super.init(title: "Survey Slice", text: "Please complete the following \(Demographic.intialProfilerQAs().count) questions to earn \(currency)", backNavBtnTitle: "Exit")
         }
         
         self.alertViewDelegate = self
@@ -120,7 +120,7 @@ extension InitialProfiler: AlertViewDelegate {
         self.cancel()
     }
     
-    func bottomBtnTapped(_ alertViewController: AlertViewController) {
+    @objc func bottomBtnTapped(_ alertViewController: AlertViewController) {
         self.startQuestion()
     }
 }

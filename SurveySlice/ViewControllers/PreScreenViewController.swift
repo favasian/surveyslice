@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import SwiftSpinner
 
 protocol PreScreenDelegate: class {
     func preScreenFinishedSuccessfully(survey: Survey, campaign: Campaign)
+    func didCancel(survey: Survey, campaign: Campaign, failed: Bool)
+    
 }
 
 class PreScreenViewController: InitialProfiler {
@@ -18,18 +21,20 @@ class PreScreenViewController: InitialProfiler {
     var campaign: Campaign
     var preScreenQuestions: [Question]
     
+    var failedPreScreening = false
     var preScreenDelegate: PreScreenDelegate?
     
     init(survey: Survey, campaign: Campaign, displayIncorrectAnswerAlert: Bool = false) {
+        self.failedPreScreening = displayIncorrectAnswerAlert
         self.survey = survey
         self.campaign = campaign
         guard let qs = survey.preScreenQuestions else { fatalError("Survey has no pre screen questions") }
         self.preScreenQuestions = qs
         
         if displayIncorrectAnswerAlert {
-            super.init(title: "Oops", text: "You didn't answer the Pre Screening Questions Correctly in order to Continue to the Survey", backNavBtnTitle: "Back", btnTitle: "Start Over")
+            super.init(title: "Oops", text: "You didn't answer the Pre Screening Questions Correctly in order to Continue to the Survey", backNavBtnTitle: "Back", btnTitle: "Back To Survey Wall")
         } else {
-            super.init(title: "Survey Slice", text: "Please correctly answer the following Pre Screening Questions to continue to the Survey", backNavBtnTitle: nil)
+            super.init(title: "Survey Slice", text: "Please answer the next questions carefully to qualify for the survey.", backNavBtnTitle: nil)
         }
         
         self.alertViewDelegate = self
@@ -46,6 +51,7 @@ class PreScreenViewController: InitialProfiler {
     
     override func cancel() {
         Globals.mainVC.popToRootViewController(animated: true)
+        self.preScreenDelegate?.didCancel(survey: self.survey, campaign: self.campaign, failed: self.failedPreScreening)
     }
     
     override func startQuestion(questionNumber: Int=1) {
@@ -74,10 +80,22 @@ class PreScreenViewController: InitialProfiler {
     }
     
     override func displayIncorrectAnswerAlert() {
-        let vc = PreScreenViewController(survey: survey, campaign: campaign, displayIncorrectAnswerAlert: true)
-        vc.preScreenDelegate = self.preScreenDelegate
-        Globals.mainVC.popToRootViewController(animated: false)
-        Globals.mainVC.pushViewController(vc, animated: false)
+        SwiftSpinner.show(duration: 10.00, title: "Wrapping up...")
+        Network.shared.createPreScreenFailure(campaign: self.campaign) { [weak self] (data, error) in
+            SwiftSpinner.hide()
+            if let strongSelf = self {
+                if let error = error {
+                    strongSelf.displayAlert(title: "Oops", message: "An error occurred", completion: {
+                        
+                    })
+                } else {
+                    let vc = PreScreenViewController(survey: strongSelf.survey, campaign: strongSelf.campaign, displayIncorrectAnswerAlert: true)
+                    vc.preScreenDelegate = strongSelf.preScreenDelegate
+                    Globals.mainVC.popToRootViewController(animated: false)
+                    Globals.mainVC.pushViewController(vc, animated: false)
+                }
+            }
+        }
     }
     
     override func submittedAnswers(answers: [String], questionNumber: Int) {
@@ -93,6 +111,14 @@ class PreScreenViewController: InitialProfiler {
             self.finishedSuccessfully()
         } else {
             self.displayIncorrectAnswerAlert()
+        }
+    }
+    
+    override func bottomBtnTapped(_ alertViewController: AlertViewController) {
+        if self.failedPreScreening {
+            self.cancel()
+        } else {
+            self.startQuestion()
         }
         
     }

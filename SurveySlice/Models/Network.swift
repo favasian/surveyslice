@@ -31,11 +31,11 @@ class Network: NSObject {
             let __PRODUCTION = true
         #endif
         session = URLSession.shared;
-        //if __PRODUCTION {
+        if __PRODUCTION {
             baseURL = "https://survey-co.herokuapp.com/api/v1"
-//        } else {
-//            baseURL = "http://localhost:3000/api/v1"
-//        }
+        } else {
+            baseURL = "http://localhost:3000/api/v1"
+        }
     }
     
     func setupReachability() {
@@ -208,6 +208,14 @@ class Network: NSObject {
                 networkingFinished()
             }
         }
+    }
+    
+    func createPreScreenFailure(campaign: Campaign, completionHandler: @escaping (JSON?, NSError?) -> ()) {
+        self.createCampaignActivity(type: "pre_screen_failures", campaign: campaign, completionHandler: completionHandler)
+    }
+    
+    func createPreScreenQuestionsStart(campaign: Campaign, completionHandler: @escaping (JSON?, NSError?) -> ()) {
+        self.createCampaignActivity(type: "pre_screen_questions_starts", campaign: campaign, completionHandler: completionHandler)
     }
     
     func createPreSurveyUrlOpen(campaign: Campaign, completionHandler: @escaping (JSON?, NSError?) -> ()) {
