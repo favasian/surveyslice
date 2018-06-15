@@ -239,7 +239,25 @@ class Network: NSObject {
     }
     
     func createCompletion(campaign: Campaign, completionHandler: @escaping (JSON?, NSError?) -> ()) {
-        self.createCampaignActivity(type: "completions", campaign: campaign, completionHandler: completionHandler)
+        self.baseSurveyeeNetworkWrapper(completionHandler: completionHandler) { (api_key, app_id, idfa, networkingFinished) in
+            var params:[String:Any] = [:]
+            if let reward_url_param = SurveySliceApp.shared.reward_url_param {
+                params["reward_url_param"] = reward_url_param
+            }
+            let url = self.baseURL +  "/app/\(app_id)/surveyees/\(idfa)/campaigns/\(campaign.id)/completions?api_key=" + api_key
+            Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default).validate().responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    Helper.logInfo("Successfully Created Completion")
+                    completionHandler(nil, nil)
+                case .failure(let error):
+                    Helper.logInfo("Failure Creating Completion")
+                    completionHandler(nil, error as NSError?)
+                }
+                networkingFinished()
+            }
+        }
+        
     }
     
     func createCampaignActivity(type: String, campaign: Campaign, completionHandler: @escaping (JSON?, NSError?) -> ()) {

@@ -20,6 +20,7 @@ public class SurveySliceApp {
     var api_key: String?
     var idfa: String?
     var app_id: String?
+    var reward_url_param: String?
     var delegate: SurveySliceAppDelegate!
     
     var devApp: DevApp?
@@ -78,9 +79,10 @@ public class SurveySliceApp {
     }
     
     //Public methods
-    public func initWith(api_key: String, app_id: String) {
+    public func initWith(api_key: String, app_id: String, reward_url_param: String?=nil) {
         self.api_key = api_key
         self.app_id = app_id
+        self.reward_url_param = reward_url_param
         self.fetchAndSetVars(app_id: app_id)
     }
     
