@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SurveySlice"
-  s.version      = "0.0.4"
+  s.version      = "1.0.0"
   s.summary      = "Library to monetize your IOS app with Survey Slice"
 
   # This description is used to generate tags and improve search results.
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = "Official Library to monetize your IOS app with Survey Slice"
 
-  s.homepage     = "https://survey-co.herokuapp.com"
+  s.homepage     = "http://www.surveyslice.com"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
