@@ -36,7 +36,11 @@ class InitialProfiler: AlertViewController {
         if displayIncorrectAnswerAlert {
             super.init(title: "Oops", text: "You didn't take enough time to complete this Initial Survey", backNavBtnTitle: "Exit", btnTitle: "Start Over")
         } else {
-            super.init(title: "Survey Slice", text: "Please complete the following \(Demographic.intialProfilerQAs().count) questions to earn \(currency)", backNavBtnTitle: "Exit")
+            var text = "Please complete the following questions to earn \(currency)"
+            if let initialProfilerReward = Globals.app.devApp?.rewardAmountForInitialProfiler, initialProfilerReward > 0 {
+                text = "Please complete the following questions to earn \(initialProfilerReward) \(currency)"
+            }
+            super.init(title: "Survey Slice", text: text, backNavBtnTitle: "Exit")
         }
         
         self.alertViewDelegate = self
@@ -62,6 +66,7 @@ class InitialProfiler: AlertViewController {
             }
             Globals.app.surveyee = surveyee
             Globals.mainVC.showSurveyWall()
+            Globals.app.initialProfilerCompleted()
         }
     }
     
@@ -88,6 +93,10 @@ class InitialProfiler: AlertViewController {
             qvc = MultipleChoiceQuestionViewController(question: q, numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self, options: answers, multiSelect: multiSelect)
         case .country:
             qvc = CountrySelectionViewController(question: q, numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self)
+        case .date:
+            qvc = DateQuestionViewController(question: q, numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self)
+        case .dob:
+            qvc = BirthdayQuestionViewController(question: q, numberOfQuestions: numberOfQuestions, currentQuestionNumber: questionNumber, delgate: self)
         default:
             print("default")
         }

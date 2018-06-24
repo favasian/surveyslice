@@ -11,6 +11,7 @@ import Foundation
 import AdSupport
 
 public protocol SurveySliceAppDelegate: class {
+    func initialProfilerCompleted(currencyPrizeAmount: Int, currency: String)
     func surveyCompleted(currencyPrizeAmount: Int, currency: String)
     func surveyDismissed()
 }
@@ -74,8 +75,21 @@ public class SurveySliceApp {
         self.delegate.surveyCompleted(currencyPrizeAmount: currencyAmount, currency: currency)
     }
     
+    func initialProfilerCompleted() {
+        guard let devApp = self.devApp else { return }
+        let currencyAmount = devApp.rewardAmountForInitialProfiler
+        let currency = devApp.currency
+        self.delegate.initialProfilerCompleted(currencyPrizeAmount: currencyAmount, currency: currency)
+    }
+    
     func didDismiss() {
         self.delegate.surveyDismissed()
+    }
+    
+    @objc func goingToForeground() {
+        print("going to foreground")
+        guard let app_id = self.app_id else { return }
+        self.fetchAndSetVars(app_id: app_id)
     }
     
     //Public methods
@@ -84,6 +98,7 @@ public class SurveySliceApp {
         self.app_id = app_id
         self.reward_url_param = reward_url_param
         self.fetchAndSetVars(app_id: app_id)
+        NotificationCenter.default.addObserver(self, selector: #selector(SurveySliceApp.goingToForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }
     
     public func printIDFA(){

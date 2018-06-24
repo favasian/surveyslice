@@ -44,6 +44,8 @@
 		9DB8E9BF2078666200615509 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8E9BE2078666200615509 /* Answer.swift */; };
 		9DB8E9C12078762300615509 /* QuestionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8E9C02078762300615509 /* QuestionList.swift */; };
 		9DB8E9C32079B7D700615509 /* SurveyMultipleChoiceQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8E9C22079B7D700615509 /* SurveyMultipleChoiceQuestionViewController.swift */; };
+		9DBABA6020DD3A6E000A47E9 /* DateQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBABA5F20DD3A6E000A47E9 /* DateQuestionViewController.swift */; };
+		9DBABA6220DD40C3000A47E9 /* BirthdayQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DBABA6120DD40C3000A47E9 /* BirthdayQuestionViewController.swift */; };
 		9DC2283B20CEF00700A7F1FA /* PreScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC2283A20CEF00700A7F1FA /* PreScreenViewController.swift */; };
 		AAD19ABF2AAEDF8E401A15CA /* Pods_SurveySlice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 378E6F0543FE71B7A2386800 /* Pods_SurveySlice.framework */; };
 /* End PBXBuildFile section */
@@ -90,6 +92,8 @@
 		9DB8E9BE2078666200615509 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		9DB8E9C02078762300615509 /* QuestionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionList.swift; sourceTree = "<group>"; };
 		9DB8E9C22079B7D700615509 /* SurveyMultipleChoiceQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyMultipleChoiceQuestionViewController.swift; sourceTree = "<group>"; };
+		9DBABA5F20DD3A6E000A47E9 /* DateQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateQuestionViewController.swift; sourceTree = "<group>"; };
+		9DBABA6120DD40C3000A47E9 /* BirthdayQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayQuestionViewController.swift; sourceTree = "<group>"; };
 		9DC2283A20CEF00700A7F1FA /* PreScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreScreenViewController.swift; sourceTree = "<group>"; };
 		DD3713789A7DAF85B7BCB9DB /* Pods-SurveySlice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurveySlice.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SurveySlice/Pods-SurveySlice.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -188,6 +192,8 @@
 				9D7F7A4C2075A1E200DFF492 /* CountrySelectionViewController.swift */,
 				9DB8E9C22079B7D700615509 /* SurveyMultipleChoiceQuestionViewController.swift */,
 				9DC2283A20CEF00700A7F1FA /* PreScreenViewController.swift */,
+				9DBABA5F20DD3A6E000A47E9 /* DateQuestionViewController.swift */,
+				9DBABA6120DD40C3000A47E9 /* BirthdayQuestionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -377,9 +383,11 @@
 				9D549D982064017400D50A0F /* PreSurveyDetailsViewController.swift in Sources */,
 				9DAABDF62059E68500D85EE8 /* NumberInputViewController.swift in Sources */,
 				9DAABDF020539A8900D85EE8 /* ProgressBar.swift in Sources */,
+				9DBABA6220DD40C3000A47E9 /* BirthdayQuestionViewController.swift in Sources */,
 				9D549D8B205C387C00D50A0F /* SurveyWallViewController.swift in Sources */,
 				9D6742CB2076822F0049B50A /* Campaign.swift in Sources */,
 				9DB8E9B92077CEDF00615509 /* CampaignList.swift in Sources */,
+				9DBABA6020DD3A6E000A47E9 /* DateQuestionViewController.swift in Sources */,
 				9D290749206BF02200D9302E /* DevApp.swift in Sources */,
 				9D8934D62053697700773F59 /* BaseQuestionViewController.swift in Sources */,
 			);

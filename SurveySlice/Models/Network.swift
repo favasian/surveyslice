@@ -25,13 +25,9 @@ class Network: NSObject {
     var internetAvailable = true
     
     override init() {
-        #if DEBUG
-            let __PRODUCTION = false
-        #else
-            let __PRODUCTION = true
-        #endif
         session = URLSession.shared;
         baseURL = "https://survey-co.herokuapp.com/api/v1"
+        //baseURL = "http://localhost:3000/api/v1"
     }
     
     func setupReachability() {
@@ -148,7 +144,10 @@ class Network: NSObject {
     func createSurveyee(idfa: String, demographicParams: [String:Any], completionHandler: @escaping (JSON?, NSError?) -> ()) {
         print("demo param")
         print(demographicParams)
-        let parameters:[String:Any] = ["idfa": idfa, "demographic_attributes": demographicParams]
+        var parameters:[String:Any] = ["idfa": idfa, "demographic_attributes": demographicParams]
+        if let rewardUrlParam = Globals.app.reward_url_param {
+            parameters["reward_url_param"] = rewardUrlParam
+        }
          self.baseNetworkWrapper(completionHandler: completionHandler) { (api_key, app_id, networkingFinished) in
             Alamofire.request(self.baseURL + "/app/\(app_id)/surveyees?api_key=" + api_key, method: .post, parameters: parameters as? Parameters, encoding: JSONEncoding.default).validate().responseJSON { response in
                 switch response.result {

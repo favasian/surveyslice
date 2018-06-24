@@ -48,12 +48,12 @@ class Demographic {
                 "demographicKey": "gender"
             ],
             [
-                "question": "What is your age?",
+                "question": "What is your birthday?",
                 "options": [],
                 "multi": false,
-                "type": QuestionType.number,
+                "type": QuestionType.dob,
                 "isDemographic": true,
-                "demographicKey": "age"
+                "demographicKey": "dob"
             ],
             [
                 "question": "Take the number between 3 and 5. What is this number minus 2?",
@@ -149,6 +149,105 @@ class Demographic {
                 "type": QuestionType.country,
                 "isDemographic": true,
                 "demographicKey": "country"
+            ],
+            [
+                "question": "Are you the parent of any children below the age of 18?",
+                "options": ["Yes", "No"],
+                "backend_value_options": Array(1...2).map({ (i) -> String in return "\(i)" }),
+                "multi": false,
+                "type": QuestionType.multipleChoice,
+                "isDemographic": true,
+                "demographicKey": "hasChildren"
+            ],
+            [
+                "question": "What is your employment status? (check all that apply)",
+                "options": ["Student", "Employed Part-Time", "Employed Full-Time", "Not currently employed", "Retired", "Self-employed", "Stay-at-home spouse or partner"],
+                "backend_value_options": Array(1...7).map({ (i) -> String in return "\(i)" }),
+                "multi": true,
+                "type": QuestionType.multipleChoice,
+                "isDemographic": true,
+                "demographicKey": "employment"
+            ],
+            [
+                "question": "How many of your children under the age of 18 live in your home?",
+                "options": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "More than 10"],
+                "backend_value_options": Array(1...12).map({ (i) -> String in return "\(i)" }),
+                "multi": false,
+                "type": QuestionType.multipleChoice,
+                "isDemographic": true,
+                "demographicKey": "howManyChildren"
+            ],
+            [
+                "question": "In which of the following industries are you currently employed?",
+                "options": ["Accounting", "Advertising/PR", "Aerospace/Defense", "Agriculture/Fishing", "Architecture", "Arts/Entertainment", "Athletics/Sports", "Automotive", "Aviation", "Banking/Financial", "Basic Materials - Metals, Minerals, Oil, Chemicals", "Bio-Tech", "Brokerage", "Business Services", "Carpenting/Electrical installations/VVS", "Chemicals/Plastics/Rubber", "Communication/Information", "Computer Electronic Equipment/Hardware", "Computer Reseller (software/hardware)", "Computer Software, Storage, Security", "Construction", "Consulting", "Consumer Electronics", "Consumer Packaged Goods", "Dentistry", "Education", "Employment", "Engineering", "Environmental Services", "Equipment", "Fashion/Apparel", "Fitness", "Food and Beverage", "Government/Public Sector", "Healthcare", "Hospitality/Tourism/Travel", "Human Resources", "Industrial Goods", "Information Technology", "Insurance", "Internet/Web Development", "Legal/Law", "Manufacturing", "Market Research", "Marketing/Sales", "Media/Entertainment", "Military", "Nonprofit/Charity/Social Services/Religious Organization", "Personal Services", "Pharmaceuticals", "Publishing/Printing/Print Media", "Real-Estate/Property", "Recreation", "Retail", "Security", "Shipping/Distribution", "Training Consulting", "Transportation", "Utilities/Telecom", "Veterinary Services", "Waste Management", "Wholesale", "Other", "None / I do not work"],
+                "backend_value_options": Array(1...64).map({ (i) -> String in return "\(i)" }),
+                "multi": false,
+                "type": QuestionType.multipleChoice,
+                "isDemographic": true,
+                "demographicKey": "employmentIndustry"
+            ],
+            [
+                "question": "Which of these best describes your job title?",
+                "options": ["Business Owner", "C-level Executive", "V.P./Director", "Mid-level Management", "Entry-level", "Technical/IT", "Sales/Business Development", "Purchasing/Procurement", "Human Resources", "Engineer", "Programmer", "Clerical/Administrative/Support Staff/General Staff", "Military/Law Enforcement", "Foreman/Contractor", "Cook/Chef", "Unskilled Labor", "Teacher/Professor", "Psychologist/Counselor", "Medical Professional", "Legal/Law", "CPA", "I do not work", "Other", "Customer Service/Client Service", "Finance/Accounting", "Professional Photographer/Film Maker/Videographer"],
+                "backend_value_options": Array(1...26).map({ (i) -> String in return "\(i)" }),
+                "multi": false,
+                "type": QuestionType.multipleChoice,
+                "isDemographic": true,
+                "demographicKey": "jobTitle"
+            ],
+            [
+                "question": "What language do you primarily speak at home?",
+                "options":["English", "French", "Spanish", "German", "Italian", "Portuguese", "Mandarin", "Cantonese", "Japanese", "Arabic", "Other", "Indonesian", "Korean", "Malay", "Russian", "Thai", "Turkish", "Vietnamese", "Hindi", "Swahili", "Polish", "Romanian", "Ukrainian", "Dutch", "Punjabi"],
+                "backend_value_options": Array(1...25).map({ (i) -> String in return "\(i)" }),
+                "multi": false,
+                "type": QuestionType.multipleChoice,
+                "isDemographic": true,
+                "demographicKey": "language"
+            ],
+            [
+                "question": "What is your marital status?",
+                "options": ["Single, never married", "Engaged", "Married", "Living with Partner", "Separated", "Divorced", "Widowed", "Civil Union / Civil Partnership", "Prefer not to answer"],
+                "backend_value_options": Array(1...9).map({ (i) -> String in return "\(i)" }),
+                "multi": false,
+                "type": QuestionType.multipleChoice,
+                "isDemographic": true,
+                "demographicKey": "maritalStatus"
+            ],
+            [
+                "question": "Which of the following best describes your racial and ethnic background?",
+                "options": ["Black or African American", "Asian, South East Asian", "White or Caucasian", "Hawaiian or Pacific Islander", "Hispanic or Latino", "Native American, Alaska Native, Aleutian", "Prefer not to answer"],
+                "backend_value_options": Array(1...7).map({ (i) -> String in return "\(i)" }),
+                "multi": false,
+                "type": QuestionType.multipleChoice,
+                "isDemographic": true,
+                "demographicKey": "ethnicityUS"
+            ],
+            [
+                "question": "Which of the following income ranges best describes your household's total income before taxes last year (USD)?",
+                "options": ["Less than $5,000", "$5,000 to $9,999", "$10,000 to $14,999", "$15,000 to $19,999", "$20,000 to $24,999", "$25,000 to $29,999", "$30,000 to $34,999", "$35,000 to $39,999", "$40,000 to $44,999", "$45,000 to $49,999", "$50,000 to $54,999", "$55,000 to $59,999", "$60,000 to $64,999", "$65,000 to $69,999", "$70,000 to $74,999", "$75,000 to $79,999", "$80,000 to $89,999", "$90,000 to $99,999", "$100,000 to $124,999", "$125,000 to $149,999", "$150,000 to $199,999", "$200,000 to $249,999", "$250,000 to $499,999", "More than $500,000", "Prefer not to answer", "Not Sure"],
+                "backend_value_options": Array(1...26).map({ (i) -> String in return "\(i)" }),
+                "multi": false,
+                "type": QuestionType.multipleChoice,
+                "isDemographic": true,
+                "demographicKey": "householdIncomePlusUS"
+            ],
+            [
+                "question": "Which of the following, if any, is the highest educational or professional qualification you have obtained?",
+                "options":["Elementary School", "Middle School/Junior High", "Some High School", "High School Graduate", "Some College or Technical School", "College or Technical School Graduate", "Graduate School Degree", "Doctoral Degree", "Other"],
+                "backend_value_options": Array(1...9).map({ (i) -> String in return "\(i)" }),
+                "multi": false,
+                "type": QuestionType.multipleChoice,
+                "isDemographic": true,
+                "demographicKey": "educationUS"
+            ],
+            [
+                "question": "Approximately how many employees work at your organization (all locations)?",
+                "options":["1-10", "11-50", "51-100", "101-500", "501-1000", "1001-5000", "Greater than 5000", "I do not work/I do not know"],
+                "backend_value_options": Array(1...8).map({ (i) -> String in return "\(i)" }),
+                "multi": false,
+                "type": QuestionType.multipleChoice,
+                "isDemographic": true,
+                "demographicKey": "employees_number"
             ],
         ]
     }

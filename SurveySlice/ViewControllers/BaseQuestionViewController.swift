@@ -15,10 +15,14 @@ enum QuestionType {
     case text
     case multipleChoice
     case country
+    case date
+    case dob
 }
 
 enum AnswerValidation {
     case length
+    case numberGreaterThan
+    case numberLessThan
 }
 
 
@@ -101,7 +105,22 @@ class BaseQuestionViewController: BottomButtonableViewController {
                         if answer.count != length { return false }
                     }
                 }
+            case .numberLessThan:
+                for answer in answers {
+                    let answerNum = (answer as NSString).doubleValue
+                    if let max = validations[key] as? Double {
+                        if answerNum > max { return false }
+                    }
+                }
+            case .numberGreaterThan:
+                for answer in answers {
+                    let answerNum = (answer as NSString).doubleValue
+                    if let min = validations[key] as? Double {
+                        if answerNum < min { return false }
+                    }
+                }
             }
+            
         }
         return true
     }

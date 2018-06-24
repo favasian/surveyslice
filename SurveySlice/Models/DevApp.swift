@@ -18,6 +18,7 @@ struct DevApp: JSONDecodable {
     var icon: String
     var status: String
     var revenueShare: Double
+    var rewardAmountForInitialProfiler: Int
     
     init?(json: JSON) {
         print(json)
@@ -28,6 +29,7 @@ struct DevApp: JSONDecodable {
         guard let icon: String = "icon" <~~ json else { return nil }
         guard let status: String = "status" <~~ json else { return nil }
         guard let revenueShare: NSString = "revenue_share" <~~ json else { return nil }
+        guard let rewardAmountForInitialProfiler: Int = "reward_amount_for_initial_profiler" <~~ json else { return nil }
         
         self.app_id = app_id
         self.name = name
@@ -36,6 +38,7 @@ struct DevApp: JSONDecodable {
         self.icon = icon
         self.status = status
         self.revenueShare = revenueShare.doubleValue
+        self.rewardAmountForInitialProfiler = rewardAmountForInitialProfiler
     }
 
     static func fetch(app_id: String, completionHandler: @escaping (DevApp?) -> ()) {
