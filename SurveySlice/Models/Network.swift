@@ -309,4 +309,39 @@ class Network: NSObject {
             }
         }
     }
+    
+    func fetchUnredeemedCompletions(completionHandler: @escaping (JSON?, NSError?) -> ()) {
+        self.baseSurveyeeNetworkWrapper(completionHandler: completionHandler) { (api_key, app_id, idfa, networkingFinished) in
+            let url = self.baseURL +  "/app/\(app_id)/surveyees/\(idfa)/unredeemed_completions?api_key=" + api_key
+            Alamofire.request(url, encoding: JSONEncoding.default).validate().responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    Helper.logInfo("Successfully fetched unredeemed completions")
+                    let dict = value as? JSON
+                    completionHandler(dict, nil)
+                case .failure(let error):
+                    Helper.logInfo("Failure fetching unredeemed completions")
+                    completionHandler(nil, error as NSError?)
+                }
+                networkingFinished()
+            }
+        }
+    }
+    
+    func redeemUnredeemedCompletions(completion_id: Int, completionHandler: @escaping (JSON?, NSError?) -> ()) {
+        self.baseSurveyeeNetworkWrapper(completionHandler: completionHandler) { (api_key, app_id, idfa, networkingFinished) in
+            let url = self.baseURL +  "/app/\(app_id)/surveyees/\(idfa)/unredeemed_completions/\(completion_id)/redeem?api_key=" + api_key
+            Alamofire.request(url, encoding: JSONEncoding.default).validate().responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    Helper.logInfo("Successfully redeemed completions")
+                    completionHandler(nil, nil)
+                case .failure(let error):
+                    Helper.logInfo("Failure redeeming completions")
+                    completionHandler(nil, error as NSError?)
+                }
+                networkingFinished()
+            }
+        }
+    }
 }

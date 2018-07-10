@@ -21,6 +21,8 @@
 		9D6742CB2076822F0049B50A /* Campaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6742CA2076822F0049B50A /* Campaign.swift */; };
 		9D6742CD207683E20049B50A /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6742CC207683E20049B50A /* Survey.swift */; };
 		9D7F7A4D2075A1E200DFF492 /* CountrySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7F7A4C2075A1E200DFF492 /* CountrySelectionViewController.swift */; };
+		9D867CE320E1DD41001A801B /* UnredeemedCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D867CE220E1DD41001A801B /* UnredeemedCompletion.swift */; };
+		9D867CE520E1DD62001A801B /* UnredeemedCompletionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D867CE420E1DD62001A801B /* UnredeemedCompletionList.swift */; };
 		9D89349320471B7600773F59 /* SurveySlice.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D89349120471B7600773F59 /* SurveySlice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9D8934C22048D00500773F59 /* InitialProfiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8934C02048D00500773F59 /* InitialProfiler.swift */; };
 		9D8934C32048D00500773F59 /* InitialProfiler.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8934C12048D00500773F59 /* InitialProfiler.xib */; };
@@ -67,6 +69,8 @@
 		9D6742CA2076822F0049B50A /* Campaign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Campaign.swift; sourceTree = "<group>"; };
 		9D6742CC207683E20049B50A /* Survey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
 		9D7F7A4C2075A1E200DFF492 /* CountrySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountrySelectionViewController.swift; sourceTree = "<group>"; };
+		9D867CE220E1DD41001A801B /* UnredeemedCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnredeemedCompletion.swift; sourceTree = "<group>"; };
+		9D867CE420E1DD62001A801B /* UnredeemedCompletionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnredeemedCompletionList.swift; sourceTree = "<group>"; };
 		9D89348E20471B7600773F59 /* SurveySlice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SurveySlice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D89349120471B7600773F59 /* SurveySlice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SurveySlice.h; sourceTree = "<group>"; };
 		9D89349220471B7600773F59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -135,6 +139,8 @@
 				9DB8E9BC2078664600615509 /* Question.swift */,
 				9DB8E9BE2078666200615509 /* Answer.swift */,
 				9DB8E9C02078762300615509 /* QuestionList.swift */,
+				9D867CE220E1DD41001A801B /* UnredeemedCompletion.swift */,
+				9D867CE420E1DD62001A801B /* UnredeemedCompletionList.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -361,11 +367,13 @@
 				9D549D9A2064802C00D50A0F /* SurveyViewController.swift in Sources */,
 				9D8934D42049F1C700773F59 /* BaseViewController.swift in Sources */,
 				9D8934CE2049DFD200773F59 /* AlertViewController.swift in Sources */,
+				9D867CE320E1DD41001A801B /* UnredeemedCompletion.swift in Sources */,
 				9DAABDEE2053714B00D85EE8 /* BottomButtonableViewController.swift in Sources */,
 				9D549D9420614EF000D50A0F /* SubNavSurveyWall.swift in Sources */,
 				9D29074B206C23C100D9302E /* Demographic.swift in Sources */,
 				9DC2283B20CEF00700A7F1FA /* PreScreenViewController.swift in Sources */,
 				9DAABDF42059D26900D85EE8 /* TextInputViewController.swift in Sources */,
+				9D867CE520E1DD62001A801B /* UnredeemedCompletionList.swift in Sources */,
 				9D6742CD207683E20049B50A /* Survey.swift in Sources */,
 				9D8934D92053699A00773F59 /* GenderQuestionViewController.swift in Sources */,
 				9DABFFC32069E49900DE63A5 /* Surveyee.swift in Sources */,

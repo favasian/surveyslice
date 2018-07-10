@@ -86,10 +86,28 @@ public class SurveySliceApp {
         self.delegate.surveyDismissed()
     }
     
+    func redeemUnredeemedCompletions() {
+        Network.shared.fetchUnredeemedCompletions { [weak self] (data, error) in
+            guard let data = data else { return }
+            guard let strongSelf = self else { return }
+            guard let devapp = strongSelf.devApp else { return }
+            guard let rucs = UnredeemedCompletionList(json: data)?.unredeemed_completions else { return }
+            for ruc in rucs {
+                ruc.redeem(completionHandler: { (success) in
+                    if success {
+                        strongSelf.surveyCompleted(currencyAmount: ruc.awardAmount(), currency: devapp.currency)
+                    }
+                })
+            }
+        }
+    }
+    
     @objc func goingToForeground() {
         print("going to foreground")
         guard let app_id = self.app_id else { return }
-        self.fetchAndSetVars(app_id: app_id)
+        self.fetchAndSetVars(app_id: app_id) {
+            self.redeemUnredeemedCompletions()
+        }
     }
     
     //Public methods
@@ -97,7 +115,8 @@ public class SurveySliceApp {
         self.api_key = api_key
         self.app_id = app_id
         self.reward_url_param = reward_url_param
-        self.fetchAndSetVars(app_id: app_id)
+        //self.fetchAndSetVars(app_id: app_id)
+        self.goingToForeground()
         NotificationCenter.default.addObserver(self, selector: #selector(SurveySliceApp.goingToForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }
     

@@ -31,9 +31,20 @@ class Demographic {
                     hash[key] = answers[index]
                 }
             }
-           
             index += 1
         }
+        hash["flashEnabled"] = [2] // no
+        hash["javaEnabled"] = [2] // no
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            hash["computerCheck"] = [4] // ipad
+            hash["isTablet"] = [1]
+        } else {
+            hash["computerCheck"] = [3] // iphone
+            hash["isTablet"] = [2]
+        }
+        hash["OS"] = [4] // ios
+        hash["isMobileDevice"] = [1] // yes
+        hash["browser"] = [6] // safari
         return hash
     }
     

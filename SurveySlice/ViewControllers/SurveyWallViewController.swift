@@ -350,20 +350,33 @@ class SurveyWallViewController: BottomButtonableViewController {
     }
     
     func startSurvey(campaign: Campaign, survey: Survey) {
-        SwiftSpinner.show("Loading Questions...")
+        
         self.markAsSurveyStarted(campaign)
-        Question.fetch(forSurvey: survey) { (questions) in
-            SwiftSpinner.hide()
-            if let questions = questions {
-                let vc = SurveyViewController(campaign: campaign, survey: survey, questions: questions)
-                vc.surveyDelegate = self
-                self.navigationController?.pushViewController(vc, animated: true)
-            } else {
-                self.displayAlert(title: "Oops", message: "Error loading Survey", completion: {
-                    
-                })
+        if let link = campaign.externalLink {
+            if let url = URL(string: link) {
+                if UIApplication.shared.canOpenURL(url) {
+                    //Globals.mainVC.popToRootViewController(animated: false)
+                    UIApplication.shared.openURL(url)
+                } else {
+                    self.displayAlert(title: "Oops", message: "There was an error loading the Survey") {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
             }
-            
+        } else {
+            SwiftSpinner.show("Loading Questions...")
+            Question.fetch(forSurvey: survey) { (questions) in
+                SwiftSpinner.hide()
+                if let questions = questions {
+                    let vc = SurveyViewController(campaign: campaign, survey: survey, questions: questions)
+                    vc.surveyDelegate = self
+                    self.navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    self.displayAlert(title: "Oops", message: "Error loading Survey", completion: {
+                        
+                    })
+                }
+            }
         }
     }
     
@@ -384,39 +397,54 @@ extension SurveyWallViewController: BottomButtonDelegate {
 extension SurveyWallViewController: SurveyPackDelegate {
     func tapped(campaign: Campaign) {
         if self.alreadyStarted(campaign: campaign) {
-            SwiftSpinner.show("Loading Survey...")
-            Survey.fetch(byCampaignId: campaign.id, checkMinTime: true) { [weak self] (survey) in
-                SwiftSpinner.hide()
-                if let survey = survey {
-                    if let expiration = survey.visitedUrlMinimumMinutesExpiration {
-                        if Helper.unixTimestampNow() < expiration {
-                            self?.displayAlert(title: "", message: survey.errorStringVisitedUrlMinimumMinutes(timeLeft: expiration-Helper.unixTimestampNow()), completion: {
-                                
-                            })
+            if let _ = campaign.externalLink {
+                let surveyStub = Survey(saysoCampaign: campaign)
+                let vc = PreSurveyDetailsViewController(campaign: campaign, survey: surveyStub)
+                vc.delegate = self
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                SwiftSpinner.show("Loading Survey...")
+                Survey.fetch(byCampaignId: campaign.id, checkMinTime: true) { [weak self] (survey) in
+                    SwiftSpinner.hide()
+                    if let survey = survey {
+                        if let expiration = survey.visitedUrlMinimumMinutesExpiration {
+                            if Helper.unixTimestampNow() < expiration {
+                                self?.displayAlert(title: "", message: survey.errorStringVisitedUrlMinimumMinutes(timeLeft: expiration-Helper.unixTimestampNow()), completion: {
+                                    
+                                })
+                            }
                         }
-                    }
-                    if let preScreenQuestions = survey.preScreenQuestions, preScreenQuestions.count > 0 {
-                        self?.startPreScreenQuestions(campaign: campaign, survey: survey)
+                        if let preScreenQuestions = survey.preScreenQuestions, preScreenQuestions.count > 0 {
+                            self?.startPreScreenQuestions(campaign: campaign, survey: survey)
+                        } else {
+                            self?.startSurvey(campaign: campaign, survey: survey)
+                        }
                     } else {
-                        self?.startSurvey(campaign: campaign, survey: survey)
+                        self?.displayAlert(title: "Oops", message: "An error occurred", completion: {
+                        })
                     }
-                } else {
-                    self?.displayAlert(title: "Oops", message: "An error occurred", completion: {
-                    })
                 }
             }
         } else {
-            SwiftSpinner.show("Loading Survey...")
             Network.shared.createClick(campaign: campaign) { (response, error) in
             }
-            Survey.fetch(byCampaignId: campaign.id, checkMinTime: false)  { [weak self] (survey) in
-                SwiftSpinner.hide()
-                if let survey = survey {
-                    let vc = PreSurveyDetailsViewController(campaign: campaign, survey: survey)
-                    vc.delegate = self
-                    self?.navigationController?.pushViewController(vc, animated: true)
+            if let _ = campaign.externalLink {
+                let surveyStub = Survey(saysoCampaign: campaign)
+                let vc = PreSurveyDetailsViewController(campaign: campaign, survey: surveyStub)
+                vc.delegate = self
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                SwiftSpinner.show("Loading Survey...")
+                Survey.fetch(byCampaignId: campaign.id, checkMinTime: false)  { [weak self] (survey) in
+                    SwiftSpinner.hide()
+                    if let survey = survey {
+                        let vc = PreSurveyDetailsViewController(campaign: campaign, survey: survey)
+                        vc.delegate = self
+                        self?.navigationController?.pushViewController(vc, animated: true)
+                    }
                 }
             }
+            
         }
     }
 }

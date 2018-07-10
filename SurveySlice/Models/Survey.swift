@@ -46,6 +46,14 @@ struct Survey: JSONDecodable {
         self.preScreenQuestions = "pre_screen_questions" <~~ json
     }
     
+    init(saysoCampaign: Campaign) {
+        self.id = saysoCampaign.id
+        self.campaignId = saysoCampaign.id
+        self.questionCount = 0
+        self.specialNote = "Please Review the questions in this survey carefully to qualify and receive your reward."
+        
+    }
+    
     static func fetch(byCampaignId: Int, checkMinTime: Bool, completionHandler: @escaping (Survey?) -> ()) {
         Network.shared.fetchSurvey(byCampaignId: byCampaignId, checkMinTime: checkMinTime) { (surveyData, error) in
             if let surveyData = surveyData {

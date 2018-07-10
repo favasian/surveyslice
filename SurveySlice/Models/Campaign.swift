@@ -14,6 +14,7 @@ struct Campaign: JSONDecodable {
     var id: Int
     var bid: Double?
     var avgCompletionTime: Int?
+    var externalLink: String?
 
     init?(json: JSON) {
         guard let id: Int = "id" <~~ json else { return nil }
@@ -22,6 +23,12 @@ struct Campaign: JSONDecodable {
         self.id = id
         self.bid = bidString.doubleValue
         self.avgCompletionTime = "avg_completion_time" <~~ json
+        self.externalLink = "external_link" <~~ json
+        if let el = self.externalLink {
+            if let rup = Globals.app.reward_url_param {
+                self.externalLink = "\(el)&reward_url_param=\(rup)"
+            }
+        }
     }
     
     func awardAmount() -> Int {
